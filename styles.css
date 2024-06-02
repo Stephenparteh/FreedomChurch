@@ -1,183 +1,264 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* color: white; */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body{
-    /* background-color: darkgrey; */
-    background-image: url(images/wideOpenBible.jpg);
-    color: white;
-    
+#topImageHeight {
+  height: 100vh;
+  opacity: 0.9;
 }
 
-.navBar{
-    display: flex;
-    justify-content: space-between;
-    /* background-color: green; */
-    padding: 20px 20px;
-    /* position: fixed;
-    top: 0; */
-
+body {
+  color: white;
 }
 
-.navBar .left{
-    display: flex;
-    align-items: center;
-    font-size: 25px;
+.navBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  position: fixed;
+  top: 0;
+  background-color: black;
+  height: 8vh;
+  width: 100%;
+  z-index: 1;
 }
 
-.navBar .left img{
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
+.navBar .left {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
 }
 
-.navBar .right{
-    display: flex;
-    align-items: center;
-    font-size: 18px;
+.navBar .left img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
 }
 
-.navBar li{
-    list-style: none;
+.navBar .right {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
 }
 
-.navBar li a{
-    text-decoration: none;
-    color: #fff;
-    margin-right: 15px;
+.navBar li {
+  list-style: none;
 }
 
-.navBar li a:hover{
-    border-bottom: 3px solid red;
+.navBar li a {
+  text-decoration: none;
+  color: #fff;
+  margin-right: 15px;
+}
+
+.navBar li a:hover {
+  border-bottom: 3px solid red;
 }
 
 main .homeMiddle {
-    /* background-color: red; */
-    width: 60%;
-    margin: 100px auto;
-    padding: 30px 0;
+  width: 60%;
+  margin: 100px auto;
+  padding: 30px 0;
+  text-align: center;
+  color: white;
+}
+
+main .homeMiddle h2 {
+  font-size: 50px;
+  font-weight: 600;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  letter-spacing: 3px;
+}
+
+main .homeMiddle h2 .buttomCenter {
+  display: block;
+}
+
+.farAway {
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.twoBtn button {
+  color: red;
+  font-size: 22px;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 10px;
+  width: 150px;
+  background-color: transparent;
+  border: 1px solid red;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.twoBtn button:hover {
+  color: #fff;
+  background-color: red;
+}
+
+main #About {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  height: 100vh;
+}
+
+main #About .aboutImage img {
+  width: 100%;
+  height: 100%;
+}
+
+main #About .aboutTexts {
+  color: black;
+  background-color: whitesmoke;
+  padding: 45px;
+}
+
+main #About .aboutTexts h2 {
+  margin-top: 50px;
+}
+
+main #About .aboutTexts p {
+  text-wrap: wrap;
+  padding-top: 25px;
+}
+
+main #About .aboutTexts ul li {
+  list-style: square;
+}
+
+.redText {
+  color: red;
+}
+
+main .Ministries {
+  text-align: center;
+  color: black;
+  margin-top: 50px;
+  height: 100vh;
+}
+
+main .Ministries .ministryHead {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+main .Ministries .ourMinistries {
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+main .Ministries .containerMinistries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+main .Ministries .containerMinistries .ministry {
+  background-color: whitesmoke;
+  margin: 10px;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  width: calc(33% - 20px);
+  height: 40vh;
+}
+
+main .Ministries .containerMinistries .ministry img:hover {
+  opacity: 0.7;
+}
+
+main .Ministries .containerMinistries .ministry img {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+main .Ministries .containerMinistries .ministry .ministryText {
+  padding: 20px;
+}
+
+main .Ministries .containerMinistries .ministry .ministryText .ministryTitle {
+  font-weight: 900;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+main .Ministries .containerMinistries .ministry .ministryText p {
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+main .Ministries .containerMinistries .ministry .ministryText a {
+  font-weight: 700;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  main .homeMiddle {
+    width: 80%;
+  }
+
+  main .Ministries .containerMinistries .ministry {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .navBar {
+    flex-direction: row;
+    height: 10vh;
+    align-items: center;
+  }
+
+  .navBar .left {
+    margin-bottom: 20px;
+  }
+
+  .navBar .right {
+    flex-direction: column;
     text-align: center;
+  }
+
+  .navBar li a {
+    margin: 5px 0;
+  }
+
+  main #Ministries .containerMinistries .ministry {
+    /* width: 90%;
+    margin-top: 15px; */
+  }
 }
 
-main .homeMiddle h2{
-    font-size: 50px;
-    font-weight: 600;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    letter-spacing: 3px;
-}
+@media (max-width: 576px) {
+  .navBar .left img {
+    width: 40px;
+  }
 
-main .homeMiddle h2 .buttomCenter{
-    display: block;
-}
+  .navBar .left {
+    font-size: 16px;
+  }
 
-main .homeMiddle .twoBtn button {
-     color:  red;
-     font-size: 22px;
-     font-weight: 600;
-     border-radius: 25px;
-     padding: 10px;
-     width: 150px;
-     background-color: transparent;
-     border: 1px solid red;
-     margin-top: 20px;
-     cursor: pointer;
-}
-main .homeMiddle .twoBtn button:hover{
-    color: #fff;
-    background-color: red;
-}
+  .navBar .right {
+    font-size: 12px;
+  }
 
-main #About{
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
+  main .homeMiddle h2 {
+    font-size: 24px;
+  }
+
+  .twoBtn button {
+    font-size: 16px;
+    width: 100px;
+  }
+
+  main #Ministries .containerMinistries .ministry {
     width: 100%;
-    /* height: 450px; */
-    /* background-color: green; */
-}
-
-main #About .aboutImage img{
-    width: 100%;
-    height: 100%;
-}
-
-main #About .aboutTexts{
-    color: black;
-    background-color: white;
-    padding: 45px;
-}
-main #About .aboutTexts h2{
-    margin-top: 50px;
-}
-
-
-main #About .aboutTexts p{
-    text-wrap: wrap;
-    padding-top: 25px;
-}
-
-main #About .aboutTexts ul li{
-    list-style: square;
-}
-
-.redText{
-    color: red;
-}
-
-main .Ministries{
-    text-align: center;
-    color: black;
-    margin-top: 50px;
-}
-
-main .Ministries .ministryHead{
-    font-weight: 700;
-    font-size: 20px;
-}
-
-main .Ministries .ourMinistries{
-    font-size: 40px;
-    font-weight: 600;
-    margin-top: 5px;
-}
-
-main .Ministries .containerMinistries{
-    display: flex;
-    width: 100%;
-}
-main .Ministries .containerMinistries .ministry{
-    background-color: whitesmoke;
-    margin: 10px;
-    border-radius: 10px;
-    margin-top: 30px;
-    text-align: left;
-    cursor: pointer;
-}
-
-
-main .Ministries .containerMinistries .ministry img{
-    width: 100%;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-main .Ministries .containerMinistries .ministry .ministryText{
-    padding: 20px;
-}
-
-main .Ministries .containerMinistries .ministry .ministryText .ministryTitle{
-    font-weight: 900;
-    font-size: 25px;
-    margin-bottom: 10px;
-}
-main .Ministries .containerMinistries .ministry .ministryText p{
-    line-height: 20px;
-    margin-bottom: 10px;
-}
-
-main .Ministries .containerMinistries .ministry .ministryText a{
-    font-weight: 700;
+  }
 }
