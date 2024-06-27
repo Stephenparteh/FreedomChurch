@@ -9,6 +9,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="shortcut icon" href="churchLogo-removebg-preview.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-dark">
@@ -16,32 +17,32 @@
     <nav class="navbar navbar-expand-lg bg-danger navbar-dark position-fixed top-0 w-100" style="z-index: 1;">
         <div class="container">
             <!-- <img src="churchLogo-removebg-preview.png" class="bg-dark img-fluid" alt=""> -->
-            <a href="#" class="navbar-brand">Freedom Pentecostal Church</a>
+            <a href="#" class="navbar-brand" id="navStyle">Freedom Pentecostal Church</a>
 
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigationn"> <span
                     class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navigationn">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link ">Home</a>
+                        <a href="#" class="nav-link text-light" id="navStyle">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">About Us</a>
+                        <a href="about.html" class="nav-link text-light" id="navStyle">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Events</a>
+                        <a href="" class="nav-link text-light" id="navStyle">Events</a>
                     </li>
                     <li class="nav-item">
-                        <a href="ministries.html" class="nav-link">Ministries</a>
+                        <a href="ministries.html" class="nav-link text-light" id="navStyle">Ministries</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Testimonies</a>
+                        <a href="" class="nav-link text-light" id="navStyle">Testimonies</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Gallery</a>
+                        <a href="" class="nav-link text-light" id="navStyle">Gallery</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">Contact Us</a>
+                        <a href="" class="nav-link text-light" id="navStyle">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -74,31 +75,93 @@
     <!-- TEXT OVER THE SLIDING IMAGES -->
     <div class="position-absolute bottom-0 top-0 align-items-center pt-5 mt-5 text-center w-100">
         <h1 class="pt-5">NATIONAL <span class="text-danger"> FREEDOM </span>
-            PENTECOSTAL CHURCH</h1>
-        <h3 class="fst-italic"><span> WE<span> LOVE </span> GOD,
-                WE </span> <span>BELIEVE IN
-                GOD</span> </h3>
+            PENTECOSTAL <span class="text-danger">CHURCH</span></h1>
+        <h3 class="fst-italic"><span> WE ARE <span class="text-danger">FREEDOMITE</span>, OUR CASES ARE <span
+                    class="text-danger">DIFFERENT</span> </h3>
         <p class="">Far away behind the word
             mountains, far from the countries Vokalia
             and Consonantia, there live the blind
             texts.</p>
         <div class="twoBtn">
-            <a href="#About"><button class="btn btn-danger btn-lg">About
+            <a href="#About"><button class="btn btn-danger btn-lg" id="homeBtn">About
                     Us</button></a>
-            <a href=""><button class="btn btn-danger btn-lg">Meet Our Pastor</button></a>
+            <a href=""><button class="btn btn-danger btn-lg" id="homeBtn">Contact Us</button></a>
         </div>
         <i class="bi bi-location"></i>
         <br><br><br><br>
-        <h3 class="text-light"><i class="bi bi-clock text-danger"></i> 10:30 A.M. - 01:30 P.M.</h3>
+        <h3 class="text-light"><i class="bi bi-clock text-danger"></i>Sunday Service: 10:30 A.M. - 01:30 P.M.</h3>
+        <h4 class="text-light"> <i class="bi bi-geo-alt text-danger"></i> Police Academy Road, Bishop Fence Community
+        </h4>
 
-
-        <!-- Locations and Service Time -->
     </div>
 
-    <!-- <i class="bi bi-facebook"></i> -->
+    <footer class="bg-danger text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-4 text-md-start text-center">
+                    <h5>SLD & Associate</h5>
+                    <p>We are a construction company committed to delivering high-quality projects on time and
+                        within budget. Our team is dedicated to providing exceptional service and exceeding our
+                        clients' expectations.</p>
+                    <a href="contact.html" class="btn btn-dark" id="homeBtn">Contact US</a>
+                </div>
+
+                <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
+                    <h5>Menu</h5>
+                    <div class="footer-social">
+                        <i class="bi bi-house d-block"> <a href="index.html" class="text-light">Home</a></i>
+                        <i class="bi bi-info-circle d-block"> <a href="about.html" class="text-light">About Us</a></i>
+                        <i class="bi bi-calendar-event d-block"> <a href="services.html"
+                                class="text-light">Events</a></i>
+                        <i class="bi bi-people d-block"> <a href="projects.html" class="text-light">Ministries</a></i>
+                        <i class="bi bi-chat-quote d-block"> <a href="projects.html"
+                                class="text-light">Testimonies</a></i>
+                        <i class="bi bi-images d-block"> <a href="projects.html" class="text-light">Gallery</a></i>
+                        <i class="bi bi-envelope"> <a href="contact.html" class="text-light">Contact</a></i>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
+                    <h5>Get in Contact</h5>
+                    <p><i class="bi bi-envelope"> <a href="mailto:info@constructioncompany.com"
+                                class="text-light">nfpchurch@gmail.com</a> </i>
+                    </p>
+
+                    <p><i class="bi bi-telephone"> <a href="tel:+231886" class="text-light"> 0777******</a>
+                        </i>
+                    </p>
+                    <p><i class="bi bi-telephone"> <a href="tel:+231777" class="text-light"> 0888******</a>
+                        </i>
+                    </p>
+
+                    <p><i class="bi bi-geo-alt"> Police Academy Paynesville </i>
+                    </p>
+                    <i class="bi bi-facebook"> <a href="contact.html" class="text-light"></a></i>
+                </div>
+
+
+            </div>
+
+            <div class="text-center mt-5">
+                <i>&copy; 2024 National Freedom Pentecostal Church</i>
+                <a href="https://stephenpartehportfolio.netlify.app/" target="_blank" class="text-light"><i>|Designed
+                        by: Stephen
+                        Monsue Parteh</i></a>
+                <i>|All Rights Reserved.</i>
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<!-- 
+    About Us
+    Menu 
+    Address
+    Say Hello
+-->

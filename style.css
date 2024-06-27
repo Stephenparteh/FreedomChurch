@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,5 +17,23 @@ img {
 #bgVideo {
   width: 100%;
   height: 100vh;
+} */
+/* let combineObject = Object.assign({}, object1, object2) */
+
+#navStyle:hover{
+  text-decoration: underline;
 }
-let combineObject = Object.assign({}, object1, object2)
+
+#homeBtn:hover{
+  background-color: white;
+  color: #dc3545;
+  border: none;
+}
+
+#churchHistory{
+  margin-top: 2vh;
+}
+
+#aboutUs{
+  margin-top: 5vh;
+}
