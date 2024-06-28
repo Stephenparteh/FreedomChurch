@@ -20,30 +20,36 @@ img {
 } */
 /* let combineObject = Object.assign({}, object1, object2) */
 
-#navStyle:hover{
+#navStyle:hover {
   text-decoration: underline;
 }
 
-#homeBtn:hover{
+#homeBtn:hover {
   background-color: white;
   color: #dc3545;
   border: none;
 }
 
-#churchHistory{
+#churchHistory {
   margin-top: 2vh;
 }
 
-#aboutUs{
+#aboutUs {
   margin-top: 5vh;
 }
 
-.card:hover{
+.card:hover {
   background-color: white;
   color: black;
   cursor: pointer;
 }
 
-#beliefs{
+#beliefs {
   /* margin-right: 5px; */
+}
+#beliefMission {
+  background-color: #0d6efd;
+}
+#beliefMission ul li {
+  list-style: circle;
 }
