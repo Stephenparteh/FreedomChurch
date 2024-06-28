@@ -37,3 +37,13 @@ img {
 #aboutUs{
   margin-top: 5vh;
 }
+
+.card:hover{
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+#beliefs{
+  /* margin-right: 5px; */
+}
