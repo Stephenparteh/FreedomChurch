@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
+    <title>Events</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
@@ -40,68 +40,98 @@
                             <a href="gallery.html" class="nav-link">Gallery</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Contact Us</a>
+                            <a href="contact.html" class="nav-link">Contact Us</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <section id="contact">
+        <section id="events">
             <div class="" style="position: relative;">
                 <img src="churchAudience.jpg" alt="" class="img-fluid w-100"
                     style="height: 30vh; object-fit: cover; opacity: 0.6;">
                 <h1 class="text-center text-light pt-5 mt-5"
-                    style="position: absolute; top: 0; right: 0; left: 0; bottom: 0;"> <span class="text-danger">Contact
-                        Us</span>
+                    style="position: absolute; top: 0; right: 0; left: 0; bottom: 0;"> <span
+                        class="text-danger">Events</span>
                 </h1>
             </div>
         </section>
 
-        <section id="contact-info" class="py-5">
+        <section id="upcoming-events" class="py-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h2 class="text-light mb-4">Contact Information</h2>
-                        <ul class="list-unstyled text-light">
-                            <li><i class="bi bi-geo-alt-fill"></i> Police Academy Paynesville</li>
-                            <li><i class="bi bi-envelope-fill"></i> <a href="mailto:nfpchurch@gmail.com"
-                                    class="text-light">nfpchurch@gmail.com</a></li>
-                            <li><i class="bi bi-telephone-fill"></i> <a href="tel:+231886"
-                                    class="text-light">0777******</a></li>
-                            <li><i class="bi bi-telephone-fill"></i> <a href="tel:+231777"
-                                    class="text-light">0888******</a></li>
-                        </ul>
+                <h2 class="text-light mb-4">Upcoming Events</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="event1.jpg" class="card-img-top" alt="Event 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Title 1</h5>
+                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                <a href="#" class="btn btn-danger">Learn More</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-8">
-                        <h2 class="text-light mb-4">Send us a message</h2>
-                        <form action="#" method="POST">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Your Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="event2.jpg" class="card-img-top" alt="Event 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Title 2</h5>
+                                <p class="card-text">Pellentesque euismod magna rutrum arcu bibendum ultricies.</p>
+                                <a href="#" class="btn btn-danger">Learn More</a>
                             </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Your Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-danger">Submit</button>
-                        </form>
+                        </div>
                     </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="event3.jpg" class="card-img-top" alt="Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Title 3</h5>
+                                <p class="card-text">Fusce vel arcu ac dolor rutrum placerat.</p>
+                                <a href="#" class="btn btn-danger">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more events here -->
                 </div>
             </div>
         </section>
 
-        <section id="map" class="bg-light py-5">
+        <section id="past-events" class="bg-light py-5">
             <div class="container">
-                <h2 class="text-center mb-4">Location</h2>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d798.3732622280073!2d-11.228606070769915!3d6.340634045935701!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTrCsDIzJzMxLjIiUyAxMcKwNTMnNDkuNiJF!5e0!3m2!1sen!2slr!4v1626841952842!5m2!1sen!2slr"
-                        allowfullscreen></iframe>
+                <h2 class="text-center mb-4">Past Events</h2>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="past_event1.jpg" class="card-img-top" alt="Past Event 1">
+                            <div class="card-body">
+                                <h5 class="card-title">Past Event Title 1</h5>
+                                <p class="card-text">Vestibulum ac urna in justo vestibulum fermentum.</p>
+                                <a href="#" class="btn btn-outline-danger">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="past_event2.jpg" class="card-img-top" alt="Past Event 2">
+                            <div class="card-body">
+                                <h5 class="card-title">Past Event Title 2</h5>
+                                <p class="card-text">Nullam id ligula condimentum, maximus elit at, efficitur quam.</p>
+                                <a href="#" class="btn btn-outline-danger">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="past_event3.jpg" class="card-img-top" alt="Past Event 3">
+                            <div class="card-body">
+                                <h5 class="card-title">Past Event Title 3</h5>
+                                <p class="card-text">Aliquam erat volutpat. Phasellus quis hendrerit est.</p>
+                                <a href="#" class="btn btn-outline-danger">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add more past events here -->
                 </div>
             </div>
         </section>
@@ -123,7 +153,7 @@
                             <i class="bi bi-house d-block"> <a href="index.html" class="text-light">Home</a></i>
                             <i class="bi bi-info-circle d-block"> <a href="about.html" class="text-light">About
                                     Us</a></i>
-                            <i class="bi bi-calendar-event d-block"> <a href="event.html"
+                            <i class="bi bi-calendar-event d-block"> <a href="events.html"
                                     class="text-light">Events</a></i>
                             <i class="bi bi-people d-block"> <a href="ministries.html"
                                     class="text-light">Ministries</a></i>
@@ -151,6 +181,8 @@
                         </p>
                         <i class="bi bi-facebook"> <a href="contact.html" class="text-light"></a></i>
                     </div>
+
+
                 </div>
 
                 <div class="text-center mt-5">
@@ -163,6 +195,7 @@
                 </div>
             </div>
         </footer>
+
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
