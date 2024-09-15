@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media - National Freedom Pentecostal Church</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS for Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Additional CSS for Custom Styles */
+        .hero-section {
+            background: url('images/widerAudience.jpg') no-repeat center center;
+            background-size: cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .gallery-section img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.2s;
+        }
+
+        .gallery-section img:hover {
+            transform: scale(1.05);
+        }
+
+        .testimonial-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+        }
+
+        .social-media-feed {
+            background-color: #f0f0f0;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center" data-aos="fade-up">
+        <div class="container">
+            <h1 class="display-4">Experience the Spirit Through Our Memories</h1>
+            <p>Explore the events and memories of our church through our gallery.</p>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section -->
+    <section class="gallery-section py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center mb-4">Photo Gallery</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <img src="images/churchAudience.jpg" class="img-fluid" alt="Gallery Image 1">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="images/openBible.jpg" class="img-fluid" alt="Gallery Image 2">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="images/wideOpenBible.jpg" class="img-fluid" alt="Gallery Image 3">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="images/churchAudience.jpg" class="img-fluid" alt="Gallery Image 1">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="images/openBible.jpg" class="img-fluid" alt="Gallery Image 2">
+                </div>
+                <div class="col-md-4 mb-4">
+                    <img src="images/wideOpenBible.jpg" class="img-fluid" alt="Gallery Image 3">
+                </div>
+            </div>
+            <!-- Categories or Filters -->
+            <div class="text-center">
+                <button class="btn btn-primary">Sunday Worship</button>
+                <button class="btn btn-outline-primary">Youth Camp 2024</button>
+                <button class="btn btn-outline-primary">Community Outreach</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Highlights Section -->
+    <section class="video-highlights py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center mb-4">Video Highlights</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/yourvideoid1" title="Video 1"
+                        allowfullscreen></iframe>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/yourvideoid2" title="Video 2"
+                        allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonial-section" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center mb-4">Testimonials</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="p-3 shadow">
+                        <p>“The church has truly changed my life. The community is so welcoming and loving.”</p>
+                        <small>- Church Member</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 shadow">
+                        <p>“Worshiping with everyone on Sundays has brought me closer to God.”</p>
+                        <small>- Church Member</small>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-3 shadow">
+                        <p>“I feel a strong sense of belonging. This church is my family.”</p>
+                        <small>- Church Member</small>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-primary">Submit Testimonial</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Feed Section -->
+    <section class="social-media-feed py-5" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center mb-4">Follow Us on Social Media</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://instagram.com/yourchurchprofile"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://facebook.com/yourchurchprofile"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe src="https://twitter.com/yourchurchprofile"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section text-center py-5" data-aos="fade-up">
+        <div class="container">
+            <h2>Join Our Next Event</h2>
+            <p>We welcome you to be part of our church family. Come worship with us or join our ministries.</p>
+            <a href="/events" class="btn btn-primary btn-lg">View Upcoming Events</a>
+            <a href="/contact" class="btn btn-outline-primary btn-lg">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>© 2024 National Freedom Pentecostal Church. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="https://facebook.com" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com" class="text-white"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap and AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
