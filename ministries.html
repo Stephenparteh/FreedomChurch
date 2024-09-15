@@ -4,332 +4,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Ministries</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="churchLogo-removebg-preview.png" type="image/x-icon">
+    <title>Ministries Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> <!-- AOS CSS -->
+    <style>
+        /* Color scheme */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* Navbar customization */
+        .navbar-custom {
+            background-color: #003366;
+        }
+
+        .navbar-custom .nav-link,
+        .navbar-custom .navbar-brand {
+            color: #ffffff;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ff0000;
+        }
+
+        /* Footer customization */
+        .footer-custom {
+            background-color: #003366;
+            color: #ffffff;
+            padding: 2rem 0;
+        }
+
+        .footer-custom a {
+            color: #ffffff;
+        }
+
+        .footer-custom a:hover {
+            color: #ff0000;
+        }
+
+        /* Ministries Section */
+        .ministry-section {
+            padding: 4rem 0;
+        }
+
+        .ministry-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .ministry-image {
+            flex: 1;
+            max-width: 50%;
+        }
+
+        .ministry-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .ministry-content {
+            flex: 1;
+            padding: 0 2rem;
+        }
+
+        .ministry-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        .ministry-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .join-btn {
+            background-color: #ff0000;
+            color: #fff;
+            padding: 0.5rem 1.5rem;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background-color: #d40000;
+            color: #fff;
+        }
+    </style>
 </head>
 
-<body class="bg-dark">
-    <main>
-        <nav class="navbar navbar-expand-lg bg-danger navbar-dark position-fixed top-0 w-100" style="z-index: 1;">
-            <div class="container">
-                <!-- <img src="churchLogo-removebg-preview.png" class="bg-dark img-fluid" alt=""> -->
-                <a href="#" class="navbar-brand">Freedom Pentecostal Church</a>
+<body>
 
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigationn"> <span
-                        class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navigationn">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link ">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="event.html" class="nav-link">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Ministries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="testimonies.html" class="nav-link">Testimonies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Navbar (from index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="#">Church Name</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="ministries.html">Ministries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <section id="aboutUs">
-            <div class="" style="position: relative;">
-                <img src="churchAudience.jpg" alt="" class="img-fluid w-100"
-                    style="height: 30vh; object-fit: cover; opacity: 0.6;">
-                <h1 class="text-center text-light pt-5 mt-5"
-                    style="position: absolute; top: 0; right: 0; left: 0; bottom: 0;">Our <span
-                        class="text-danger">Ministries</span>
-                </h1>
+    <!-- Ministries Section -->
+    <section class="ministry-section container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2>Our Ministries</h2>
+            <p>Explore the various ministries you can join or support in our church.</p>
+        </div>
+
+        <!-- Ministry 1 -->
+        <div class="ministry-item row" data-aos="fade-right">
+            <div class="ministry-image col-md-6">
+                <img src="https://via.placeholder.com/500x300" alt="Worship Ministry">
             </div>
-            <div>
-
+            <div class="ministry-content col-md-6">
+                <h3>Worship Ministry</h3>
+                <p>Join our worship team and be part of an amazing group of individuals who lead the church in praise
+                    and worship. Open to musicians, singers, and sound engineers.</p>
+                <a href="#" class="join-btn">Join Us</a>
             </div>
-        </section>
+        </div>
 
-        <section id="ministries" class="text-light mt-5">
-            <div class=" ">
-                <div class="row  w-100 ">
-                    <div class="col-md-6">
-                        <img src="widerAudience.jpg" class="img-fluid"
-                            style="object-fit: cover; height: 75%; width: 100%;" alt="">
-                    </div>
-                    <div class="col-md-6">
-                        <h2 class="text-center"><span class="text-danger">Men</span> Ministries</h2>
-                        <p>The purpose of the Men’s Fellowship is to deepen the spiritual life of the layman of the
-                            Church, to cultivate denominational loyalty and to expand the denomination through education
-                            and personal evangelism. <br><br>
-
-                            The Men’s Fellowship educates Apostolic men in their mission, privilege and responsibility,
-                            giving insights into specific areas of service through the Local Church to their Community,
-                            State, Nation and the World. <br><br>
-
-                            The Motto for the Men’s Fellowship is “Men of God, Be Strong in the Lord.”</p>
-                    </div>
-                </div>
+        <!-- Ministry 2 -->
+        <div class="ministry-item row" data-aos="fade-left">
+            <div class="ministry-image col-md-6 order-md-2">
+                <img src="https://via.placeholder.com/500x300" alt="Children's Ministry">
             </div>
-            <div class="">
-                <div class="row  w-100">
-
-                    <div class="col-md-6">
-                        <h2 class="text-center"><span class="text-danger">Women</span> Ministries</h2>
-                        <p>
-                            The Women’s Movement is an organization within the Church that seeks to deepen spiritual
-                            life in the women members of the Church, by meeting together for prayer and fellowship, to
-                            enter into intercession on behalf of the Divine purpose, and to work generally among women
-                            under the direction of the leaders. <br><br>
-
-                            They cooperate with the local administration of the Church, Pastors and Apostles, in
-                            visitation and other avenues of service particularly adapted to womanhood. <br><br>
-
-                            The Motto for the Women’s Movement is “Holiness unto the Lord” or in the Twi language
-                            “Kronkron ma Awurade.”
-
-
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="widerAudience.jpg" class="img-fluid"
-                            style="object-fit: cover; height: 75%; width: 100%;" alt="">
-                    </div>
-                </div>
+            <div class="ministry-content col-md-6 order-md-1">
+                <h3>Children's Ministry</h3>
+                <p>Help nurture the faith of our youngest members through teaching, activities, and care. Our Children's
+                    Ministry is always looking for compassionate volunteers.</p>
+                <a href="#" class="join-btn">Get Involved</a>
             </div>
-        </section>
+        </div>
 
-        <!-- <section id="ministries" class="p-5">
-            <h2 class="text-light text-center my-3" style="text-decoration: underline;">Our <span
-                    class="text-danger">Ministries</span> / <span class="text-danger">Departments</span>
-            </h2>
-            <div class="row container-fliud bg-dark">
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="childrenMinistry.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Children's Ministry</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Children's ministry is the most important ministry in our church. This ministry helps
-                                    kids
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="churchAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Women Ministry</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Women ministry is the most important ministry in our church. This ministry helps
-                                    women
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Men Ministry</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Men ministry is the most important ministry in our church. This ministry helps
-                                    men
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Youth Ministry</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Youth ministry is the most important ministry in our church. This ministry helps
-                                    youth
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Music Ministry </h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Music's ministry is the most important ministry in our church. This ministry helps
-                                    worshippers
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Portocol Department</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Protocol department is the most important department in our church. This department
-                                    helps
-                                    Protocol
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Media Department</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Media Department is the most important ministry in our church. This department helps
-                                    creator
-                                    learn about the...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card bg-light text-dark">
-                        <div class="card-img">
-                            <img src="widerAudience.jpg" class="img-fluid w-100" style="height: 220px;" alt="">
-                        </div>
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3>Daughters of Freedom</h3>
-                            </div>
-                            <div class="card-text">
-                                <p>Daughters of freedom is one of the most important department in our church. This
-                                    department helps
-                                    prayerful women
-                                    learn...</p>
-                            </div>
-                            <a href="" class="btn btn-danger">Read more</a>
-                        </div>
-                    </div>
-                </div>
+        <!-- Ministry 3 -->
+        <div class="ministry-item row" data-aos="fade-right">
+            <div class="ministry-image col-md-6">
+                <img src="https://via.placeholder.com/500x300" alt="Outreach Ministry">
             </div>
-        </section> -->
-
-        <footer class="bg-danger text-light mt-5">
-            <div class="container py-4">
-                <div class="row">
-                    <div class="col-md-4 text-md-start text-center">
-                        <h5>SLD & Associate</h5>
-                        <p>We are a construction company committed to delivering high-quality projects on time and
-                            within budget. Our team is dedicated to providing exceptional service and exceeding our
-                            clients' expectations.</p>
-                        <a href="contact.html" class="btn btn-dark" id="homeBtn">Contact US</a>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Menu</h5>
-                        <div class="footer-social">
-                            <i class="bi bi-house d-block"> <a href="index.html" class="text-light">Home</a></i>
-                            <i class="bi bi-info-circle d-block"> <a href="about.html" class="text-light">About
-                                    Us</a></i>
-                            <i class="bi bi-calendar-event d-block"> <a href="event.html"
-                                    class="text-light">Events</a></i>
-                            <i class="bi bi-people d-block"> <a href="ministries.html"
-                                    class="text-light">Ministries</a></i>
-                            <i class="bi bi-chat-quote d-block"> <a href="testimonies.html"
-                                    class="text-light">Testimonies</a></i>
-                            <i class="bi bi-images d-block"> <a href="gallery.html" class="text-light">Gallery</a></i>
-                            <i class="bi bi-envelope"> <a href="contact.html" class="text-light">Contact</a></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Get in Contact</h5>
-                        <p><i class="bi bi-envelope"> <a href="mailto:info@constructioncompany.com"
-                                    class="text-light">nfpchurch@gmail.com</a> </i>
-                        </p>
-
-                        <p><i class="bi bi-telephone"> <a href="tel:+231886" class="text-light"> 0777******</a>
-                            </i>
-                        </p>
-                        <p><i class="bi bi-telephone"> <a href="tel:+231777" class="text-light"> 0888******</a>
-                            </i>
-                        </p>
-
-                        <p><i class="bi bi-geo-alt"> Police Academy Paynesville </i>
-                        </p>
-                        <i class="bi bi-facebook"> <a href="contact.html" class="text-light"></a></i>
-                    </div>
-
-
-                </div>
-
-                <div class="text-center mt-5">
-                    <i>&copy; 2024 National Freedom Pentecostal Church</i>
-                    <a href="https://stephenpartehportfolio.netlify.app/" target="_blank"
-                        class="text-light"><i>|Designed
-                            by: Stephen
-                            Monsue Parteh</i></a>
-                    <i>|All Rights Reserved.</i>
-                </div>
+            <div class="ministry-content col-md-6">
+                <h3>Outreach Ministry</h3>
+                <p>Be the hands and feet of Christ by joining our Outreach Ministry. We work to meet the physical and
+                    spiritual needs of our community through various services.</p>
+                <a href="#" class="join-btn">Learn More</a>
             </div>
-        </footer>
+        </div>
+    </section>
 
-    </main>
+    <!-- Footer (from index.html) -->
+    <footer class="footer-custom text-center">
+        <div class="container">
+            <p>&copy; 2024 Church Name. All Rights Reserved.</p>
+            <a href="#" class="me-2">Privacy Policy</a>
+            <a href="#" class="me-2">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS and AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animations
+        AOS.init({
+            duration: 1000, // Animation duration in ms
+            once: true      // Whether animation should happen only once
+        });
+    </script>
 </body>
 
 </html>

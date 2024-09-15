@@ -4,203 +4,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="churchLogo-removebg-preview.png" type="image/x-icon">
+    <title>Events - National Freedom Pentecostal Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        .event-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .event-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .calendar-container,
+        .event-details,
+        .past-events,
+        .testimonials,
+        .newsletter-signup {
+            background: #f8f9fa;
+            padding: 40px 0;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .event-description {
+            font-size: 1rem;
+        }
+
+        .event-card-body {
+            padding: 15px;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .registration-form {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+        }
+    </style>
 </head>
 
-<body class="bg-dark">
-    <main>
-        <nav class="navbar navbar-expand-lg bg-danger navbar-dark position-fixed top-0 w-100" style="z-index: 1;">
-            <div class="container">
-                <a href="#" class="navbar-brand">Freedom Pentecostal Church</a>
+<body>
 
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigationn"> <span
-                        class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navigationn">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link ">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="about.html" class="nav-link">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="event.html" class="nav-link">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ministries.html" class="nav-link">Ministries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="testimonies.html" class="nav-link">Testimonies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="gallery.html" class="nav-link">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" class="nav-link">Contact Us</a>
-                        </li>
-                    </ul>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">NFP Church</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Give</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Filter Events Section -->
+    <section class="container py-5">
+        <h2 class="text-center mb-4">Filter Events</h2>
+        <form class="row g-3">
+            <div class="col-md-4">
+                <label for="eventCategory" class="form-label">Category</label>
+                <select id="eventCategory" class="form-select">
+                    <option selected>All Categories</option>
+                    <option value="1">Services</option>
+                    <option value="2">Bible Studies</option>
+                    <option value="3">Youth Events</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="eventDate" class="form-label">Date</label>
+                <input type="date" id="eventDate" class="form-control">
+            </div>
+            <div class="col-md-4 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Apply Filters</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="calendar-container">
+        <div class="container">
+            <h2 class="text-center mb-4">Upcoming Events</h2>
+            <div class="row">
+                <!-- Event Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Sunday Service</h5>
+                            <p class="card-text">Date: September 15, 2024</p>
+                            <p class="card-text">Time: 10:00 AM - 12:00 PM</p>
+                            <p class="card-text event-description">Join us for our weekly Sunday service where we gather
+                                for worship and fellowship.</p>
+                            <a href="event-details.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Event Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Bible Study</h5>
+                            <p class="card-text">Date: September 17, 2024</p>
+                            <p class="card-text">Time: 6:00 PM - 8:00 PM</p>
+                            <p class="card-text event-description">Dive deeper into the Word with our Bible study
+                                sessions every Tuesday evening.</p>
+                            <a href="event-details.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Event Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Youth Night</h5>
+                            <p class="card-text">Date: September 20, 2024</p>
+                            <p class="card-text">Time: 7:00 PM - 9:00 PM</p>
+                            <p class="card-text event-description">A special night for our youth to gather for games,
+                                worship, and bonding.</p>
+                            <a href="event-details.html" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+    </section>
 
-        <section id="events">
-            <div class="" style="position: relative;">
-                <img src="churchAudience.jpg" alt="" class="img-fluid w-100"
-                    style="height: 30vh; object-fit: cover; opacity: 0.6;">
-                <h1 class="text-center text-light pt-5 mt-5"
-                    style="position: absolute; top: 0; right: 0; left: 0; bottom: 0;"> <span
-                        class="text-danger">Events</span>
-                </h1>
-            </div>
-        </section>
-
-        <section id="upcoming-events" class="py-5">
-            <div class="container">
-                <h2 class="text-light mb-4">Upcoming Events</h2>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="event1.jpg" class="card-img-top" alt="Event 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Event Title 1</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                <a href="#" class="btn btn-danger">Learn More</a>
-                            </div>
+    <!-- Past Events Section -->
+    <section class="past-events">
+        <div class="container">
+            <h2 class="text-center mb-4">Past Events</h2>
+            <div class="row">
+                <!-- Past Event Card 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Annual Church Picnic</h5>
+                            <p class="card-text">Date: August 10, 2024</p>
+                            <p class="card-text">Time: 12:00 PM - 4:00 PM</p>
+                            <p class="card-text event-description">A fun-filled day with food, games, and fellowship.
+                            </p>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="event2.jpg" class="card-img-top" alt="Event 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Event Title 2</h5>
-                                <p class="card-text">Pellentesque euismod magna rutrum arcu bibendum ultricies.</p>
-                                <a href="#" class="btn btn-danger">Learn More</a>
-                            </div>
+                </div>
+                <!-- Past Event Card 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Christmas Celebration</h5>
+                            <p class="card-text">Date: December 24, 2023</p>
+                            <p class="card-text">Time: 7:00 PM - 10:00 PM</p>
+                            <p class="card-text event-description">Celebrate Christmas with carols, a sermon, and a
+                                festive dinner.</p>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="event3.jpg" class="card-img-top" alt="Event 3">
-                            <div class="card-body">
-                                <h5 class="card-title">Event Title 3</h5>
-                                <p class="card-text">Fusce vel arcu ac dolor rutrum placerat.</p>
-                                <a href="#" class="btn btn-danger">Learn More</a>
-                            </div>
+                </div>
+                <!-- Past Event Card 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card event-card">
+                        <div class="card-body event-card-body">
+                            <h5 class="card-title event-title">Easter Service</h5>
+                            <p class="card-text">Date: April 9, 2024</p>
+                            <p class="card-text">Time: 10:00 AM - 12:00 PM</p>
+                            <p class="card-text event-description">A special service celebrating the resurrection of
+                                Christ.</p>
                         </div>
                     </div>
-                    <!-- Add more events here -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="past-events" class="bg-light py-5">
-            <div class="container">
-                <h2 class="text-center mb-4">Past Events</h2>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="past_event1.jpg" class="card-img-top" alt="Past Event 1">
-                            <div class="card-body">
-                                <h5 class="card-title">Past Event Title 1</h5>
-                                <p class="card-text">Vestibulum ac urna in justo vestibulum fermentum.</p>
-                                <a href="#" class="btn btn-outline-danger">View Details</a>
-                            </div>
-                        </div>
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="text-center mb-4">What People Are Saying</h2>
+            <div class="row">
+                <!-- Testimonial 1 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The Sunday services have been a true blessing to me and my family.
+                            The worship and sermons are inspiring and uplifting."</p>
+                        <p class="text-end"><strong>- Sarah Johnson</strong></p>
                     </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="past_event2.jpg" class="card-img-top" alt="Past Event 2">
-                            <div class="card-body">
-                                <h5 class="card-title">Past Event Title 2</h5>
-                                <p class="card-text">Nullam id ligula condimentum, maximus elit at, efficitur quam.</p>
-                                <a href="#" class="btn btn-outline-danger">View Details</a>
-                            </div>
-                        </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The Bible study sessions have helped me grow in my faith. The
+                            community here is so supportive and welcoming."</p>
+                        <p class="text-end"><strong>- Mark Smith</strong></p>
                     </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="past_event3.jpg" class="card-img-top" alt="Past Event 3">
-                            <div class="card-body">
-                                <h5 class="card-title">Past Event Title 3</h5>
-                                <p class="card-text">Aliquam erat volutpat. Phasellus quis hendrerit est.</p>
-                                <a href="#" class="btn btn-outline-danger">View Details</a>
-                            </div>
-                        </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p class="testimonial-text">"The youth events are fantastic! My kids look forward to them every
+                            week. It's great to see them growing spiritually."</p>
+                        <p class="text-end"><strong>- Emily Davis</strong></p>
                     </div>
-                    <!-- Add more past events here -->
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer class="bg-danger text-light mt-5">
-            <div class="container py-4">
-                <div class="row">
-                    <div class="col-md-4 text-md-start text-center">
-                        <h5>SLD & Associate</h5>
-                        <p>We are a construction company committed to delivering high-quality projects on time and
-                            within budget. Our team is dedicated to providing exceptional service and exceeding our
-                            clients' expectations.</p>
-                        <a href="contact.html" class="btn btn-dark" id="homeBtn">Contact US</a>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Menu</h5>
-                        <div class="footer-social">
-                            <i class="bi bi-house d-block"> <a href="index.html" class="text-light">Home</a></i>
-                            <i class="bi bi-info-circle d-block"> <a href="about.html" class="text-light">About
-                                    Us</a></i>
-                            <i class="bi bi-calendar-event d-block"> <a href="events.html"
-                                    class="text-light">Events</a></i>
-                            <i class="bi bi-people d-block"> <a href="ministries.html"
-                                    class="text-light">Ministries</a></i>
-                            <i class="bi bi-chat-quote d-block"> <a href="testimonies.html"
-                                    class="text-light">Testimonies</a></i>
-                            <i class="bi bi-images d-block"> <a href="gallery.html" class="text-light">Gallery</a></i>
-                            <i class="bi bi-envelope"> <a href="contact.html" class="text-light">Contact</a></i>
+    <!-- Registration Form Section -->
+    <section class="container py-5">
+        <h2 class="text-center mb-4">Register for an Event</h2>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="registration-form">
+                    <form>
+                        <div class="mb-3">
+                            <label for="eventName" class="form-label">Event Name</label>
+                            <input type="text" id="eventName" class="form-control" required>
                         </div>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Get in Contact</h5>
-                        <p><i class="bi bi-envelope"> <a href="mailto:info@constructioncompany.com"
-                                    class="text-light">nfpchurch@gmail.com</a> </i>
-                        </p>
-
-                        <p><i class="bi bi-telephone"> <a href="tel:+231886" class="text-light"> 0777******</a>
-                            </i>
-                        </p>
-                        <p><i class="bi bi-telephone"> <a href="tel:+231777" class="text-light"> 0888******</a>
-                            </i>
-                        </p>
-
-                        <p><i class="bi bi-geo-alt"> Police Academy Paynesville </i>
-                        </p>
-                        <i class="bi bi-facebook"> <a href="contact.html" class="text-light"></a></i>
-                    </div>
-
-
-                </div>
-
-                <div class="text-center mt-5">
-                    <i>&copy; 2024 National Freedom Pentecostal Church</i>
-                    <a href="https://stephenpartehportfolio.netlify.app/" target="_blank"
-                        class="text-light"><i>|Designed
-                            by: Stephen
-                            Monsue Parteh</i></a>
-                    <i>|All Rights Reserved.</i>
+                        <div class="mb-3">
+                            <label for="participantName" class="form-label">Your Name</label>
+                            <input type="text" id="participantName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-primary">Submit Registration</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </footer>
+        </div>
+    </section>
 
-    </main>
+    <!-- Newsletter Signup Section -->
+    <section class="newsletter-signup">
+        <div class="container">
+            <h2 class="text-center mb-4">Stay Updated</h2>
+            <form class="row g-3">
+                <div class="col-md-8">
+                    <label for="newsletterEmail" class="form-label">Email Address</label>
+                    <input type="email" id="newsletterEmail" class="form-control" required>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <!-- Footer -->
+    <footer class="bg-light py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2024 National Freedom Pentecostal Church. All rights reserved.</p>
+            <a href="#" class="text-dark">Privacy Policy</a> | <a href="#" class="text-dark">Terms of Service</a>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

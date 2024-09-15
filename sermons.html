@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sermons - National Freedom Pentecostal Church</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
         /* Custom Styles */
         .featured-sermon {
@@ -101,10 +102,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sermons</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="event.html">Events</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Ministries</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Give</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
@@ -114,7 +115,7 @@
     </nav>
 
     <!-- Featured Sermon Section -->
-    <section class="featured-sermon">
+    <section class="featured-sermon" data-aos="fade-up">
         <div class="container">
             <h2>Featured Sermon</h2>
             <div class="embed-responsive embed-responsive-16by9 mb-4">
@@ -130,7 +131,7 @@
     </section>
 
     <!-- Filter/Sort Section -->
-    <section class="filter-sort container">
+    <section class="filter-sort container" data-aos="fade-right">
         <div class="row">
             <div class="col-md-6">
                 <input type="text" class="form-control" placeholder="Search sermons...">
@@ -147,7 +148,7 @@
     </section>
 
     <!-- Sermon Library Section -->
-    <section class="container">
+    <section class="container" data-aos="fade-up">
         <h2 class="section-title">Sermon Library</h2>
         <div class="row">
             <div class="col-md-4 mb-4">
@@ -180,7 +181,7 @@
     </section>
 
     <!-- Upcoming Sermons Section -->
-    <section class="upcoming-sermons container">
+    <section class="upcoming-sermons container" data-aos="fade-left">
         <h2 class="section-title">Upcoming Sermons</h2>
         <div class="row">
             <div class="col-md-4 mb-4">
@@ -197,7 +198,7 @@
     </section>
 
     <!-- Popular Sermons Section -->
-    <section class="container">
+    <section class="container" data-aos="fade-up">
         <h2 class="section-title">Popular Sermons</h2>
         <div class="row">
             <div class="col-md-4 mb-4">
@@ -217,7 +218,7 @@
     </section>
 
     <!-- Sermon Categories Section -->
-    <section class="sermon-categories container">
+    <section class="sermon-categories container" data-aos="fade-up">
         <h2 class="section-title">Sermon Categories</h2>
         <div class="row">
             <div class="col-md-3">
@@ -234,87 +235,54 @@
             </div>
         </div>
     </section>
-    <!-- Testimonies Section with Carousel -->
-    <section class="testimony py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center mb-4">Testimonies</h2>
-            <div id="testimoniesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
-                <div class="carousel-inner">
-                    <!-- Testimony 1 -->
-                    <div class="carousel-item active">
-                        <div class="d-flex flex-column text-center">
-                            <h5>John Doe</h5>
-                            <p>"The sermons at NFP Church have truly transformed my life."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 2 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>Jane Smith</h5>
-                            <p>"I found peace and purpose through the messages shared here."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 3 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>Michael Lee</h5>
-                            <p>"The impact of the sermons on my family is immeasurable."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 4 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>Sarah Johnson</h5>
-                            <p>"NFP Church helped me reconnect with my faith in a profound way."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 5 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>David Brown</h5>
-                            <p>"The messages are relatable and inspiring. Highly recommend."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 6 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>Emily Davis</h5>
-                            <p>"I’ve experienced spiritual growth beyond my expectations."</p>
-                        </div>
-                    </div>
-                    <!-- Testimony 7 -->
-                    <div class="carousel-item">
-                        <div class="d-flex flex-column text-center">
-                            <h5>Paul Anderson</h5>
-                            <p>"This church is a blessing in my life. It brought me closer to God."</p>
-                        </div>
-                    </div>
+
+    <!-- Testimonials Section -->
+    <section class="testimony container" data-aos="fade-up">
+        <h2 class="section-title">Testimonials</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <p class="quote">"The sermons have truly transformed my life. Thank you!"</p>
+                    <p>- Jane Doe</p>
                 </div>
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#testimoniesCarousel"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#testimoniesCarousel"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <div class="carousel-item">
+                    <p class="quote">"Incredible teachings and inspiration every week."</p>
+                    <p>- John Smith</p>
+                </div>
+                <div class="carousel-item">
+                    <p class="quote">"A place where my faith has grown stronger."</p>
+                    <p>- Emily Johnson</p>
+                </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </section>
 
-
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="bg-light py-4">
         <div class="container text-center">
-            <p>&copy; 2024 National Freedom Pentecostal Church. All rights reserved.</p>
+            <p class="mb-0">&copy; 2024 National Freedom Pentecostal Church. All rights reserved.</p>
+            <a href="#" class="text-dark">Privacy Policy</a> | <a href="#" class="text-dark">Terms of Service</a>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+    </script>
 </body>
 
 </html>
