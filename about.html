@@ -4,323 +4,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freedom Church Website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="churchLogo-removebg-preview.png" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <title>About Us - National Freedom Pentecostal Church</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        .section-title {
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #0056b3;
+        }
+
+        .hero-section {
+            background: url('images/churchAudience.jpg') no-repeat center center/cover;
+            color: #fff;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            background-size: cover;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.25rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 1rem 0;
+            list-style: none;
+            border-left: 2px solid #0056b3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -7px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #0056b3;
+            border: 2px solid #fff;
+        }
+
+        .timeline-item-content {
+            position: relative;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+
+        .team-member img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .team-member h4 {
+            margin: 0.5rem 0;
+            font-size: 1.25rem;
+            color: #0056b3;
+        }
+
+        .team-member p {
+            color: #555;
+        }
+
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+
+        .team-member img:hover {
+            transform: scale(1.1);
+        }
+
+        .card-deck {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .card {
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+
+        footer p {
+            margin: 0;
+            color: #555;
+        }
+    </style>
 </head>
 
-<body class="bg-dark">
-    <main class="text-light">
-        <!-- NAVIGATION BAR -->
-        <nav class="navbar navbar-expand-lg bg-danger navbar-dark position-fixed top-0 w-100" style="z-index: 1;">
-            <div class="container">
-                <!-- <img src="churchLogo-removebg-preview.png" class="bg-dark img-fluid" alt=""> -->
-                <a href="#" class="navbar-brand" id="navStyle">Freedom Pentecostal Church</a>
+<body>
 
-                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navigationn"> <span
-                        class="navbar-toggler-icon"></span> </button>
-                <div class="collapse navbar-collapse" id="navigationn">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link text-light" id="navStyle">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link text-light" id="navStyle">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="" class="nav-link text-light" id="navStyle">Events</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="ministries.html" class="nav-link text-light" id="navStyle">Ministries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="testimonies.html" class="nav-link text-light" id="navStyle">Testimonies</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="gallery.html" class="nav-link text-light" id="navStyle">Gallery</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="contact.html" class="nav-link text-light" id="navStyle">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/churchLogo.jpg" alt="Church Logo" height="40">
+                NFP Church
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sermons.html">Sermons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Ministries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Give</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <section id="aboutUs">
-            <div class="" style="position: relative;">
-                <img src="churchAudience.jpg" alt="" class="img-fluid w-100"
-                    style="height: 30vh; object-fit: cover; opacity: 0.6;">
-                <h1 class="text-center text-light pt-5 mt-5"
-                    style="position: absolute; top: 0; right: 0; left: 0; bottom: 0;"><span
-                        class="text-danger">About</span> Us</h1>
-            </div>
-            <div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 data-aos="fade-up">Welcome to National Freedom Pentecostal Church</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Join us in our mission to spread love, faith, and hope to our
+                community and beyond.</p>
+        </div>
+    </section>
 
-            </div>
+    <!-- About Us Page -->
+    <main class="container mt-5 pt-5">
+        <!-- Our Vision & Mission -->
+        <section data-aos="fade-up">
+            <h2 class="section-title">Our Vision & Mission</h2>
+            <p>At National Freedom Pentecostal Church, our vision is to spread the word of God and serve our community
+                with compassion and integrity. Our mission is to inspire and empower individuals to live a life that
+                reflects Christ’s love and teachings. We believe in fostering a supportive and inclusive environment
+                where everyone can grow spiritually and make a positive impact in their communities.</p>
         </section>
 
-        <section id="churchHistory" class="text-light container">
-            <h2 class="text-center" style="text-decoration: underline;"> <i>Our <span class="text-danger">History</span>
-                </i></h2>
+        <!-- History -->
+        <section data-aos="fade-up" data-aos-delay="200">
+            <h2 class="section-title">History</h2>
+            <ul class="timeline">
+                <li class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Founding Year</h4>
+                        <p>National Freedom Pentecostal Church was founded in 1990 with a commitment to serving the
+                            local community through worship and outreach programs. The initial congregation was small,
+                            but the mission to spread the gospel grew quickly.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Major Expansion</h4>
+                        <p>In 2005, the church expanded its facilities to accommodate growing numbers and added new
+                            ministries to better serve the community. This expansion included a new auditorium and
+                            additional classrooms for Bible studies and community events.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Community Outreach</h4>
+                        <p>Over the years, we have launched numerous community outreach programs, including food drives,
+                            youth mentorship initiatives, and support for local schools. Our commitment to community
+                            service is a cornerstone of our church’s mission.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-item-content">
+                        <h4>Global Missions</h4>
+                        <p>In recent years, we have expanded our mission efforts globally, partnering with international
+                            organizations to support humanitarian projects and spread the message of Christ worldwide.
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Leadership Team -->
+        <section data-aos="fade-up" data-aos-delay="400">
+            <h2 class="section-title">Leadership Team</h2>
             <div class="row">
-                <div class="col-md-3 text-center" style="align-self: center; justify-items: center;">
-                    <img src="churchLogo-removebg-preview.png" style="object-fit: cover; " class="img-fluid" alt="">
+                <div class="col-md-4 team-member">
+                    <img src="images/pastor1.jpg" alt="Pastor John Doe">
+                    <h4>Pastor John Doe</h4>
+                    <p>Senior Pastor</p>
+                    <p>Pastor John Doe has been leading our church with wisdom and compassion since 2005. His vision and
+                        dedication have greatly contributed to the growth and success of our church.</p>
                 </div>
-                <div class="col-md-9">
-                    <i>Our church was founded in [Year] by a group of devoted believers seeking to create a community
-                        centered around worship, fellowship, and service. Over the years, we have grown from a small
-                        gathering in a local home to a vibrant congregation that serves the community in numerous ways.
-                        Significant milestones in our history include the construction of our current sanctuary in
-                        [Year], the establishment of various ministries such as our Youth and Outreach programs, and the
-                        celebration of our [Number]th anniversary in [Year]. Each step of our journey has been marked by
-                        God's faithfulness and the dedication of our members.
-                        <br> <br>
-                        Our church was founded in [Year] by a
-                        group of devoted believers seeking to create a community centered around worship, fellowship,
-                        and service. Over the years, we have grown from a small gathering in a local home to a vibrant
-                        congregation that serves the community in numerous ways. Significant milestones in our history
-                        include the construction of our current sanctuary in [Year], the establishment of various
-                        ministries such as our Youth and Outreach programs, and the celebration of our [Number]th
-                        anniversary in [Year]. Each step of our journey has been marked by God’s faithfulness and the
-                        dedication of our members. <br> <br> Our church was founded in [Year] by a group of devoted
-                        believers
-                        seeking to create a community centered around worship, fellowship, and service. Over the years,
-                        we have grown from a small gathering in a local home to a vibrant congregation that serves the
-                        community in numerous ways. Significant milestones in our history include the construction of
-                        our current sanctuary in [Year], the establishment of various ministries such as our Youth and
-                        Outreach programs, and the celebration of our [Number]th anniversary in [Year]. Each step of our
-                        journey has been marked by God’s faithfulness and the dedication of our members.
-                    </i>
+                <div class="col-md-4 team-member">
+                    <img src="images/pastor2.jpg" alt="Pastor Jane Smith">
+                    <h4>Pastor Jane Smith</h4>
+                    <p>Associate Pastor</p>
+                    <p>Pastor Jane Smith brings a wealth of experience in pastoral care and community outreach. She has
+                        been instrumental in developing our support programs and fostering spiritual growth.</p>
                 </div>
-
-            </div>
-        </section>
-
-        <section id="leadershipTeam" class="container">
-            <div class="text-center">
-                <h2 style="text-decoration: underline;"><span class="text-danger">Leadership</span> Team</h2>
-                <p>Meet our dedicated <span class="text-danger">leadership</span> team who guide and serve our
-                    congregation with <span class="text-danger">love</span> and <span class="text-danger">wisdom</span>
-                </p>
-            </div>
-            <div class="row">
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Apostle Alexander George</h5>
-                            </div>
-                            <div class="card-text">Apostle George has been leading our church since 2001. With a
-                                background in theology and pastoral care, he is passionate about preaching the Word and
-                                shepherding the flock. He enjoys spending time with his family and engaging in community
-                                outreach.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Children Pastor Isreal Johnson</h5>
-                            </div>
-                            <div class="card-text">Pastor Isreal joined our team in [Year] and has since revitalized our
-                                youth ministry. His dynamic approach to teaching and mentoring young people has made a
-                                significant impact on our community.
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Music Director Sehsue Davis</h5>
-                            </div>
-                            <div class="card-text">Sehsue leads our worship team with a heart for music and a talent for
-                                bringing people into God’s presence through song. She has been part of our church since
-                                [Year] and is committed to cultivating a vibrant worship culture.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Music Director Sehsue Davis</h5>
-                            </div>
-                            <div class="card-text">Sehsue leads our worship team with a heart for music and a talent for
-                                bringing people into God’s presence through song. She has been part of our church since
-                                [Year] and is committed to cultivating a vibrant worship culture.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Men President Sehsue Davis</h5>
-                            </div>
-                            <div class="card-text">Sehsue leads our worship team with a heart for music and a talent for
-                                bringing people into God’s presence through song. She has been part of our church since
-                                [Year] and is committed to cultivating a vibrant worship culture.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 my-2">
-                    <div class="card bg-danger">
-                        <div class="card-body">
-                            <div class="card-img">
-                                <img src="apostleGeorge.jpg" class="img-fluid"
-                                    style="height: 40vh; width: 100%; object-fit: cover;" alt="">
-                            </div>
-                            <div class="card-title">
-                                <h5>Women President Sehsue Davis</h5>
-                            </div>
-                            <div class="card-text">Sehsue leads our worship team with a heart for music and a talent for
-                                bringing people into God’s presence through song. She has been part of our church since
-                                [Year] and is committed to cultivating a vibrant worship culture.
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4 team-member">
+                    <img src="images/pastor3.jpg" alt="Pastor Michael Johnson">
+                    <h4>Pastor Michael Johnson</h4>
+                    <p>Youth Pastor</p>
+                    <p>Pastor Michael Johnson is dedicated to nurturing the next generation through engaging youth
+                        programs
+                        and activities. His passion for youth ministry has made a significant impact on our young
+                        members.</p>
                 </div>
             </div>
         </section>
 
-        <section id="beliefMission" class="mt-5 bg-cyan">
-            <div class="row" style="justify-content: space-between;">
-                <div class="col-md-6 text-light" id="beliefs">
-                    <h2 class="text-center">Beliefs</h2>
-                    <p class="text-center"> Our church holds to the following core beliefs:</p>
-                    <ul>
-                        <li>The Trinity: We believe in one God, eternally existent in three persons: Father, Son, and
-                            Holy Spirit.</li>
-                        <li>The Bible: We believe that the Bible is the inspired, infallible, and authoritative Word of
-                            God.</li>
-                        <li>Salvation: We believe that salvation is a gift from God, received through faith in Jesus
-                            Christ alone.</li>
-                        <li>The Church: We believe in the universal Church, the body of Christ, and the local church as
-                            an expression of the universal Church.</li>
-                        <li>Baptism and Communion: We practice baptism by immersion and regularly observe the Lord's
-                            Supper.</li>
-                    </ul>
+        <!-- Our Faith -->
+        <section data-aos="fade-up" data-aos-delay="600">
+            <h2 class="section-title">Our Faith</h2>
+            <p>We believe in the fundamental teachings of Christianity and uphold the values of faith, hope, and love.
+                Our
+                church is committed to living out the teachings of Jesus Christ and promoting a life of service and
+                compassion. Here are some key aspects of our faith:</p>
+            <div class="card-deck">
+                <div class="card" data-aos="fade-up">
+                    <div class="card-body">
+                        <h5 class="card-title">Scripture</h5>
+                        <p class="card-text">We hold the Bible as the inspired word of God and the foundation of our
+                            beliefs and practices. It guides our faith and teaches us how to live a Christ-centered
+                            life.
+                        </p>
+                    </div>
                 </div>
-
-                <div class="col-md-5 bg-light text-dark" id="missionVision">
-                    <h2 class="text-center">Mission & Vision</h2>
-
-                    <ul>
-                        <li>Mission: Our mission is to love God, love people, and make disciples of Jesus Christ through
-                            worship, teaching, and service.</li>
-                        <li>Vision: We envision a church that transforms lives and communities through the power of the
-                            Gospel, fosters deep relationships, and equips every believer to live out their God-given
-                            purpose.</li>
-                    </ul>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-body">
+                        <h5 class="card-title">Love</h5>
+                        <p class="card-text">We believe in loving our neighbors as ourselves, showing compassion, and
+                            serving others with kindness. Love is at the heart of our mission and interactions.</p>
+                    </div>
                 </div>
-
+                <div class="card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-body">
+                        <h5 class="card-title">Prayer</h5>
+                        <p class="card-text">Prayer is a vital part of our spiritual life, connecting us with God and
+                            seeking His guidance. We encourage prayer as a means to strengthen our faith and resolve.
+                        </p>
+                    </div>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="card-body">
+                        <h5 class="card-title">Community</h5>
+                        <p class="card-text">We value building a supportive and inclusive community where everyone can
+                            grow
+                            spiritually and make a positive impact. Our church is a place of fellowship and mutual
+                            support.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <footer class="bg-danger text-light mt-5">
-            <div class="container py-4">
-                <div class="row">
-                    <div class="col-md-4 text-md-start text-center">
-                        <h5>SLD & Associate</h5>
-                        <p>We are a construction company committed to delivering high-quality projects on time and
-                            within budget. Our team is dedicated to providing exceptional service and exceeding our
-                            clients' expectations.</p>
-                        <a href="contact.html" class="btn btn-dark" id="homeBtn">Contact US</a>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Menu</h5>
-                        <div class="footer-social">
-                            <i class="bi bi-house d-block"> <a href="index.html" class="text-light">Home</a></i>
-                            <i class="bi bi-info-circle d-block"> <a href="about.html" class="text-light">About
-                                    Us</a></i>
-                            <i class="bi bi-calendar-event d-block"> <a href="event.html"
-                                    class="text-light">Events</a></i>
-                            <i class="bi bi-people d-block"> <a href="ministries.html"
-                                    class="text-light">Ministries</a></i>
-                            <i class="bi bi-chat-quote d-block"> <a href="testimonies.html"
-                                    class="text-light">Testimonies</a></i>
-                            <i class="bi bi-images d-block"> <a href="gallery.html" class="text-light">Gallery</a></i>
-                            <i class="bi bi-envelope"> <a href="contact.html" class="text-light">Contact</a></i>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 text-md-start mb-3 mb-md-0 text-center">
-                        <h5>Get in Contact</h5>
-                        <p><i class="bi bi-envelope"> <a href="mailto:info@constructioncompany.com"
-                                    class="text-light">nfpchurch@gmail.com</a> </i>
-                        </p>
-
-                        <p><i class="bi bi-telephone"> <a href="tel:+231886" class="text-light"> 0777******</a>
-                            </i>
-                        </p>
-                        <p><i class="bi bi-telephone"> <a href="tel:+231777" class="text-light"> 0888******</a>
-                            </i>
-                        </p>
-
-                        <p><i class="bi bi-geo-alt"> Police Academy Paynesville </i>
-                        </p>
-                        <i class="bi bi-facebook"> <a href="contact.html" class="text-light"></a></i>
-                    </div>
-
-
-                </div>
-
-                <div class="text-center mt-5">
-                    <i>&copy; 2024 National Freedom Pentecostal Church</i>
-                    <a href="https://stephenpartehportfolio.netlify.app/" target="_blank"
-                        class="text-light"><i>|Designed
-                            by: Stephen
-                            Monsue Parteh</i></a>
-                    <i>|All Rights Reserved.</i>
-                </div>
-            </div>
-        </footer>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 National Freedom Pentecostal Church. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 
 </html>
-
-<!-- 
-    About Us
-    Menu 
-    Address
-    Say Hello
--->
