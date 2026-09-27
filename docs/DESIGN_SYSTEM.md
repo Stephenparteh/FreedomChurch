@@ -15,6 +15,16 @@ This palette should be treated as a working default, easy to swap once the churc
 
 Both are self-hosted via `@fontsource-variable` (see [ARCHITECTURE.md](ARCHITECTURE.md)) rather than loaded from Google Fonts at runtime. Only two families are used, and only the weight axis of each is loaded — no italics, no extra widths — to keep the font payload small.
 
+## Photography
+
+Unlike color, the site's photography isn't a placeholder guess — Milestone 2 visually inspected every legacy image and found two genuinely real, verified photos of the NFPC congregation (`churchAudience.jpg`/`widerAudience.jpg`, with "N.F.P.C" signage visible in-frame) plus a genuine church crest/logo. See [LEGACY_AUDIT.md](LEGACY_AUDIT.md) for how each asset was judged.
+
+- Real photography is used where it carries real meaning: the homepage hero (full-bleed, dark gradient overlay for text legibility), the About page's intro, and the `/gallery` page.
+- It is **not** repeated on every interior page hero — `PageHero` (used on About/Ministries/Sermons/Events/Gallery/Contact) stays a clean, photo-free muted band, so the two available real photos don't feel stretched thin across the whole site.
+- Sections with no real photography to show (ministry cards, sermon/event thumbnails) use a flat `primary-50`/`surface-muted` block rather than a fabricated stock image — for ministries, a large display-font monogram of the ministry's initial gives the block some identity without pretending to be a real photo.
+- Both real photos are optimized to `.webp` (full ~350KB for hero-scale use, ~90KB thumbnail variant for smaller placements) via a one-off `sharp` script, not a standing dependency — see [MIGRATION_NOTES.md](MIGRATION_NOTES.md).
+- Assets whose licensing is unverified (`openBible.jpg`, `wideOpenBible.jpg`, `OIP.jpg`) or that misrepresent the church (`church.jpg`, confirmed not to depict NFPC's actual building) are excluded — see [MISSING_CONTENT.md](MISSING_CONTENT.md).
+
 ## Colors
 
 | Token | Value | Usage |
@@ -51,7 +61,7 @@ A restrained set, deliberately not the "everything is a pill" look the brief war
 
 ## Shadows
 
-Two tokens only — `shadow-soft` (resting state) and `shadow-elevated` (hover) — applied narrowly (cards, the sticky header on scroll). No drop-shadows on text, no glow effects.
+Two tokens only — `shadow-soft` (resting state) and `shadow-elevated` (hover) — applied narrowly to cards. The header uses a border + blur instead of a shadow to separate itself from content on scroll. No drop-shadows on text, no glow effects.
 
 ## Buttons
 
@@ -70,4 +80,11 @@ One `Card` primitive: white surface, `border`, `radius-lg`, `shadow-soft` at res
 
 ## Motion
 
-Deliberately minimal for this milestone: color/shadow transitions on interactive elements only (`transition-colors`, `transition-shadow`). The legacy site leaned on AOS for scroll-triggered fade/slide animations on nearly every section; V2 does not carry that forward by default — subtle, purposeful motion can be added per-component in Milestone 2 once real content exists to animate, rather than wrapping every section in the same effect by convention.
+The legacy site leaned on the AOS library for scroll-triggered fade/slide animations on nearly every section; V2 doesn't add a new animation dependency to replace it. Instead:
+
+- **`Reveal`** ([`components/shared/Reveal.tsx`](../frontend/src/components/shared/Reveal.tsx)) — a small `IntersectionObserver`-based wrapper (fade + slight upward slide) used sparingly on section headings and card grids, staggered with a `delay` prop. It is entirely opt-in per section, not a global default, so motion stays purposeful rather than decorative.
+- **Reduced motion is respected structurally, not as an afterthought.** `Reveal`'s animation classes are all gated behind Tailwind's `motion-safe:` variant — a `prefers-reduced-motion: reduce` user sees final-state content immediately, with no JS branching required.
+- **Header transitions** — background/text color cross-fade (`transition-colors duration-300`) as the header goes from transparent-over-hero to solid-on-scroll (homepage only; every other page's header is always solid, since there's no image behind it to overlay). The mobile nav panel animates `max-height` rather than sliding a transform, to avoid layout jumps.
+- **Interactive elements** — color/shadow/lift transitions on hover (`transition-colors`, `transition-[box-shadow,transform]` on `Card`, image `scale` on gallery/preview hover).
+
+Nothing auto-plays, nothing loops, and no section is animated purely because a template pattern suggests it should be.

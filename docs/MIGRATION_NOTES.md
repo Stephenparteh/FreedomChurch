@@ -1,6 +1,6 @@
 # Migration Notes
 
-What happened to the legacy site during Milestone 1, concretely.
+What happened to the legacy site, concretely, across Milestones 1 and 2.
 
 ## What moved
 
@@ -41,10 +41,21 @@ Per the milestone brief's explicit instruction not to invent or silently carry f
 - **`/admin/*` route tree** — the legacy site had no administration surface at all. Route shells exist now; functionality lands in Milestone 4 ([DASHBOARD_PLAN.md](DASHBOARD_PLAN.md)).
 - **A single shared Header/Footer/design system** — replacing 9x duplicated navbar/footer markup and 3 inconsistent color schemes.
 
+## Milestone 2 additions
+
+Milestone 1 left every page image as a neutral placeholder block, pending a decision on which legacy assets were trustworthy. Milestone 2 made that decision by actually opening the images (not just reading filenames):
+
+- **`churchLogo-removebg-preview.png` migrated.** Visual inspection showed this is a real, detailed church crest (open Bible, dove, map of Africa, US flag motif, raised hands) with a genuine motto, **"You Must Be Free."** Resized (source is only 200×199px) and moved to `frontend/src/assets/brand/nfpc-logo.png`. Now used in the live `Header` and `Footer`. The motto is recorded in `frontend/src/data/site.ts` as `siteConfig.motto` and used on the homepage hero and About page.
+- **`churchAudience.jpg` and `widerAudience.jpg` migrated.** Visual inspection confirmed these are genuine photos of the actual NFPC congregation ("N.F.P.C" signage visible in-frame). Optimized from ~500KB JPEGs to ~350KB (full) / ~90KB (thumbnail) `.webp` files via a one-off `sharp` script (not a permanent dependency — installed, run, uninstalled), output to `frontend/src/assets/photos/`. Used in the homepage hero, the About page, and as the entire content of the new `/gallery` page.
+- **`church.jpg` explicitly excluded, with a corrected understanding of why.** Milestone 1's audit only guessed it was "likely real church photography." Milestone 2's visual inspection shows it's a photo of a glossy American-style church building with a steeple — architecturally nothing like the real sanctuary in the verified photos above. It does not depict NFPC's building and was not migrated.
+- **`openBible.jpg`, `wideOpenBible.jpg`, `OIP.jpg`, and both `.mp4` videos remain excluded**, unchanged from the Milestone 1 decision — licensing/rights still unconfirmed.
+- **Testimonials were not migrated in any form**, including as placeholder UI — per the milestone brief, fabricating testimony content (even clearly-labeled placeholder testimony) was judged worse than omitting the section entirely until real testimonials exist.
+- **`docs/LEGACY_AUDIT.md`'s asset table and migration-recommendations table were corrected** to reflect the above — see that document for the updated per-asset verdicts.
+
 ## Still needs migration / decisions (tracked for later milestones)
 
-- [ ] Church leadership confirms real contact info, service times, mission/vision copy, and history → feeds `SiteSetting` (Milestone 3) and replaces `TODO_CONFIRM_*` placeholders in the frontend.
-- [ ] Confirm licensing/rights on `OIP.jpg` and the two music videos before any reuse; otherwise replace with original church media.
-- [ ] Optimize and migrate `churchAudience.jpg`, `widerAudience.jpg`, `church.jpg`, and the logo files into the new frontend once approved.
-- [ ] Real leadership bios/photos, real ministry descriptions, real sermon/event data — feed the backend models once Milestone 3 exists; until then `frontend/src/data/placeholders.ts` stands in.
+- [ ] Church leadership confirms real contact info, service times, mission/vision copy, history, and leadership bios/photos → feeds `SiteSetting` (Milestone 3) and replaces the `TODO_CONFIRM_*` placeholders in the frontend. Full list in [MISSING_CONTENT.md](MISSING_CONTENT.md).
+- [ ] Confirm licensing/rights on `OIP.jpg`, `openBible.jpg`, `wideOpenBible.jpg`, and the two music videos before any reuse.
+- [ ] Real leadership bios/photos, real ministry descriptions, real sermon/event data, real testimonials — feed the backend models once Milestone 3 exists; until then `frontend/src/data/placeholders.ts` stands in.
 - [ ] Decide whether `event-details.html`'s intended per-event detail view becomes a dedicated `/events/:id` route (likely, once events are backend-driven in Milestone 3) rather than guessed at now.
+- [ ] More church photography beyond the 2 verified images, for a fuller gallery.

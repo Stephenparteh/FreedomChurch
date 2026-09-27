@@ -42,18 +42,20 @@ frontend/src/
 ├── components/
 │   ├── layout/         Header, Footer, SiteLayout, AdminLayout — structural, page-independent
 │   ├── ui/              Button, Card, Container, Section — the design-system primitives
-│   ├── shared/          PageHero, StateMessage — cross-page composite patterns
-│   └── sections/        (reserved for M2 — homepage/landing-specific section components)
+│   ├── shared/          PageHero, StateMessage, Reveal — cross-page composite patterns
+│   └── sections/        Hero, ServiceInfo, AboutPreview, MinistriesPreview, SermonsPreview,
+│                        EventsPreview, GalleryPreview, CTASection — homepage building blocks
 ├── pages/               One component per route; admin pages under pages/admin/
 ├── routes/              router.tsx — the single source of truth for the route tree
-├── hooks/               usePageMeta, and future data-fetching hooks (M3)
+├── hooks/               usePageMeta, useScrolled, and future data-fetching hooks (M3)
 ├── lib/                cn() and other framework-agnostic helpers
 ├── types/               content.ts — shapes mirroring the future backend models
-├── data/               site.ts (nav/site config), placeholders.ts (sample content, deleted once the API exists)
-└── styles/             (reserved — currently everything lives in index.css)
+├── data/               site.ts (nav/site config), placeholders.ts (sample sermons/events/ministries),
+│                        gallery.ts (the two verified real photos)
+└── styles/             (reserved — everything currently lives in index.css)
 ```
 
-`components/sections` and `styles/` are placeholder directories for Milestone 2, kept empty rather than populated speculatively, per the instruction not to build ahead of the current milestone.
+`components/sections` was populated in Milestone 2 per the "meaningful UI concepts, not one giant page component" principle: `Home.tsx` composes 8 section components rather than containing the homepage inline. `styles/` remains an empty placeholder — nothing has yet justified splitting styles out of `index.css`.
 
 ### Data flow (current vs. future)
 

@@ -21,6 +21,7 @@ export interface Sermon {
   preacher: string
   date: string
   series?: string
+  category?: string
   description: string
   thumbnailUrl?: string
   videoUrl?: string

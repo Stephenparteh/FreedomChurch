@@ -1,4 +1,4 @@
-import type { ChurchEvent, GalleryItem, Ministry, Sermon } from '@/types/content'
+import type { ChurchEvent, Ministry, Sermon } from '@/types/content'
 
 /**
  * Sample content ONLY — shaped like what the backend will eventually return
@@ -41,6 +41,7 @@ export const placeholderSermons: Sermon[] = [
     title: 'Sample Sermon Title',
     preacher: 'TODO_CONFIRM_PREACHER',
     date: 'TODO_CONFIRM_DATE',
+    category: 'Faith',
     description: 'Placeholder description — real sermons will be managed from the admin dashboard.',
   },
   {
@@ -48,6 +49,7 @@ export const placeholderSermons: Sermon[] = [
     title: 'Sample Sermon Title',
     preacher: 'TODO_CONFIRM_PREACHER',
     date: 'TODO_CONFIRM_DATE',
+    category: 'Christian Living',
     description: 'Placeholder description — real sermons will be managed from the admin dashboard.',
   },
   {
@@ -55,6 +57,7 @@ export const placeholderSermons: Sermon[] = [
     title: 'Sample Sermon Title',
     preacher: 'TODO_CONFIRM_PREACHER',
     date: 'TODO_CONFIRM_DATE',
+    category: 'Spiritual Growth',
     description: 'Placeholder description — real sermons will be managed from the admin dashboard.',
   },
 ]
@@ -73,10 +76,3 @@ export const placeholderEvents: ChurchEvent[] = [
     description: 'Placeholder — confirm real schedule and description.',
   },
 ]
-
-export const placeholderGallery: GalleryItem[] = Array.from({ length: 6 }, (_, index) => ({
-  id: `sample-${index + 1}`,
-  imageUrl: '',
-  caption: 'Placeholder image',
-  category: 'Sample',
-}))

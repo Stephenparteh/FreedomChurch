@@ -62,9 +62,10 @@ Two pages are linked from navigation but were never created: **`gallery.html`** 
 
 | Asset | Notes |
 |---|---|
-| `images/churchLogo.jpg`, `churchLogo-removebg-preview.png` | Church logo, two versions (one background-removed) |
-| `images/church.jpg`, `churchAudience.jpg`, `widerAudience.jpg` | Photos of the congregation/sanctuary — likely real church photography, candidates for reuse |
-| `images/openBible.jpg`, `wideOpenBible.jpg` | Generic open-Bible stock-style photos |
+| `images/churchLogo.jpg`, `churchLogo-removebg-preview.png` | **Verified, genuine church identity.** A real crest: "National Freedom Pentecostal Church" encircling an open Bible, a dove, a map of Africa, a US flag motif, and raised hands, with the motto **"You Must Be Free"**. Confirmed by visual inspection during Milestone 2 — this is real branding, not a placeholder, and is now used in the V2 header/footer (200×199px source, upscaled no further than that). |
+| `images/churchAudience.jpg`, `widerAudience.jpg` | **Verified, genuine church photography.** Visual inspection during Milestone 2 confirms these show the actual NFPC congregation and sanctuary — "N.F.P.C" signage is visible in-frame in both. Real West African Pentecostal worship setting (colorful fabric drapery, plastic/banquet chairs), consistent with the "Police Academy Paynesville" (Liberia) address found in `testimonies.html`. Optimized to `.webp` and migrated into `frontend/src/assets/photos/` — see docs/MIGRATION_NOTES.md. |
+| `images/church.jpg` | **Not representative — do not use.** Visual inspection during Milestone 2 shows this is a glossy American-style church building with a steeple, architecturally nothing like the real sanctuary shown in `churchAudience.jpg`/`widerAudience.jpg`. This is very likely stock/reference imagery mislabeled as the church's own building, not NFPC's real property. Excluded from V2. |
+| `images/openBible.jpg`, `wideOpenBible.jpg` | Generic open-Bible stock-style photos, licensing unverified. Excluded from V2 pending confirmation — see docs/MISSING_CONTENT.md. |
 | `images/OIP.jpg` | Filename is the default name Bing Images gives cached thumbnails — this is almost certainly a downloaded stock/reference image, not original church content. **Do not carry this forward without confirming licensing.** |
 | `videos/Eugy_Official_-_He_Called_Me_...mp4`, `videos/_I_Got_a_Secret..._Visualizer_...mp4` | Two gospel music videos, ~15MB and ~19MB. Filenames suggest these are third-party official music videos (artist "Eugy", a track titled "I Got a Secret"), not church-produced content. **Confirm rights/permission before reusing in V2** — likely should be replaced with the church's own sermon/service recordings. |
 
@@ -78,6 +79,8 @@ Content worth carrying forward as a *starting point*, pending confirmation:
 - Ministry names/categories: Worship Ministry, Children's Ministry, Outreach Ministry.
 - General page taxonomy: Home, About, Sermons, Events, Ministries, Media/Gallery, Give, Contact — this structure is reused in the new site's route architecture (see [ARCHITECTURE.md](ARCHITECTURE.md)).
 - The general shape of the "Our Faith" pillars (Scripture, Love, Prayer, Community) as a *layout pattern*, though the copy itself is generic and needs real doctrinal content.
+- **The church crest/logo and its motto "You Must Be Free"** (`churchLogo-removebg-preview.png`) — genuine, verified church identity, confirmed by visual inspection in Milestone 2. Migrated into the V2 header and footer.
+- **`churchAudience.jpg` and `widerAudience.jpg`** — genuine photography of the real NFPC congregation, confirmed by visual inspection in Milestone 2 (visible "N.F.P.C" signage in both). Optimized and migrated into the V2 homepage hero, About page, and Gallery.
 
 Content that is **not** reusable as fact and must not be presented as real in V2 until confirmed by church leadership — see the conflicts documented below.
 
@@ -111,7 +114,8 @@ Content that is **not** reusable as fact and must not be presented as real in V2
 | Church name, ministry names/categories | **Keep** | Real identity content |
 | Contact details, service times, founding history | **Archive, do not migrate as fact** | Conflicting/placeholder across pages; must be reconfirmed with church leadership before publishing |
 | `testimonies.html` construction-company footer | **Delete on rebuild** (already excluded from V2) | Unrelated template leftover, not real content |
-| `churchAudience.jpg`, `widerAudience.jpg`, `church.jpg`, logo files | **Keep, optimize** | Likely real church photography; convert to modern formats and compress before reuse |
+| `churchAudience.jpg`, `widerAudience.jpg`, logo files | **Kept, migrated (done in Milestone 2)** | Verified real church photography and identity; optimized to `.webp`/resized PNG and now used in the live V2 site |
+| `church.jpg` | **Archive, do not use** | Confirmed non-representative — depicts a building that isn't NFPC's |
 | `openBible.jpg`, `wideOpenBible.jpg`, `OIP.jpg` | **Archive, verify licensing** | Stock-style imagery of unclear origin; `OIP.jpg` in particular looks like an unlicensed downloaded image |
 | Music videos in `videos/` | **Archive, do not reuse without confirming rights** | Appear to be third-party official music videos, not church-produced sermon content |
 | Contact/event/donation forms | **Rewrite** | None were functional; V2 forms will post to the real API (Milestone 3) |

@@ -18,6 +18,9 @@ import type { NavLink, ServiceTime } from '@/types/content'
 export const siteConfig = {
   name: 'National Freedom Pentecostal Church',
   shortName: 'NFPC',
+  // Verified from the church's own crest (legacy/images/churchLogo-removebg-preview.png) — a real,
+  // confirmed piece of church identity, not invented copy. See docs/LEGACY_AUDIT.md.
+  motto: 'You Must Be Free',
   // TODO: confirm canonical contact details with church leadership.
   email: 'TODO_CONFIRM_EMAIL',
   phone: 'TODO_CONFIRM_PHONE',

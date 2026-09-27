@@ -12,9 +12,15 @@ National Freedom Pentecostal Church's website is being rebuilt from a static, be
 - Documented exactly what was and wasn't migrated ([`docs/MIGRATION_NOTES.md`](docs/MIGRATION_NOTES.md)), including facts left unconfirmed rather than invented.
 - Verified the app builds, typechecks, lints clean, and renders correctly in a real browser.
 
-## Milestone 2 — Modern public website
+## Milestone 2 — Modern public website ✅
 
-Build out the real public pages against the foundation from Milestone 1: full homepage, About, Ministries, Sermons, Events, Gallery, Give, and Contact pages with production-quality layout, imagery, and copy (once church leadership confirms the `TODO_CONFIRM_*` facts flagged in Milestone 1). Still content-static at this point — pages render placeholder/confirmed content directly, not yet fetched from a live API.
+- Rebuilt the homepage as a composition of 8 section components (`Hero`, `ServiceInfo`, `AboutPreview`, `MinistriesPreview`, `SermonsPreview`, `EventsPreview`, `GalleryPreview`, `CTASection`) instead of one page-level file.
+- Rebuilt About, Ministries, Sermons, Events, Gallery, and Contact with production-quality layout — intentional composition (alternating ministry rows, functional sermon search/filter, honest empty states) instead of uniform card grids.
+- Verified, migrated, and optimized real NFPC assets discovered by actually opening the legacy images: the genuine church crest/logo and motto ("You Must Be Free"), and two genuine congregation photos — now used in the header, footer, homepage hero, About page, and `/gallery`. Also *excluded* `church.jpg` after confirming it depicts a different, non-NFPC building — see [`docs/LEGACY_AUDIT.md`](docs/LEGACY_AUDIT.md).
+- Added scroll-aware header behavior (transparent-over-hero on the homepage, solid elsewhere/on-scroll), a mobile nav panel with a backdrop and scroll lock, and a reduced-motion-respecting `Reveal` scroll-entrance primitive — no new animation dependency.
+- Did not fabricate leadership names, service times, contact details, ministry copy, sermons, events, or testimonials — every unconfirmed fact is a visible `TODO_CONFIRM_*` string, catalogued in [`docs/MISSING_CONTENT.md`](docs/MISSING_CONTENT.md).
+- No backend or admin-dashboard functionality was built — out of scope per the milestone brief.
+- Verified: clean build, clean lint, zero browser console errors across all 8 public pages at desktop (1440px) and mobile (390px) viewports, real-browser screenshots reviewed.
 
 ## Milestone 3 — Backend + MongoDB + dynamic content
 

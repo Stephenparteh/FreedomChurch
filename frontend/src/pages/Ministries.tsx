@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Button'
-import { Card } from '@/components/ui/Card'
 import { Section } from '@/components/ui/Section'
 import { PageHero } from '@/components/shared/PageHero'
+import { Reveal } from '@/components/shared/Reveal'
 import { placeholderMinistries } from '@/data/placeholders'
 import { usePageMeta } from '@/hooks/usePageMeta'
 
@@ -13,21 +13,45 @@ export function Ministries() {
       <PageHero
         eyebrow="Get involved"
         title="Our ministries"
-        description="Explore the various ministries you can join or support. Content below is placeholder — will be managed from the admin dashboard in a later milestone."
+        description="Explore the various ministries you can join or support. Descriptions below are placeholder copy pending confirmation from church leadership — see docs/MISSING_CONTENT.md."
       />
 
       <Section>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {placeholderMinistries.map((ministry) => (
-            <Card key={ministry.id} className="flex flex-col">
-              <div className="h-40 rounded-md bg-surface-muted" aria-hidden />
-              <h3 className="mt-4 text-lg font-semibold text-text">{ministry.name}</h3>
-              <p className="mt-2 flex-1 text-sm text-text-muted">{ministry.description}</p>
-              <Button variant="link" className="mt-4 self-start">
-                Learn more &rarr;
-              </Button>
-            </Card>
-          ))}
+        <div className="space-y-16 sm:space-y-20">
+          {placeholderMinistries.map((ministry, index) => {
+            const reversed = index % 2 === 1
+            return (
+              <Reveal key={ministry.id}>
+                <div
+                  className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
+                    reversed ? 'lg:[&>*:first-child]:order-2' : ''
+                  }`}
+                >
+                  <div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-primary-50">
+                    <span className="font-display text-8xl font-semibold text-primary-200">
+                      {ministry.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-semibold text-text sm:text-3xl">
+                      {ministry.name}
+                    </h2>
+                    <p className="mt-4 text-text-muted">{ministry.description}</p>
+                    {ministry.meetingInfo && (
+                      <p className="mt-4 text-sm font-medium text-text">
+                        Meets: <span className="font-normal text-text-muted">{ministry.meetingInfo}</span>
+                      </p>
+                    )}
+                    <div className="mt-6">
+                      <Button to="/contact" variant="secondary">
+                        Get involved
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
       </Section>
     </>
