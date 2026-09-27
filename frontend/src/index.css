@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces/wght.css";
+@import "@fontsource-variable/inter/wght.css";
+
+/*
+  NFPC V2 design tokens.
+  Palette is a temporary, documented placeholder derived from the recurring
+  colors in the legacy site (navy/blue + a red accent), NOT official church
+  branding. See docs/DESIGN_SYSTEM.md before treating any value here as final.
+*/
+@theme {
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary-50: #eef4fb;
+  --color-primary-100: #d6e5f4;
+  --color-primary-200: #adc9e9;
+  --color-primary-300: #7ea9dc;
+  --color-primary-400: #4d84c9;
+  --color-primary-500: #2c65ae;
+  --color-primary-600: #1f4d8c;
+  --color-primary-700: #1a3d6f;
+  --color-primary-800: #17325a;
+  --color-primary-900: #142a49;
+
+  --color-accent-50: #fdecec;
+  --color-accent-100: #fad0d0;
+  --color-accent-200: #f4a3a3;
+  --color-accent-300: #ec7373;
+  --color-accent-400: #e14b4b;
+  --color-accent-500: #c72e2e;
+  --color-accent-600: #a92222;
+  --color-accent-700: #871a1a;
+  --color-accent-800: #6b1616;
+  --color-accent-900: #571313;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f8fa;
+  --color-surface-inverted: #101828;
+
+  --color-text: #1a2233;
+  --color-text-muted: #5b6472;
+  --color-text-inverted: #f7f8fa;
+
+  --color-border: #e3e6eb;
+  --color-border-strong: #c7ccd4;
+
+  --color-success: #1e7d47;
+  --color-warning: #b7791f;
+  --color-error: #b3261e;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-soft: 0 1px 2px rgba(16, 24, 40, 0.04), 0 2px 8px rgba(16, 24, 40, 0.06);
+  --shadow-elevated: 0 4px 12px rgba(16, 24, 40, 0.08), 0 12px 32px rgba(16, 24, 40, 0.08);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-surface);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
