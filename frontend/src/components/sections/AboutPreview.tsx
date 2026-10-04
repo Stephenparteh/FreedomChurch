@@ -1,7 +1,8 @@
-import congregationPhoto from '@/assets/photos/congregation-worship.webp'
 import { Button } from '@/components/ui/Button'
 import { Section } from '@/components/ui/Section'
 import { Reveal } from '@/components/shared/Reveal'
+
+const congregationPhoto = '/photos/congregation-worship.webp'
 
 export function AboutPreview() {
   return (

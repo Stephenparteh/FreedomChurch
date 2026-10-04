@@ -2,11 +2,12 @@ import { Card } from '@/components/ui/Card'
 import { Section } from '@/components/ui/Section'
 import { PageHero } from '@/components/shared/PageHero'
 import { StateMessage } from '@/components/shared/StateMessage'
-import { siteConfig } from '@/data/site'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 export function Give() {
   usePageMeta('Give', 'Support the mission of NFPC.')
+  const { email, address } = useSiteSettings()
 
   return (
     <>
@@ -27,11 +28,11 @@ export function Give() {
             <dl className="mt-4 space-y-3 text-sm text-text-muted">
               <div>
                 <dt className="font-medium text-text">In person</dt>
-                <dd>During any service at {siteConfig.address}</dd>
+                <dd>During any service at {address}</dd>
               </div>
               <div>
                 <dt className="font-medium text-text">Contact</dt>
-                <dd>{siteConfig.email}</dd>
+                <dd>{email}</dd>
               </div>
             </dl>
           </Card>

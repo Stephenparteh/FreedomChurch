@@ -1,6 +1,6 @@
-# Backend Plan (Milestone 3 — not implemented yet)
+# Backend Plan
 
-This document is the architecture and contract the backend will follow when it's built. No `backend/` directory, API server, or database connection exists yet — this milestone establishes the plan only, per the milestone brief's explicit instruction not to build the API prematurely.
+This document describes the backend architecture. Milestone 3 implements the public read API and contact endpoint; endpoints are documented in [API.md](API.md) and models in [DATABASE.md](DATABASE.md). Authentication, admin write endpoints, and the dashboard remain Milestone 4.
 
 ## Structure
 
@@ -22,7 +22,7 @@ Node.js + Express + TypeScript + Mongoose. Express over a heavier framework (Nes
 
 ## API architecture
 
-- REST, JSON, versioned under `/api/v1/...` from day one so breaking changes later don't require a new base path negotiation.
+- REST, JSON, under `/api/...`. Versioning (`/api/v1/...`) was planned but is deferred: the API is currently unversioned.
 - Public read endpoints (sermons, events, ministries, announcements, gallery, published leadership/settings) require no authentication.
 - Write endpoints (create/update/delete on any resource, plus reading contact submissions) require an authenticated admin session.
 - Frontend consumes this API over `VITE_API_URL` (see `.env.example`) — never talks to MongoDB directly.

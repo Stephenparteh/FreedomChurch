@@ -10,7 +10,7 @@ frontend/   React + TypeScript + Vite + Tailwind CSS + React Router (see fronten
 docs/       Architecture, design system, backend/dashboard plans, migration notes
 ```
 
-`backend/` does not exist yet — it's planned for Milestone 3 ([`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md)).
+`backend/` is the Express + Mongoose public API. See [`docs/API.md`](docs/API.md) and [`docs/DATABASE.md`](docs/DATABASE.md).
 
 ## Where to start reading
 
@@ -18,7 +18,8 @@ docs/       Architecture, design system, backend/dashboard plans, migration note
 - [`docs/LEGACY_AUDIT.md`](docs/LEGACY_AUDIT.md) — what existed in the original site and what it means for the rebuild.
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — how the pieces fit together, and why.
 - [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) — typography, color, and component conventions.
-- [`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md) / [`docs/DASHBOARD_PLAN.md`](docs/DASHBOARD_PLAN.md) — the plan for the not-yet-built API and admin dashboard.
+- [`docs/API.md`](docs/API.md) / [`docs/DATABASE.md`](docs/DATABASE.md) — the implemented public API and data models.
+- [`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md) / [`docs/DASHBOARD_PLAN.md`](docs/DASHBOARD_PLAN.md) — backend architecture and the planned admin dashboard (Milestone 4).
 - [`docs/MIGRATION_NOTES.md`](docs/MIGRATION_NOTES.md) — exactly what moved, what didn't, and what's still pending confirmation from church leadership.
 
 ## Running the frontend

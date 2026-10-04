@@ -22,7 +22,13 @@ National Freedom Pentecostal Church's website is being rebuilt from a static, be
 - No backend or admin-dashboard functionality was built — out of scope per the milestone brief.
 - Verified: clean build, clean lint, zero browser console errors across all 8 public pages at desktop (1440px) and mobile (390px) viewports, real-browser screenshots reviewed.
 
-## Milestone 3 — Backend + MongoDB + dynamic content
+## Milestone 3 — Backend + MongoDB + dynamic content (complete pending review)
+
+- Express 5 + TypeScript API in `backend/`, Mongoose models for all nine content/config collections, central error handling, zod validation, Helmet, restricted CORS, and rate limiting on `POST /api/contact`.
+- Public read endpoints for sermons, events, announcements, ministries, service units, gallery, leadership, and site settings — published content only. See [`docs/API.md`](docs/API.md).
+- Frontend public pages fetch through a centralized client (`frontend/src/lib/api/`); the static placeholder data files were removed. Loading, empty, and error states are implemented.
+- Integration tests (vitest + supertest + an ephemeral MongoDB) cover the public API and error paths.
+- Still required from the church: a MongoDB Atlas cluster and `MONGODB_URI`, and verified contact details, service times, leadership, and content. See [`docs/DATABASE.md`](docs/DATABASE.md) and [`docs/MISSING_CONTENT.md`](docs/MISSING_CONTENT.md).
 
 Implement the Express + TypeScript + Mongoose API against MongoDB Atlas, following [`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md): all content models (Sermon, Event, Ministry, Announcement, GalleryItem, LeadershipMember, ContactSubmission, SiteSetting), public read endpoints, and the contact form actually submitting somewhere real. Wire the Milestone 2 frontend pages to fetch from this API instead of static data.
 

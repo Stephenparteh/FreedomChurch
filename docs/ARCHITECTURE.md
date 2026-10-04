@@ -9,7 +9,7 @@ NFPC V2
 │
 ├── frontend/           React + TypeScript + Vite + Tailwind CSS + React Router
 │
-├── backend/             (Milestone 3) Node.js + Express + TypeScript + Mongoose — not implemented yet
+├── backend/             Node.js + Express + TypeScript + Mongoose — public read API (Milestone 3)
 │
 ├── database              MongoDB Atlas — not provisioned yet
 │
@@ -24,7 +24,7 @@ The legacy site was 9 loose HTML files at the repo root with no build tooling. R
 
 - `legacy/` holds the original site untouched (moved with `git mv`, so history is preserved).
 - `frontend/` is a clean Vite scaffold, free to adopt modern tooling without fighting legacy file layout.
-- `backend/` will be added as its own top-level directory in Milestone 3, sibling to `frontend/`, so each app has its own `package.json`, dependency tree, and deploy target.
+- `backend/` is its own top-level directory, sibling to `frontend/`, with its own `package.json`, dependency tree, and deploy target.
 
 ## Frontend
 
@@ -59,22 +59,22 @@ frontend/src/
 
 ### Data flow (current vs. future)
 
-Milestone 1 pages import typed placeholder data directly from `src/data/placeholders.ts`. Every page component is written against the same `Sermon`/`ChurchEvent`/`Ministry`/etc. types defined in `src/types/content.ts` that the backend will eventually return, so swapping `import { placeholderSermons } from '@/data/placeholders'` for a `useSermons()` API hook in Milestone 3 is a data-source change, not a component rewrite:
+Public pages now read content from the API through `frontend/src/lib/api/` and the `useApi` / `useSiteSettings` hooks. Components render the same `Sermon`/`ChurchEvent`/`Ministry`/etc. types defined in `src/types/content.ts`, which mirror the backend models field-for-field:
 
 ```text
 Milestone 1:  src/data/placeholders.ts  →  page component
-Milestone 3+: MongoDB → Express API → frontend fetch hook → page component
+MongoDB → Express API (`/api`) → `lib/api` client → `useApi` hook → `AsyncList` / page component
 ```
 
 ### Environment variables
 
-Frontend env vars must be prefixed `VITE_` to be exposed to client code (Vite convention). See [`.env.example`](../.env.example) and [`frontend/.env.example`](../frontend/.env.example). Only `VITE_API_URL` is defined so far, and it is unused until Milestone 3 wires up real data fetching.
+Frontend env vars must be prefixed `VITE_` to be exposed to client code (Vite convention). See [`.env.example`](../.env.example) and [`frontend/.env.example`](../frontend/.env.example). `VITE_API_URL` is used by the API client (default `http://localhost:5000/api`).
 
-## Backend (planned, Milestone 3)
+## Backend (Milestone 3)
 
-Node.js + Express + TypeScript + Mongoose, exposing a versioned REST API (`/api/v1/...`). Full detail in [BACKEND_PLAN.md](BACKEND_PLAN.md). Not implemented in this milestone — no `backend/` directory exists yet.
+Node.js + Express 5 + TypeScript + Mongoose, exposing an unversioned public REST API under `/api`. Endpoints are listed in [API.md](API.md); database models and setup in [DATABASE.md](DATABASE.md). Authentication and write endpoints are not implemented (Milestone 4). The `/api/v1` prefix described in BACKEND_PLAN.md is deferred — the API is currently unversioned.
 
-## Database (planned, Milestone 3)
+## Database (Milestone 3)
 
 MongoDB Atlas. Connection string via `MONGODB_URI` (see `.env.example`), never committed. No cluster has been provisioned as part of this milestone.
 

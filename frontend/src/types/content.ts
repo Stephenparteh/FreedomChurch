@@ -1,7 +1,7 @@
 /**
- * Shapes mirror the future backend models documented in docs/BACKEND_PLAN.md.
- * Defining them now lets pages consume typed placeholder data today and
- * swap in real API responses later without touching component code.
+ * Shapes mirror the backend's Mongoose models exactly (see
+ * backend/src/models/ and docs/API.md) — field names match the real API
+ * response 1:1, so no translation layer is needed between fetch and render.
  */
 
 export interface NavLink {
@@ -18,46 +18,66 @@ export interface ServiceTime {
 export interface Sermon {
   id: string
   title: string
-  preacher: string
-  date: string
-  series?: string
-  category?: string
+  slug: string
   description: string
-  thumbnailUrl?: string
+  speaker: string
+  date: string
+  category?: string
+  thumbnail?: string
   videoUrl?: string
+  audioUrl?: string
 }
 
 export interface ChurchEvent {
   id: string
   title: string
+  slug: string
+  description: string
   date: string
+  endDate?: string
   time?: string
   location?: string
-  description: string
-  imageUrl?: string
-}
-
-export interface Ministry {
-  id: string
-  name: string
-  summary: string
-  description: string
-  imageUrl?: string
-  meetingInfo?: string
+  image?: string
 }
 
 export interface Announcement {
   id: string
   title: string
-  body: string
+  slug: string
+  content: string
+  image?: string
   publishedAt: string
+}
+
+export interface Ministry {
+  id: string
+  name: string
+  slug: string
+  shortDescription: string
+  description: string
+  image?: string
+  meetingInfo?: string
+  contactInfo?: string
+  displayOrder: number
+}
+
+export interface ServiceUnit {
+  id: string
+  name: string
+  slug: string
+  description: string
+  ministry?: string
+  image?: string
 }
 
 export interface GalleryItem {
   id: string
+  title?: string
   imageUrl: string
+  altText: string
   caption?: string
   category?: string
+  displayOrder: number
 }
 
 export interface LeadershipMember {
@@ -65,5 +85,31 @@ export interface LeadershipMember {
   name: string
   role: string
   bio?: string
-  photoUrl?: string
+  image?: string
+  displayOrder: number
+}
+
+export interface SiteSettings {
+  id: string
+  churchName: string
+  motto?: string
+  description?: string
+  email?: string
+  phone?: string
+  address?: string
+  serviceTimes: ServiceTime[]
+  socials?: {
+    facebook?: string
+    instagram?: string
+    twitter?: string
+  }
+  logoUrl?: string
+}
+
+export interface ContactPayload {
+  name: string
+  email: string
+  phone?: string
+  subject?: string
+  message: string
 }

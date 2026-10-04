@@ -1,11 +1,14 @@
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { Section } from '@/components/ui/Section'
+import { AsyncList } from '@/components/shared/AsyncList'
 import { Reveal } from '@/components/shared/Reveal'
-import { StateMessage } from '@/components/shared/StateMessage'
-import { placeholderSermons } from '@/data/placeholders'
+import { useApi } from '@/hooks/useApi'
+import { getSermons } from '@/lib/api/resources'
 
 export function SermonsPreview() {
+  const state = useApi(() => getSermons({ limit: 3 }), [])
+
   return (
     <Section>
       <Reveal>
@@ -22,31 +25,33 @@ export function SermonsPreview() {
         </div>
       </Reveal>
 
-      {placeholderSermons.length === 0 ? (
-        <StateMessage
-          className="mt-10"
-          title="No sermons available yet"
-          description="Sermons will appear here once they're added from the admin dashboard."
-        />
-      ) : (
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {placeholderSermons.map((sermon, index) => (
-            <Reveal key={sermon.id} delay={index * 100}>
-              <Card interactive className="flex h-full flex-col">
-                <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
-                {sermon.category && (
-                  <span className="mt-4 w-fit rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">
-                    {sermon.category}
-                  </span>
-                )}
-                <h3 className="mt-3 text-lg font-semibold text-text">{sermon.title}</h3>
-                <p className="mt-1 text-sm text-text-muted">{sermon.preacher}</p>
-                <p className="mt-3 flex-1 text-sm text-text-muted">{sermon.description}</p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
-      )}
+      <AsyncList
+        state={state}
+        loadingLabel="Loading sermons..."
+        emptyTitle="No sermons available yet"
+        emptyDescription="Sermons will appear here once they're added from the admin dashboard."
+        errorTitle="Unable to load sermons"
+      >
+        {(sermons) => (
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {sermons.map((sermon, index) => (
+              <Reveal key={sermon.id} delay={index * 100}>
+                <Card interactive className="flex h-full flex-col">
+                  <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
+                  {sermon.category && (
+                    <span className="mt-4 w-fit rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">
+                      {sermon.category}
+                    </span>
+                  )}
+                  <h3 className="mt-3 text-lg font-semibold text-text">{sermon.title}</h3>
+                  <p className="mt-1 text-sm text-text-muted">{sermon.speaker}</p>
+                  <p className="mt-3 flex-1 text-sm text-text-muted">{sermon.description}</p>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        )}
+      </AsyncList>
     </Section>
   )
 }

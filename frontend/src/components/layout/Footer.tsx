@@ -1,8 +1,11 @@
 import nfpcLogo from '@/assets/brand/nfpc-logo.png'
 import { Container } from '@/components/ui/Container'
-import { primaryNav, serviceTimes, siteConfig } from '@/data/site'
+import { primaryNav, siteConfig } from '@/data/site'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 export function Footer() {
+  const { churchName, motto, email, phone, address, serviceTimes } = useSiteSettings()
+
   return (
     <footer className="border-t border-border bg-surface-inverted text-text-inverted">
       <Container className="grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -11,8 +14,10 @@ export function Footer() {
             <img src={nfpcLogo} alt="" className="h-9 w-9" />
             <p className="font-display text-lg font-semibold">{siteConfig.shortName}</p>
           </div>
-          <p className="mt-3 max-w-xs text-sm text-text-inverted/70">{siteConfig.name}</p>
-          <p className="mt-1 text-sm italic text-text-inverted/50">&ldquo;{siteConfig.motto}&rdquo;</p>
+          <p className="mt-3 max-w-xs text-sm text-text-inverted/70">{churchName}</p>
+          {motto && (
+            <p className="mt-1 text-sm italic text-text-inverted/50">&ldquo;{motto}&rdquo;</p>
+          )}
         </div>
 
         <div>
@@ -34,16 +39,20 @@ export function Footer() {
           <h2 className="text-sm font-semibold uppercase tracking-wide text-text-inverted/60">
             Service times
           </h2>
-          <ul className="mt-4 space-y-2 text-sm text-text-inverted/80">
-            {serviceTimes.map((service) => (
-              <li key={service.label}>
-                <span className="block text-text-inverted">{service.label}</span>
-                <span className="text-text-inverted/60">
-                  {service.day} &middot; {service.time}
-                </span>
-              </li>
-            ))}
-          </ul>
+          {serviceTimes.length === 0 ? (
+            <p className="mt-4 text-sm text-text-inverted/60">Coming soon.</p>
+          ) : (
+            <ul className="mt-4 space-y-2 text-sm text-text-inverted/80">
+              {serviceTimes.map((service) => (
+                <li key={service.label}>
+                  <span className="block text-text-inverted">{service.label}</span>
+                  <span className="text-text-inverted/60">
+                    {service.day} &middot; {service.time}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         <div>
@@ -51,9 +60,9 @@ export function Footer() {
             Contact
           </h2>
           <ul className="mt-4 space-y-2 text-sm text-text-inverted/80">
-            <li>{siteConfig.email}</li>
-            <li>{siteConfig.phone}</li>
-            <li>{siteConfig.address}</li>
+            <li>{email}</li>
+            <li>{phone}</li>
+            <li>{address}</li>
           </ul>
         </div>
       </Container>
@@ -61,7 +70,7 @@ export function Footer() {
       <div className="border-t border-white/10 py-6">
         <Container className="flex flex-col items-center justify-between gap-2 text-xs text-text-inverted/60 sm:flex-row">
           <p>
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {churchName}. All rights reserved.
           </p>
           <p>Built by the NFPC team.</p>
         </Container>

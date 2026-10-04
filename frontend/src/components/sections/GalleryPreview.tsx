@@ -1,9 +1,13 @@
 import { Button } from '@/components/ui/Button'
 import { Section } from '@/components/ui/Section'
+import { AsyncList } from '@/components/shared/AsyncList'
 import { Reveal } from '@/components/shared/Reveal'
-import { galleryPhotos } from '@/data/gallery'
+import { useApi } from '@/hooks/useApi'
+import { getGallery } from '@/lib/api/resources'
 
 export function GalleryPreview() {
+  const state = useApi(() => getGallery({ limit: 2 }), [])
+
   return (
     <Section>
       <Reveal>
@@ -20,20 +24,30 @@ export function GalleryPreview() {
         </div>
       </Reveal>
 
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {galleryPhotos.map((photo, index) => (
-          <Reveal key={photo.id} delay={index * 100}>
-            <div className="aspect-[4/3] overflow-hidden rounded-lg">
-              <img
-                src={photo.imageUrl}
-                alt={photo.caption ?? ''}
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-          </Reveal>
-        ))}
-      </div>
+      <AsyncList
+        state={state}
+        loadingLabel="Loading photos..."
+        emptyTitle="Photos coming soon"
+        emptyDescription="Photos will appear here once they're added from the admin dashboard."
+        errorTitle="Unable to load photos"
+      >
+        {(photos) => (
+          <div className="grid gap-4 sm:grid-cols-2">
+            {photos.map((photo, index) => (
+              <Reveal key={photo.id} delay={index * 100}>
+                <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                  <img
+                    src={photo.imageUrl}
+                    alt={photo.altText}
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        )}
+      </AsyncList>
     </Section>
   )
 }

@@ -1,10 +1,14 @@
-import congregationPhoto from '@/assets/photos/congregation-worship.webp'
 import { Card } from '@/components/ui/Card'
 import { Section } from '@/components/ui/Section'
+import { AsyncList } from '@/components/shared/AsyncList'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
-import { siteConfig } from '@/data/site'
+import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { useSiteSettings } from '@/hooks/useSiteSettings'
+import { getLeadership } from '@/lib/api/resources'
+
+const congregationPhoto = '/photos/congregation-worship.webp'
 
 const faithPillars = [
   { title: 'Scripture', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
@@ -15,11 +19,13 @@ const faithPillars = [
 
 export function About() {
   usePageMeta('About', 'Learn about the mission, history, and leadership of NFPC.')
+  const { motto } = useSiteSettings()
+  const leadershipState = useApi(() => getLeadership(), [])
 
   return (
     <>
       <PageHero
-        eyebrow={siteConfig.motto}
+        eyebrow={motto || undefined}
         title="Our vision & mission"
         description="Placeholder copy — replace with confirmed mission and vision statements. The legacy site's version of this text read as generic template copy (see docs/LEGACY_AUDIT.md) and should not be treated as final."
       />
@@ -51,26 +57,36 @@ export function About() {
         <Reveal>
           <h2 className="text-3xl font-semibold text-text">Leadership</h2>
           <p className="mt-2 max-w-2xl text-text-muted">
-            TODO_CONFIRM_LEADERSHIP — the legacy site used placeholder names ("Pastor John Doe",
-            etc.). Real leadership bios and photos are required before this section can ship.
+            Leadership bios and photos are managed from the admin dashboard once confirmed by
+            church leadership — see docs/MISSING_CONTENT.md.
           </p>
         </Reveal>
-        <div className="mt-8 grid gap-6 sm:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <Reveal key={i} delay={i * 100}>
-              <Card className="h-full text-center">
-                <div
-                  className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-surface-muted text-xs font-medium text-text-muted"
-                  aria-hidden
-                >
-                  Pending
-                </div>
-                <p className="mt-4 font-medium text-text">TODO_CONFIRM_NAME</p>
-                <p className="text-sm text-text-muted">TODO_CONFIRM_ROLE</p>
-              </Card>
-            </Reveal>
-          ))}
-        </div>
+        <AsyncList
+          state={leadershipState}
+          loadingLabel="Loading leadership..."
+          emptyTitle="Leadership bios coming soon"
+          emptyDescription="This section will populate once church leadership confirms names, roles, and bios."
+          errorTitle="Unable to load leadership"
+          className="mt-8"
+        >
+          {(members) => (
+            <div className="grid gap-6 sm:grid-cols-3">
+              {members.map((member, index) => (
+                <Reveal key={member.id} delay={index * 100}>
+                  <Card className="h-full text-center">
+                    <div
+                      className="mx-auto h-24 w-24 rounded-full bg-surface-muted bg-cover bg-center"
+                      style={member.image ? { backgroundImage: `url(${member.image})` } : undefined}
+                      aria-hidden
+                    />
+                    <p className="mt-4 font-medium text-text">{member.name}</p>
+                    <p className="text-sm text-text-muted">{member.role}</p>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          )}
+        </AsyncList>
       </Section>
 
       <Section>
