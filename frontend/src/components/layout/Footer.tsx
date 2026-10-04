@@ -1,4 +1,5 @@
 import nfpcLogo from '@/assets/brand/nfpc-logo.png'
+import { Link } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { primaryNav, siteConfig } from '@/data/site'
 import { useServiceSessions, formatSessionTime } from '@/hooks/useServiceSessions'
@@ -29,9 +30,9 @@ export function Footer() {
           <ul className="mt-4 space-y-2">
             {primaryNav.map((link) => (
               <li key={link.to}>
-                <a href={link.to} className="text-sm text-text-inverted/80 hover:text-white">
+                <Link to={link.to} className="text-sm text-text-inverted/80 hover:text-white">
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -74,7 +75,7 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {churchName}. All rights reserved.
           </p>
-          {footerNote ? <p>{footerNote}</p> : <p>Built by the NFPC team.</p>}
+          {footerNote && <p>{footerNote}</p>}
         </Container>
       </div>
     </footer>

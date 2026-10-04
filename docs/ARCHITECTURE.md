@@ -11,7 +11,7 @@ NFPC V2
 │
 ├── backend/             Node.js + Express + TypeScript + Mongoose — public read API (Milestone 3)
 │
-├── database              MongoDB Atlas — not provisioned yet
+├── database              MongoDB Atlas (content and uploaded images, GridFS) — not verified against a live cluster
 │
 └── docs/               Planning documents for this and future milestones
 ```
@@ -87,3 +87,11 @@ Every admin screen goes through the same centralized API client. Content section
 ## Deployment (not yet configured)
 
 No CI/CD or hosting has been set up. The likely target shape — a static frontend build deployed to a CDN/static host, an Express API deployed as a Node service, MongoDB Atlas as managed database — is deferred to Milestone 5 ("Integration + production hardening + deployment") per [PROJECT_PLAN.md](../PROJECT_PLAN.md).
+
+## Media storage (Milestone 5)
+
+Uploaded images are stored in the MongoDB database (GridFS), not on the API server's disk. Most hosting platforms discard local disk on redeploy, so disk storage would lose images. Keeping them in the same database as the content adds no new vendor or credential and keeps the existing `/uploads/<name>` URLs that the CMS and website already use. Files are validated before storage and cleaned up when no record references them. See [DATABASE.md](DATABASE.md) and [DEPLOYMENT.md](DEPLOYMENT.md).
+
+## Deployment (Milestone 5)
+
+No hosting provider is chosen or configured by this repository. [DEPLOYMENT.md](DEPLOYMENT.md) lists what each part needs and the steps that require the church's own accounts.

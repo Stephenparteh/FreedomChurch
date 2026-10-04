@@ -52,3 +52,7 @@ See [`frontend/README.md`](frontend/README.md) for build/lint/typecheck commands
 ## Environment variables
 
 Copy [`.env.example`](.env.example) to a real `.env` (never committed — see `.gitignore`). Frontend-specific variables also have a scoped example at [`frontend/.env.example`](frontend/.env.example).
+
+## Deployment
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md). The repository does not deploy anything by itself. Atlas and hosting steps need the church's accounts and are listed there as remaining work.

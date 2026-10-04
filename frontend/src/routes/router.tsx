@@ -1,21 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { AdminPage } from './AdminPage'
 import { RequireAuth } from '@/components/admin/RequireAuth'
 import { AdminLayout } from '@/components/layout/AdminLayout'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { About } from '@/pages/About'
-import { AdminDashboard } from '@/pages/admin/AdminDashboard'
-import { AdminLogin } from '@/pages/admin/AdminLogin'
-import { AdminMessages } from '@/pages/admin/AdminMessages'
-import { AdminSettings } from '@/pages/admin/AdminSettings'
-import {
-  AdminAnnouncements,
-  AdminEvents,
-  AdminGallery,
-  AdminMinistries,
-  AdminSermons,
-  AdminServiceSessions,
-  AdminTeam,
-} from '@/pages/admin/CmsPages'
 import { Contact } from '@/pages/Contact'
 import { Events } from '@/pages/Events'
 import { Gallery } from '@/pages/Gallery'
@@ -39,7 +27,7 @@ export const router = createBrowserRouter([
       { path: '/contact', element: <Contact /> },
     ],
   },
-  { path: '/admin/login', element: <AdminLogin /> },
+  { path: '/admin/login', element: <AdminPage page="login" /> },
   { path: '/admin/dashboard', element: <Navigate to="/admin" replace /> },
   {
     path: '/admin',
@@ -49,16 +37,16 @@ export const router = createBrowserRouter([
       </RequireAuth>
     ),
     children: [
-      { index: true, element: <AdminDashboard /> },
-      { path: 'messages', element: <AdminMessages /> },
-      { path: 'sermons', element: <AdminSermons /> },
-      { path: 'events', element: <AdminEvents /> },
-      { path: 'gallery', element: <AdminGallery /> },
-      { path: 'ministries', element: <AdminMinistries /> },
-      { path: 'service-sessions', element: <AdminServiceSessions /> },
-      { path: 'announcements', element: <AdminAnnouncements /> },
-      { path: 'team', element: <AdminTeam /> },
-      { path: 'settings', element: <AdminSettings /> },
+      { index: true, element: <AdminPage page="dashboard" /> },
+      { path: 'messages', element: <AdminPage page="messages" /> },
+      { path: 'sermons', element: <AdminPage page="sermons" /> },
+      { path: 'events', element: <AdminPage page="events" /> },
+      { path: 'gallery', element: <AdminPage page="gallery" /> },
+      { path: 'ministries', element: <AdminPage page="ministries" /> },
+      { path: 'service-sessions', element: <AdminPage page="service-sessions" /> },
+      { path: 'announcements', element: <AdminPage page="announcements" /> },
+      { path: 'team', element: <AdminPage page="team" /> },
+      { path: 'settings', element: <AdminPage page="settings" /> },
     ],
   },
   { path: '*', element: <NotFound /> },

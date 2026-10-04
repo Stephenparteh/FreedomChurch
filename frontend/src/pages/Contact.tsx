@@ -154,9 +154,7 @@ export function Contact() {
             </div>
 
             <div className="flex aspect-[4/3] items-center justify-center rounded-lg border border-dashed border-border-strong bg-surface-muted text-center text-sm text-text-muted">
-              Map will appear here once the church address is confirmed.
-              <br />
-              (The legacy site's map pointed at the wrong country.)
+              Map coming soon.
             </div>
           </Reveal>
         </div>

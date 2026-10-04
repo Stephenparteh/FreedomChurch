@@ -4,6 +4,7 @@ import type { ZodType } from 'zod'
 import { ApiError } from '../utils/ApiError.js'
 import { slugify } from '../utils/slugify.js'
 import { adminJson } from '../models/plugins.js'
+import { releaseUploadIfUnreferenced } from '../media/references.js'
 import { buildPaginationMeta, parsePagination } from '../utils/pagination.js'
 import { sendSuccess } from '../utils/respond.js'
 
@@ -14,6 +15,8 @@ export interface ResourceSpec {
   /** Applied when creating, after validation. Keys already present in the input win. */
   defaults?: Record<string, unknown>
   sort: Record<string, 1 | -1>
+  /** Fields that may hold an uploaded file reference. Replaced or deleted files are cleaned up when unused. */
+  mediaFields?: string[]
   /** Generates the slug from the title when the admin leaves it blank. */
   slugFrom?: 'title' | 'name'
   notFoundMessage: string
@@ -86,18 +89,28 @@ export function createAdminResource(spec: ResourceSpec): Router {
   router.patch('/:id', async (req: Request, res: Response) => {
     const parsed = updateSchema.parse(req.body) as Record<string, unknown>
     const { $set, $unset } = toUpdateOperators(parsed)
+    const before = await spec.model.findById(idParam(req)).lean()
     const doc = await spec.model.findByIdAndUpdate(
       idParam(req),
       { $set, $unset },
       { returnDocument: 'after', runValidators: true },
     )
     if (!doc) throw ApiError.notFound(spec.notFoundMessage)
+    for (const field of spec.mediaFields ?? []) {
+      const previous = (before as Record<string, unknown> | null)?.[field]
+      if (previous && previous !== (doc as unknown as Record<string, unknown>)[field]) {
+        await releaseUploadIfUnreferenced(previous)
+      }
+    }
     sendSuccess(res, adminJson(doc))
   })
 
   router.delete('/:id', async (req: Request, res: Response) => {
-    const doc = await spec.model.findByIdAndDelete(idParam(req))
+    const doc = await spec.model.findByIdAndDelete(idParam(req)).lean()
     if (!doc) throw ApiError.notFound(spec.notFoundMessage)
+    for (const field of spec.mediaFields ?? []) {
+      await releaseUploadIfUnreferenced((doc as Record<string, unknown>)[field])
+    }
     sendSuccess(res, { deleted: true, id: idParam(req) })
   })
 

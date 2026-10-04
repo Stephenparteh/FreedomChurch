@@ -1,8 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { env } from '../config/env.js'
 
-const TOKEN_TTL = '8h'
-
 export interface TokenPayload {
   sub: string
   tv: number
@@ -11,7 +9,7 @@ export interface TokenPayload {
 export function signAdminToken(userId: string, tokenVersion: number): string {
   return jwt.sign({ sub: userId, tv: tokenVersion }, env.JWT_SECRET, {
     algorithm: 'HS256',
-    expiresIn: TOKEN_TTL,
+    expiresIn: env.JWT_EXPIRES_IN as jwt.SignOptions['expiresIn'],
   })
 }
 

@@ -16,8 +16,7 @@ export function AboutPreview() {
             Who we are as a church
           </h2>
           <p className="mt-4 text-text-muted">
-            Placeholder copy — replace with confirmed mission/vision content from church
-            leadership (see docs/LEGACY_AUDIT.md for what was captured from the legacy site).
+            TODO_CONFIRM_ABOUT_SUMMARY
           </p>
           <div className="mt-6">
             <Button to="/about" variant="link">

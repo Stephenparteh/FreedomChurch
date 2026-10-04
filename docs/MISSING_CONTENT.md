@@ -43,3 +43,14 @@ These are church-leadership decisions, not engineering ones. Once confirmed:
 2. Enter it through the admin dashboard once it exists (Milestone 4), which is the intended long-term path — see [DASHBOARD_PLAN.md](DASHBOARD_PLAN.md).
 
 Until then, every `TODO_CONFIRM_*` string is intentionally visible in the UI rather than silently defaulting to something plausible-but-fabricated, so it's obvious at a glance what still needs a real answer.
+
+## Launch gate
+
+The public website must not go live while any of these are true:
+
+- Any `TODO_CONFIRM_` text is visible on a public page. Each one marks information the church has not yet confirmed. Replace it with confirmed content in the admin dashboard, or remove the section.
+- Sample records prefixed `[DEV]` exist in the database. Remove them.
+- The mission, history, and faith statements are still placeholders. These are church-approved texts and must come from the church.
+- The contact details in site settings are still empty.
+- Leadership, service sessions, and ministry descriptions are still placeholders or empty.
+- `ServiceUnit` has no confirmed meaning. The model exists but nothing is shown or managed for it.

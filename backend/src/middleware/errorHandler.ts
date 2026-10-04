@@ -14,6 +14,15 @@ function isDuplicateKeyError(err: unknown): err is MongoDuplicateKeyError {
   return err instanceof Error && 'code' in err && (err as { code: unknown }).code === 11000
 }
 
+function isBodyParserError(err: unknown): err is Error & { status: 400 | 413 } {
+  return (
+    err instanceof Error &&
+    'type' in err &&
+    typeof (err as { type: unknown }).type === 'string' &&
+    ((err as { status?: unknown }).status === 400 || (err as { status?: unknown }).status === 413)
+  )
+}
+
 /**
  * Single place every thrown/rejected error in the app funnels through.
  * Express 5 forwards async handler rejections here automatically.
@@ -46,6 +55,11 @@ export function errorHandler(err: unknown, _req: Request, res: Response, _next: 
     code = 'DUPLICATE_KEY'
     const field = err.keyValue ? Object.keys(err.keyValue)[0] : 'field'
     message = `A record with that ${field} already exists.`
+  } else if (isBodyParserError(err)) {
+    // Malformed or oversized request bodies are the client's error, not ours.
+    statusCode = err.status
+    code = err.status === 413 ? 'PAYLOAD_TOO_LARGE' : 'INVALID_JSON'
+    message = err.status === 413 ? 'Request body is too large.' : 'Request body is not valid JSON.'
   } else if (!isProduction && err instanceof Error) {
     // Only leak the real message outside production.
     message = err.message

@@ -23,6 +23,7 @@ export const resourceSpecs = {
     defaults: { isPublished: false },
     sort: { date: -1 },
     slugFrom: 'title',
+    mediaFields: ['thumbnail'],
     notFoundMessage: 'Sermon not found.',
   },
   events: {
@@ -31,6 +32,7 @@ export const resourceSpecs = {
     defaults: { isPublished: false },
     sort: { date: -1 },
     slugFrom: 'title',
+    mediaFields: ['image'],
     notFoundMessage: 'Event not found.',
   },
   gallery: {
@@ -38,6 +40,7 @@ export const resourceSpecs = {
     create: galleryInput,
     defaults: { isPublished: false, displayOrder: 0 },
     sort: { displayOrder: 1, createdAt: -1 },
+    mediaFields: ['imageUrl'],
     notFoundMessage: 'Gallery item not found.',
   },
   ministries: {
@@ -46,6 +49,7 @@ export const resourceSpecs = {
     defaults: { isPublished: false, displayOrder: 0 },
     sort: { displayOrder: 1, name: 1 },
     slugFrom: 'name',
+    mediaFields: ['image'],
     notFoundMessage: 'Ministry not found.',
   },
   serviceSessions: {
@@ -62,6 +66,7 @@ export const resourceSpecs = {
     defaults: { isPublished: false, isArchived: false, publishedAt: new Date() },
     sort: { publishedAt: -1 },
     slugFrom: 'title',
+    mediaFields: ['image'],
     notFoundMessage: 'Announcement not found.',
   },
   leadership: {
@@ -69,6 +74,7 @@ export const resourceSpecs = {
     create: leadershipInput,
     defaults: { isPublished: false, displayOrder: 0 },
     sort: { displayOrder: 1, name: 1 },
+    mediaFields: ['image'],
     notFoundMessage: 'Team member not found.',
   },
 } satisfies Record<string, ResourceSpec>

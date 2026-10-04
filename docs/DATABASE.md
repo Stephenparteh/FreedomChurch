@@ -89,11 +89,25 @@ No default event image exists in the schema, the seed data, or the code. `Event.
 
 ## Uploaded media
 
-Uploads are written to `UPLOAD_DIR` (default `backend/uploads/`, gitignored) and served from `/uploads/…`.
+Uploaded images are stored in the same Atlas database, in a GridFS bucket named `uploads` (collections `uploads.files` and `uploads.chunks`). They persist across API restarts and redeploys, and they need no storage credential beyond `MONGODB_URI`. They are served from `/uploads/<name>`.
 
-This is local disk storage, which is correct for development and tests. **Production decision (Milestone 5):** many hosts have ephemeral filesystems, so uploads can disappear on redeploy or restart. Before launch, choose persistent storage (a mounted volume, or an object-storage provider) and set `UPLOAD_DIR` to it. Milestone 4 does not add a third-party storage service.
+Deletion is safe by design:
 
-Deleting a record does not delete its uploaded file. Unreferenced files can accumulate and should be cleaned up as part of the Milestone 5 storage work.
+- Deleting a record, or replacing its image, deletes the stored file only when no other record still references it.
+- Seeded `/photos/…` files live in the frontend and are never touched.
+
+Storage size counts against the cluster's storage limit. The free shared tier is small (512 MB), which is enough for a limited number of photos but should be checked against the expected library size before launch. Images are capped at 5 MB each.
+
+## Backups
+
+Data to protect: every collection in the `nfpc` database, including `uploads.files` and `uploads.chunks`, which hold the uploaded photos.
+
+- **Atlas plan:** managed backups (snapshots) depend on the cluster tier. Free shared clusters do not include them. Confirm the backup feature for the chosen tier **[church account]** before launch.
+- **Restore test:** a backup nobody has restored is not verified. Restore one to a scratch cluster before relying on it.
+- **Manual export (if managed backups are unavailable):** `mongodump --uri "$MONGODB_URI" --out <folder>` on a schedule, stored somewhere outside the cluster. This was not run or verified in this repository.
+- **Before any deployment that changes data:** take a fresh backup.
+
+Nothing in the repository depends on a backup being in place; backups are an operations responsibility.
 
 ## Tests
 

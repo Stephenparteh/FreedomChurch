@@ -11,10 +11,10 @@ import { getLeadership } from '@/lib/api/resources'
 const congregationPhoto = '/photos/congregation-worship.webp'
 
 const faithPillars = [
-  { title: 'Scripture', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
-  { title: 'Love', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
-  { title: 'Prayer', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
-  { title: 'Community', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
+  { title: 'Scripture', body: 'TODO_CONFIRM_FAITH_STATEMENT' },
+  { title: 'Love', body: 'TODO_CONFIRM_FAITH_STATEMENT' },
+  { title: 'Prayer', body: 'TODO_CONFIRM_FAITH_STATEMENT' },
+  { title: 'Community', body: 'TODO_CONFIRM_FAITH_STATEMENT' },
 ]
 
 import { resolveMediaUrl } from '@/lib/media'
@@ -29,7 +29,7 @@ export function About() {
       <PageHero
         eyebrow={motto || undefined}
         title="Our vision & mission"
-        description="Placeholder copy — replace with confirmed mission and vision statements. The legacy site's version of this text read as generic template copy (see docs/LEGACY_AUDIT.md) and should not be treated as final."
+        description="TODO_CONFIRM_MISSION_STATEMENT"
       />
 
       <Section>
@@ -47,9 +47,7 @@ export function About() {
           <Reveal delay={150}>
             <h2 className="text-3xl font-semibold text-text">Our history</h2>
             <p className="mt-4 text-text-muted">
-              TODO_CONFIRM_HISTORY — the legacy site's founding narrative read as generic
-              placeholder text (a 1990 founding, a 2005 expansion) rather than confirmed facts.
-              Do not publish it as real history until confirmed with church leadership.
+              TODO_CONFIRM_HISTORY
             </p>
           </Reveal>
         </div>
@@ -59,15 +57,14 @@ export function About() {
         <Reveal>
           <h2 className="text-3xl font-semibold text-text">Leadership</h2>
           <p className="mt-2 max-w-2xl text-text-muted">
-            Leadership bios and photos are managed from the admin dashboard once confirmed by
-            church leadership — see docs/MISSING_CONTENT.md.
+            TODO_CONFIRM_LEADERSHIP_INTRO
           </p>
         </Reveal>
         <AsyncList
           state={leadershipState}
           loadingLabel="Loading leadership..."
           emptyTitle="Leadership bios coming soon"
-          emptyDescription="This section will populate once church leadership confirms names, roles, and bios."
+          emptyDescription="Information about our leadership will be shared here."
           errorTitle="Unable to load leadership"
           className="mt-8"
         >

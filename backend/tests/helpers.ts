@@ -13,8 +13,9 @@ export async function teardownTestDb() {
 
 /** Wipes every collection between tests so they don't leak state into each other. */
 export async function clearTestDb() {
-  const { collections } = mongoose.connection
-  await Promise.all(Object.values(collections).map((c) => c.deleteMany({})))
+  // Every collection, including GridFS buckets created by the native driver (not registered with Mongoose).
+  const collections = await mongoose.connection.db!.collections()
+  await Promise.all(collections.map((c) => c.deleteMany({})))
 }
 
 export const TEST_ADMIN = { email: 'admin@example.test', name: 'Test Admin', password: 'correct-horse-battery' }

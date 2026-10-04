@@ -32,7 +32,7 @@ export function Sermons() {
       <PageHero
         eyebrow="Sermon library"
         title="Sermons"
-        description="Browse recent teachings, fetched live from the NFPC API."
+        description="Browse recent teachings."
       />
 
       <Section>

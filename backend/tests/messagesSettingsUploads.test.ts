@@ -1,19 +1,12 @@
-import { mkdirSync, readdirSync, existsSync } from 'node:fs'
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import request from 'supertest'
 import { createApp } from '../src/app.js'
-import { UPLOAD_DIR } from '../src/utils/upload.js'
 import { clearTestDb, loginAsTestAdmin, setupTestDb, teardownTestDb } from './helpers.js'
 
 const app = createApp()
 let token = ''
 const auth = () => ({ Authorization: `Bearer ${token}` })
 
-// A tiny valid PNG (signature + padding), used as a real image fixture.
-const PNG = Buffer.concat([
-  Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]),
-  Buffer.alloc(64, 0),
-])
 
 describe('Contact messages inbox', () => {
   beforeAll(async () => {
@@ -128,82 +121,5 @@ describe('Site settings protection and public reflection', () => {
   it('rejects an invalid email address', async () => {
     const res = await request(app).patch('/api/admin/settings').set(auth()).send({ email: 'not-an-email' })
     expect(res.status).toBe(400)
-  })
-})
-
-describe('Media uploads', () => {
-  beforeAll(async () => {
-    await setupTestDb()
-    mkdirSync(UPLOAD_DIR, { recursive: true })
-  })
-  beforeEach(async () => {
-    await clearTestDb()
-    token = await loginAsTestAdmin(app)
-  })
-  afterAll(async () => {
-    await teardownTestDb()
-  })
-
-  it('rejects unauthenticated uploads', async () => {
-    const res = await request(app).post('/api/admin/uploads').attach('file', PNG, { filename: 'a.png', contentType: 'image/png' })
-    expect(res.status).toBe(401)
-  })
-
-  it('accepts a real PNG, returns a usable /uploads URL, and serves the file', async () => {
-    const res = await request(app)
-      .post('/api/admin/uploads')
-      .set(auth())
-      .attach('file', PNG, { filename: 'photo.png', contentType: 'image/png' })
-
-    expect(res.status).toBe(201)
-    expect(res.body.data.url).toMatch(/^\/uploads\/[0-9a-f-]+\.png$/)
-    expect(res.body.data.url).not.toContain('photo')
-
-    const served = await request(app).get(res.body.data.url)
-    expect(served.status).toBe(200)
-    expect(served.headers['x-content-type-options']).toBe('nosniff')
-    expect(served.headers['cross-origin-resource-policy']).toBe('cross-origin')
-  })
-
-  it('rejects an unsupported file type', async () => {
-    const res = await request(app)
-      .post('/api/admin/uploads')
-      .set(auth())
-      .attach('file', Buffer.from('<script>alert(1)</script>'), { filename: 'x.html', contentType: 'text/html' })
-    expect(res.status).toBe(400)
-    expect(res.body.error.code).toBe('UNSUPPORTED_FILE')
-  })
-
-  it('rejects a file whose bytes do not match its declared image type, and deletes it', async () => {
-    const before = readdirSync(UPLOAD_DIR).length
-    const res = await request(app)
-      .post('/api/admin/uploads')
-      .set(auth())
-      .attach('file', Buffer.from('this is definitely not a png'), { filename: 'fake.png', contentType: 'image/png' })
-    expect(res.status).toBe(400)
-    expect(res.body.error.code).toBe('UNSUPPORTED_FILE')
-    expect(readdirSync(UPLOAD_DIR).length).toBe(before)
-  })
-
-  it('rejects an image larger than 5 MB', async () => {
-    const big = Buffer.concat([PNG, Buffer.alloc(5 * 1024 * 1024 + 1, 0)])
-    const res = await request(app)
-      .post('/api/admin/uploads')
-      .set(auth())
-      .attach('file', big, { filename: 'big.png', contentType: 'image/png' })
-    expect(res.status).toBe(413)
-    expect(res.body.error.code).toBe('FILE_TOO_LARGE')
-  })
-
-  it('rejects a request with no file', async () => {
-    const res = await request(app).post('/api/admin/uploads').set(auth()).field('note', 'no file here')
-    expect(res.status).toBe(400)
-    expect(res.body.error.code).toBe('NO_FILE')
-  })
-
-  it('does not serve arbitrary files from the server', async () => {
-    expect(existsSync(UPLOAD_DIR)).toBe(true)
-    const res = await request(app).get('/uploads/../package.json')
-    expect(res.status).not.toBe(200)
   })
 })

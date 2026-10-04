@@ -32,7 +32,7 @@ Node.js + Express + TypeScript + Mongoose. Express over a heavier framework (Nes
 - Single role for Milestone 3/4: `AdminUser`. No public user accounts are planned (the site has no member-facing login) — only church staff authenticate, to manage content.
 - **Implemented (Milestone 4):** a bearer token (HS256 JWT, 8-hour lifetime) sent in the `Authorization` header and held in `sessionStorage`. This was chosen over an HTTP-only cookie because the frontend and API are on different origins in production, and cross-origin cookies need extra configuration. The trade-off is that a script running on the admin page could read the token, so the admin app avoids third-party scripts. Logout bumps the account's `tokenVersion`, so tokens are invalidated on the server, not only forgotten by the browser.
 - Passwords hashed with `bcrypt` (or `argon2`) — never stored or logged in plaintext.
-- `AUTH_SECRET` env var signs tokens; generated once, rotated only with a deliberate re-auth plan (not done casually, since it invalidates all sessions).
+- `JWT_SECRET` signs tokens (at least 32 characters). Changing it signs out every admin session. Rotate deliberately.
 - Authorization is currently a single tier (any authenticated admin can manage any content). Per-resource roles (e.g. an editor who can't touch Settings) are **not** planned for Milestone 3/4 — flagged here as a possible Milestone 5+ enhancement only if the church actually needs multiple staff accounts with different permissions.
 
 ## Mongoose / MongoDB strategy
@@ -76,15 +76,19 @@ Prefix everything `/api/v1/`. Additive changes (new fields, new endpoints) don't
 
 ## Environment variables
 
-Documented in [`.env.example`](../.env.example):
+Documented in [`backend/.env.example`](../backend/.env.example):
 
 ```env
+NODE_ENV=production
+PORT=5000
 MONGODB_URI=
-PORT=4000
-AUTH_SECRET=
-CORS_ORIGIN=http://localhost:5173
-NODE_ENV=development
+FRONTEND_URL=https://www.your-domain.example
+JWT_SECRET=
+JWT_EXPIRES_IN=8h
+TRUST_PROXY=1
 ```
+
+The API validates these at startup. Full descriptions: `backend/.env.example`. Deployment steps: [DEPLOYMENT.md](DEPLOYMENT.md).
 
 No real values are committed anywhere in this repository.
 

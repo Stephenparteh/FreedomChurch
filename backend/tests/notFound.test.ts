@@ -23,3 +23,32 @@ describe('Unknown routes', () => {
     })
   })
 })
+
+describe('Client body errors', () => {
+  beforeAll(async () => {
+    await setupTestDb()
+  })
+  afterAll(async () => {
+    await teardownTestDb()
+  })
+
+  it('answers malformed JSON with 400, not a server error', async () => {
+    const { createApp } = await import('../src/app.js')
+    const res = await request(createApp())
+      .post('/api/contact')
+      .set('Content-Type', 'application/json')
+      .send('{"name": ')
+    expect(res.status).toBe(400)
+    expect(res.body).toMatchObject({ success: false, error: { code: 'INVALID_JSON' } })
+  })
+
+  it('answers an oversized body with 413', async () => {
+    const { createApp } = await import('../src/app.js')
+    const res = await request(createApp())
+      .post('/api/contact')
+      .set('Content-Type', 'application/json')
+      .send(JSON.stringify({ message: 'x'.repeat(200 * 1024) }))
+    expect(res.status).toBe(413)
+    expect(res.body.error.code).toBe('PAYLOAD_TOO_LARGE')
+  })
+})

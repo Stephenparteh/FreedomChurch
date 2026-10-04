@@ -22,7 +22,7 @@ Errors:
 { "success": false, "error": { "message": "Sermon not found.", "code": "NOT_FOUND" } }
 ```
 
-Error codes in use: `VALIDATION_ERROR` (400), `INVALID_ID` (400), `INVALID_PARAM` (400), `UNSUPPORTED_FILE` (400), `NO_FILE` (400), `UNAUTHORIZED` (401), `INVALID_CREDENTIALS` (401), `NOT_FOUND` (404), `ROUTE_NOT_FOUND` (404), `FILE_TOO_LARGE` (413), `DUPLICATE_KEY` (409), `RATE_LIMITED` (429), `INTERNAL_ERROR` (500). Stack traces and internal messages are never returned in production.
+Error codes in use: `VALIDATION_ERROR` (400), `INVALID_ID` (400), `INVALID_PARAM` (400), `INVALID_JSON` (400), `UNSUPPORTED_FILE` (400), `NO_FILE` (400), `UNAUTHORIZED` (401), `INVALID_CREDENTIALS` (401), `NOT_FOUND` (404), `ROUTE_NOT_FOUND` (404), `FILE_TOO_LARGE` (413), `PAYLOAD_TOO_LARGE` (413), `DUPLICATE_KEY` (409), `RATE_LIMITED` (429), `INTERNAL_ERROR` (500). Stack traces and internal messages are never returned in production.
 
 ## Public endpoints (no authentication)
 
@@ -59,7 +59,7 @@ Admin access uses a bearer token.
 
 1. `POST /api/auth/login` with `{ "email", "password" }`. Returns `{ "token", "user": { "id", "email", "name" } }`. Unknown emails and wrong passwords return the same `401 INVALID_CREDENTIALS` response. Login is rate limited to 10 attempts per IP per 15 minutes.
 2. Send `Authorization: Bearer <token>` on every admin request.
-3. Tokens are HS256 JWTs signed with `JWT_SECRET`, valid for 8 hours. The server rechecks each token against the account's `tokenVersion` on every request.
+3. Tokens are HS256 JWTs signed with `JWT_SECRET`, valid for `JWT_EXPIRES_IN` (default 8 hours). The server rechecks each token against the account's `tokenVersion` on every request.
 4. `GET /api/auth/me` returns the signed-in user.
 5. `POST /api/auth/logout` increments `tokenVersion`. Every token issued before that point stops working immediately, on the server, not just in the browser. Because the app has a single admin account, this signs out all sessions for that account.
 
@@ -106,9 +106,9 @@ Media fields accept an http(s) URL, a path returned by the upload endpoint (`/up
 - Allowed types: JPEG, PNG, GIF, WebP.
 - Maximum size: 5 MB.
 - The file's leading bytes must match its declared type. Mismatched files are deleted and rejected.
-- Stored under a random server-chosen name; the client filename is never used.
+- Stored in MongoDB GridFS under a random server-chosen name; the client filename is never used. Deleting the last record that uses a file deletes the file; a file still used elsewhere is kept, and a replaced image is removed when nothing else uses it.
 - Returns `201` with `{ "url": "/uploads/<name>", "mimeType", "size" }`.
-- Served from `/uploads/…` with `X-Content-Type-Options: nosniff` and a cross-origin resource policy so the frontend can display them.
+- Served from `GET /uploads/<name>` (public, read-only) with `X-Content-Type-Options: nosniff`, a cross-origin resource policy so the website can display them, and a one-year immutable cache. Only server-generated names are served.
 
 ### Contact messages (admin)
 

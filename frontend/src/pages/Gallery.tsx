@@ -17,7 +17,7 @@ export function Gallery() {
       <PageHero
         eyebrow="Moments"
         title="Gallery"
-        description="Photos from services and church life. This page did not exist on the legacy site despite being linked from its navigation — see docs/LEGACY_AUDIT.md."
+        description="Photos from services and church life."
       />
 
       <Section>

@@ -20,8 +20,8 @@ export function Give() {
       <Section>
         <div className="mx-auto max-w-xl">
           <StateMessage
-            title="Online giving isn't available yet"
-            description="Payment processing is intentionally out of scope for this milestone. Once a processor is selected, this page will host a secure giving form."
+            title="Online giving coming soon"
+            description="In the meantime, you can give in person or by contacting the church. See below."
           />
           <Card className="mt-8">
             <h2 className="text-lg font-semibold text-text">Other ways to give</h2>

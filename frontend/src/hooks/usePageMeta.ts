@@ -1,32 +1,40 @@
 import { useEffect } from 'react'
 import { siteConfig } from '@/data/site'
 
+function setMeta(attr: 'name' | 'property', key: string, content: string) {
+  let el = document.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`)
+  if (!el) {
+    el = document.createElement('meta')
+    el.setAttribute(attr, key)
+    document.head.appendChild(el)
+  }
+  el.setAttribute('content', content)
+  return el
+}
+
 /**
- * Minimal SEO primitive: sets document title + meta description on mount.
- * A dedicated library (e.g. react-helmet-async) isn't justified yet since
- * this app has no server-rendering step in Milestone 1 — revisit if/when
- * SSR or richer per-route Open Graph tags are needed.
+ * Sets the document title and description, plus Open Graph title and description,
+ * for the current page. Values are restored when the page unmounts.
  */
 export function usePageMeta(title: string, description?: string) {
   useEffect(() => {
+    const fullTitle = title ? `${title} | ${siteConfig.shortName}` : siteConfig.name
     const previousTitle = document.title
-    document.title = title ? `${title} | ${siteConfig.shortName}` : siteConfig.name
+    document.title = fullTitle
 
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]')
-    const previousDescription = meta?.getAttribute('content') ?? ''
+    const descriptionEl = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+    const previousDescription = descriptionEl?.getAttribute('content') ?? ''
+    if (description) setMeta('name', 'description', description)
 
-    if (description) {
-      if (!meta) {
-        meta = document.createElement('meta')
-        meta.setAttribute('name', 'description')
-        document.head.appendChild(meta)
-      }
-      meta.setAttribute('content', description)
-    }
+    const ogTitle = setMeta('property', 'og:title', fullTitle)
+    const ogDescription = description ? setMeta('property', 'og:description', description) : null
 
     return () => {
       document.title = previousTitle
-      if (meta) meta.setAttribute('content', previousDescription)
+      const current = document.querySelector<HTMLMetaElement>('meta[name="description"]')
+      if (current && description) current.setAttribute('content', previousDescription)
+      ogTitle.setAttribute('content', siteConfig.name)
+      ogDescription?.setAttribute('content', previousDescription)
     }
   }, [title, description])
 }

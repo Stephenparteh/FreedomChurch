@@ -51,3 +51,14 @@ End-to-end integration testing, performance and accessibility passes, real SEO m
 ---
 
 Each milestone builds strictly on the last — no milestone skips ahead into a later one's scope (e.g. no payment integration, no full CMS, no production credentials until Milestone 5).
+
+## Milestone 5 — Final production readiness (in review, not committed)
+
+- Uploads moved from local disk to MongoDB GridFS, so images persist across redeploys. Verified: a restart of the production build leaves uploaded images in place.
+- Safe media cleanup: a file is deleted only when no record references it.
+- Production configuration checks: `FRONTEND_URL` must be https, `JWT_SECRET` at least 32 characters. Session lifetime and proxy trust are configurable.
+- Malformed and oversized request bodies return 400 and 413 instead of 500.
+- Public copy: developer and internal notes removed from visitor-facing text. `TODO_CONFIRM_` markers remain where church information is unconfirmed, and the launch gate is in [`docs/MISSING_CONTENT.md`](docs/MISSING_CONTENT.md).
+- SEO and accessibility: Open Graph tags, `robots.txt` blocking the admin area, the church crest as favicon, a skip link, and reduced-motion-aware scrolling.
+- Deployment preparation: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md), accurate environment examples, and database backup guidance.
+- Not verified: a live Atlas cluster and any real hosting provider. Both need the church's accounts.

@@ -1,5 +1,4 @@
 import { randomUUID } from 'node:crypto'
-import { tmpdir } from 'node:os'
 import { inject } from 'vitest'
 
 // Runs before each test file's imports are evaluated, so env.ts's
@@ -16,7 +15,6 @@ process.env.MONGODB_URI = `${baseUri}test_${randomUUID().replace(/-/g, '')}`
 
 process.env.FRONTEND_URL = 'http://localhost:5173'
 process.env.JWT_SECRET = 'test-secret-not-for-production-0123456789'
-process.env.UPLOAD_DIR = `${tmpdir()}/nfpc-test-uploads-${randomUUID().replace(/-/g, '')}`
 // Tests exercise the Express app directly via supertest — nothing ever
 // binds this port — but env.ts still requires a valid positive value.
 process.env.PORT = '5099'
