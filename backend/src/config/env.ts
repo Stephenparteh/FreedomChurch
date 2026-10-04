@@ -6,9 +6,10 @@ const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(5000),
   MONGODB_URI: z.string().min(1, 'MONGODB_URI is required'),
   FRONTEND_URL: z.string().min(1, 'FRONTEND_URL is required'),
-  // Not used until Milestone 4 (admin auth) — validated now so the env
-  // contract is stable and documented ahead of time, per docs/BACKEND_PLAN.md.
-  JWT_SECRET: z.string().min(1, 'JWT_SECRET is required'),
+  // Signs admin session tokens. Must be long and random (e.g. `openssl rand -hex 32`).
+  JWT_SECRET: z.string().min(32, 'JWT_SECRET must be at least 32 characters'),
+  // Directory where uploaded media is stored and served from /uploads.
+  UPLOAD_DIR: z.string().min(1).default('uploads'),
 })
 
 const parsed = envSchema.safeParse(process.env)

@@ -29,5 +29,6 @@ export function useSiteSettings() {
     phone: settings?.phone || FALLBACK.phone,
     address: settings?.address || FALLBACK.address,
     serviceTimes: settings?.serviceTimes ?? [],
+    footerNote: settings?.footerNote || '',
   }
 }

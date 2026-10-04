@@ -28,6 +28,7 @@ const siteSettingSchema = new Schema(
       twitter: { type: String, trim: true },
     },
     logoUrl: { type: String, trim: true },
+    footerNote: { type: String, trim: true, maxlength: 500 },
   },
   { timestamps: true },
 )

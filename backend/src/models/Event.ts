@@ -1,4 +1,5 @@
 import { Schema, model, type InferSchemaType } from 'mongoose'
+import { EVENT_CATEGORIES } from '../utils/categories.js'
 import { applyJsonTransform } from './plugins.js'
 
 const eventSchema = new Schema(
@@ -8,8 +9,11 @@ const eventSchema = new Schema(
     description: { type: String, required: true, trim: true, maxlength: 5000 },
     date: { type: Date, required: true },
     endDate: { type: Date },
-    time: { type: String, trim: true, maxlength: 100 },
+    startTime: { type: String, trim: true, match: /^\d{2}:\d{2}$/ },
+    endTime: { type: String, trim: true, match: /^\d{2}:\d{2}$/ },
+    category: { type: String, enum: EVENT_CATEGORIES },
     location: { type: String, trim: true, maxlength: 200 },
+    rsvpUrl: { type: String, trim: true, maxlength: 500 },
     image: { type: String, trim: true },
     isPublished: { type: Boolean, default: false, index: true },
   },

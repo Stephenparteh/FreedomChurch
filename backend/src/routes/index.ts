@@ -1,4 +1,7 @@
 import { Router } from 'express'
+import { adminRouter } from '../admin/admin.routes.js'
+import { authRouter } from './auth.routes.js'
+import { serviceSessionsRouter } from './serviceSessions.routes.js'
 import { announcementsRouter } from './announcements.routes.js'
 import { contactRouter } from './contact.routes.js'
 import { eventsRouter } from './events.routes.js'
@@ -21,4 +24,7 @@ apiRouter.use(serviceUnitsRouter)
 apiRouter.use(galleryRouter)
 apiRouter.use(leadershipRouter)
 apiRouter.use(siteSettingsRouter)
+apiRouter.use(serviceSessionsRouter)
 apiRouter.use(contactRouter)
+apiRouter.use('/auth', authRouter)
+apiRouter.use('/admin', adminRouter)

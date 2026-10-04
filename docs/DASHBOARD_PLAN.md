@@ -1,6 +1,44 @@
-# Dashboard Plan (Milestone 4 — not implemented yet)
+# Dashboard Plan (Milestone 4 — implemented)
 
-This document is the vision for the church administration dashboard. Route shells exist today (`/admin/login`, `/admin/dashboard`, `/admin/sermons`, `/admin/events`, `/admin/gallery`, `/admin/ministries`, `/admin/announcements`, `/admin/settings`) so the navigation structure is real, but every one of them currently renders a "planned for Milestone 4" placeholder (`AdminComingSoon`). No authentication, no data tables, no forms exist yet.
+The administration dashboard is implemented. This document describes the screens and how they map to the API. It replaces the Milestone 1 placeholder description.
+
+## Screens
+
+| Route | Purpose |
+|---|---|
+| `/admin/login` | Sign in. Unauthenticated visitors to any `/admin` page are sent here and returned afterward. |
+| `/admin` | Dashboard: counts for each section, unread messages, recent messages. |
+| `/admin/messages` | Contact-form inbox: filter by status, read/unread, archive, delete (with confirmation). |
+| `/admin/sermons` | Sermons: title, slug, preacher, date, category, description, thumbnail upload, video and audio links, publish/hide, delete. |
+| `/admin/events` | Events: title, slug, date, start and end time, category, location, RSVP link, image upload, description, publish/hide, delete. |
+| `/admin/gallery` | Photos: image upload, alt text, title, caption, category, display order, publish/hide, delete. |
+| `/admin/ministries` | Ministries: name, slug, short and full description, image, meeting info, contact info, display order, publish/hide, delete. |
+| `/admin/service-sessions` | Recurring sessions (for example Tuesday Bible study, Saturday debate): day, start and end time, platform, location, meeting link, notes, display order, publish/hide, delete. |
+| `/admin/announcements` | Announcements: title, slug, date to show, content, image, publish/hide, archive, delete. |
+| `/admin/team` | Team and leadership: name, role, biography, photo, social links, display order, publish/hide, delete. |
+| `/admin/settings` | Church name, motto, description, email, phone, address, footer note, social links. |
+
+Every list shows status (Published or Draft, and Archived where it applies). Deleting asks for confirmation inline. Forms show server validation messages and success feedback.
+
+## How it's built
+
+- One generic list-and-form screen (`CrudPage`) is configured per resource in `frontend/src/pages/admin/resourceConfigs.ts`. Adding a field is a one-line change.
+- Date and time inputs are native `date`, `datetime-local`, and `time` controls.
+- Category and day fields are dropdowns whose options match the API's fixed lists.
+- Image fields upload immediately through `/api/admin/uploads`; see [API.md](API.md).
+- Authorization is enforced by the API. Hiding a link in the UI is not a security boundary.
+
+## Not included in Milestone 4
+
+- Multiple admin accounts or roles. There is one admin account, created from the command line.
+- Password change or reset screens. Use `npm run create-admin` to reset the password.
+- Drag-and-drop reordering. Ordering uses a numeric display order field.
+- Pagination controls in the dashboard. Lists show up to 100 records.
+- A separate public announcements page. Announcements appear on the homepage.
+- Deleting uploaded files when their record is deleted (see [DATABASE.md](DATABASE.md)).
+- Admin screens for `ServiceUnit`. The model and public read endpoints exist, but nothing is managed for them yet, and the church has not confirmed that service units are a separate concept from ministries.
+
+## Original goals (for reference)
 
 ## Goal
 

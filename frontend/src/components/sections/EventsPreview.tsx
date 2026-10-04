@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/Card'
 import { Section } from '@/components/ui/Section'
 import { AsyncList } from '@/components/shared/AsyncList'
 import { Reveal } from '@/components/shared/Reveal'
+import { EventDetails } from '@/components/shared/EventDetails'
 import { useApi } from '@/hooks/useApi'
 import { getEvents } from '@/lib/api/resources'
 
@@ -46,6 +47,7 @@ export function EventsPreview() {
                   </p>
                   <h3 className="mt-2 text-lg font-semibold text-text">{event.title}</h3>
                   <p className="mt-3 text-sm text-text-muted">{event.description}</p>
+                <EventDetails event={event} />
                 </Card>
               </Reveal>
             ))}

@@ -6,6 +6,7 @@ import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { StateMessage } from '@/components/shared/StateMessage'
 import { usePageMeta } from '@/hooks/usePageMeta'
+import { useServiceSessions, formatSessionTime } from '@/hooks/useServiceSessions'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
 import { ApiClientError } from '@/lib/api/client'
 import { submitContact } from '@/lib/api/resources'
@@ -14,7 +15,8 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error'
 
 export function Contact() {
   usePageMeta('Contact', 'Get in touch with NFPC.')
-  const { email, phone, address, serviceTimes } = useSiteSettings()
+  const { email, phone, address } = useSiteSettings()
+  const { sessions } = useServiceSessions()
   const [state, setState] = useState<SubmitState>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -137,14 +139,14 @@ export function Contact() {
 
             <div>
               <h2 className="text-xl font-semibold text-text">Service times</h2>
-              {serviceTimes.length === 0 ? (
+              {sessions.length === 0 ? (
                 <p className="mt-4 text-sm text-text-muted">Coming soon.</p>
               ) : (
                 <ul className="mt-4 space-y-2 text-sm text-text-muted">
-                  {serviceTimes.map((service) => (
-                    <li key={service.label}>
-                      <span className="font-medium text-text">{service.label}</span> &middot;{' '}
-                      {service.day}, {service.time}
+                  {sessions.map((session) => (
+                    <li key={session.id}>
+                      <span className="font-medium text-text">{session.name}</span> &middot; {session.dayOfWeek},{' '}
+                      {formatSessionTime(session)}
                     </li>
                   ))}
                 </ul>

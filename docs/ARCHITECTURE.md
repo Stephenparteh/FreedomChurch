@@ -72,15 +72,17 @@ Frontend env vars must be prefixed `VITE_` to be exposed to client code (Vite co
 
 ## Backend (Milestone 3)
 
-Node.js + Express 5 + TypeScript + Mongoose, exposing an unversioned public REST API under `/api`. Endpoints are listed in [API.md](API.md); database models and setup in [DATABASE.md](DATABASE.md). Authentication and write endpoints are not implemented (Milestone 4). The `/api/v1` prefix described in BACKEND_PLAN.md is deferred — the API is currently unversioned.
+Node.js + Express 5 + TypeScript + Mongoose, exposing an unversioned public REST API under `/api`. Endpoints are listed in [API.md](API.md); database models and setup in [DATABASE.md](DATABASE.md). Milestone 4 adds bearer-token admin authentication and authenticated CMS endpoints under `/api/admin`, plus media uploads served from `/uploads`. The `/api/v1` prefix described in BACKEND_PLAN.md is deferred — the API is currently unversioned.
 
 ## Database (Milestone 3)
 
 MongoDB Atlas. Connection string via `MONGODB_URI` (see `.env.example`), never committed. No cluster has been provisioned as part of this milestone.
 
-## Admin dashboard (planned, Milestone 4)
+## Admin dashboard (Milestone 4)
 
-A protected route subtree (`/admin/*`) inside the same frontend app, sharing the design system but using `AdminLayout` instead of `SiteLayout`. Route shells and navigation already exist (`/admin/login`, `/admin/dashboard`, `/admin/sermons`, etc.) so the route architecture doesn't need to change when real functionality lands — only the page components behind each route do. Detail in [DASHBOARD_PLAN.md](DASHBOARD_PLAN.md).
+A protected route subtree (`/admin/*`) inside the same frontend app. It shares the design system and uses `AdminLayout` (sidebar on large screens, a collapsible menu on small ones) instead of `SiteLayout`. `RequireAuth` redirects anonymous visitors to `/admin/login` and returns them to the page they asked for.
+
+Every admin screen goes through the same centralized API client. Content sections (sermons, events, gallery, ministries, service sessions, announcements, team) share one generic `CrudPage` driven by a per-resource config (`src/pages/admin/resourceConfigs.ts`). Authorization is enforced by the API (`requireAuth` on `/api/admin`), not by hiding routes. See [DASHBOARD_PLAN.md](DASHBOARD_PLAN.md) for the screens and [API.md](API.md) for the endpoints.
 
 ## Deployment (not yet configured)
 

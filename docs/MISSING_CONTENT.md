@@ -2,18 +2,20 @@
 
 Everything a church administrator needs to confirm or provide before the placeholder content built in Milestone 2 can be replaced with the real thing. Nothing listed here was invented — each item is either a `TODO_CONFIRM_*` value in the code or an asset deliberately excluded from the site. Cross-reference [LEGACY_AUDIT.md](LEGACY_AUDIT.md) for why each item is unconfirmed rather than just missing.
 
-## Facts to confirm (currently `TODO_CONFIRM_*` in `frontend/src/data/site.ts`)
+## Facts to confirm
+
+Church-wide facts now live in the database (`SiteSetting`, service sessions, ministries, leadership) and are edited in the admin dashboard. Until they are entered, the website shows `TODO_CONFIRM_*` text or an empty state. The table below lists what the church still needs to provide.
 
 | Field | Current state | Why it's unconfirmed |
 |---|---|---|
 | Email | `TODO_CONFIRM_EMAIL` | Legacy site had 3 different values across pages |
 | Phone | `TODO_CONFIRM_PHONE` | Legacy site had 3 different values, two partially redacted |
 | Address | `TODO_CONFIRM_ADDRESS` | Legacy site had a placeholder US-style address in every footer, and a real-looking Liberia address only in `testimonies.html` |
-| Service times (day/time) | `TODO_CONFIRM_TIME` for both listed services | Never listed anywhere on the legacy site in a structured way |
+| Service and Bible study times | No sessions entered (empty state on the website) | Never listed anywhere on the legacy site in a structured way. Add each session in the admin dashboard once confirmed |
 | Church history / founding story | Not published (`About` page shows a note instead) | Legacy `about.html` copy read as generic template text, not confirmed history |
 | Mission/vision statement | Placeholder copy on the About page and homepage | Legacy copy was generic, not distinctly NFPC's own words |
 | Doctrinal statement ("Our Faith" pillars: Scripture, Love, Prayer, Community) | Placeholder body copy per pillar | Legacy copy was generic; the *categories* are kept as a layout pattern, the *text* is not |
-| Leadership names, roles, bios, photos | `TODO_CONFIRM_NAME` / `TODO_CONFIRM_ROLE`, no photos | Legacy site used placeholder names ("Pastor John Doe", etc.) |
+| Leadership names, roles, bios, photos | Empty (no team members entered) | Legacy site used placeholder names ("Pastor John Doe", etc.). Add members in the dashboard once approved |
 | Social media links (Facebook/Instagram/Twitter) | `TODO_CONFIRM_URL` | Legacy footer icons all linked to `#` |
 | Real ministry descriptions (beyond the 3 category names) | Sample copy in `frontend/src/data/placeholders.ts` | Category names (Worship, Children's, Outreach) are real; the descriptions are illustrative only |
 | Sermons (titles, preachers, dates, video links) | Sample data | No real sermon has been catalogued yet — awaiting Milestone 3/4 |

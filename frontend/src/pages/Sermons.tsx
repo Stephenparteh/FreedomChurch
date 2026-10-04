@@ -10,6 +10,8 @@ import { usePageMeta } from '@/hooks/usePageMeta'
 import { getSermons } from '@/lib/api/resources'
 import { cn } from '@/lib/cn'
 
+import { resolveMediaUrl } from '@/lib/media'
+
 export function Sermons() {
   usePageMeta('Sermons', 'Watch and listen to sermons from NFPC.')
   const [query, setQuery] = useState('')
@@ -106,7 +108,11 @@ export function Sermons() {
                 {filtered.map((sermon, index) => (
                   <Reveal key={sermon.id} delay={(index % 3) * 100}>
                     <Card interactive className="flex h-full flex-col">
-                      <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
+                      {resolveMediaUrl(sermon.thumbnail) ? (
+                        <img src={resolveMediaUrl(sermon.thumbnail)} alt="" className="aspect-video w-full rounded-md object-cover" />
+                      ) : (
+                        <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
+                      )}
                       {sermon.category && (
                         <span className="mt-4 w-fit rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">
                           {sermon.category}

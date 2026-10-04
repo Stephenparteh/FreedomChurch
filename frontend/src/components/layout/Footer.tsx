@@ -1,10 +1,12 @@
 import nfpcLogo from '@/assets/brand/nfpc-logo.png'
 import { Container } from '@/components/ui/Container'
 import { primaryNav, siteConfig } from '@/data/site'
+import { useServiceSessions, formatSessionTime } from '@/hooks/useServiceSessions'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 export function Footer() {
-  const { churchName, motto, email, phone, address, serviceTimes } = useSiteSettings()
+  const { churchName, motto, email, phone, address, footerNote } = useSiteSettings()
+  const { sessions } = useServiceSessions()
 
   return (
     <footer className="border-t border-border bg-surface-inverted text-text-inverted">
@@ -39,15 +41,15 @@ export function Footer() {
           <h2 className="text-sm font-semibold uppercase tracking-wide text-text-inverted/60">
             Service times
           </h2>
-          {serviceTimes.length === 0 ? (
+          {sessions.length === 0 ? (
             <p className="mt-4 text-sm text-text-inverted/60">Coming soon.</p>
           ) : (
             <ul className="mt-4 space-y-2 text-sm text-text-inverted/80">
-              {serviceTimes.map((service) => (
-                <li key={service.label}>
-                  <span className="block text-text-inverted">{service.label}</span>
+              {sessions.map((session) => (
+                <li key={session.id}>
+                  <span className="block text-text-inverted">{session.name}</span>
                   <span className="text-text-inverted/60">
-                    {service.day} &middot; {service.time}
+                    {session.dayOfWeek} &middot; {formatSessionTime(session)}
                   </span>
                 </li>
               ))}
@@ -72,7 +74,7 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()} {churchName}. All rights reserved.
           </p>
-          <p>Built by the NFPC team.</p>
+          {footerNote ? <p>{footerNote}</p> : <p>Built by the NFPC team.</p>}
         </Container>
       </div>
     </footer>

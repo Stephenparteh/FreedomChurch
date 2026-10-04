@@ -1,9 +1,21 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { RequireAuth } from '@/components/admin/RequireAuth'
 import { AdminLayout } from '@/components/layout/AdminLayout'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { About } from '@/pages/About'
-import { AdminComingSoon } from '@/pages/admin/AdminComingSoon'
+import { AdminDashboard } from '@/pages/admin/AdminDashboard'
 import { AdminLogin } from '@/pages/admin/AdminLogin'
+import { AdminMessages } from '@/pages/admin/AdminMessages'
+import { AdminSettings } from '@/pages/admin/AdminSettings'
+import {
+  AdminAnnouncements,
+  AdminEvents,
+  AdminGallery,
+  AdminMinistries,
+  AdminSermons,
+  AdminServiceSessions,
+  AdminTeam,
+} from '@/pages/admin/CmsPages'
 import { Contact } from '@/pages/Contact'
 import { Events } from '@/pages/Events'
 import { Gallery } from '@/pages/Gallery'
@@ -27,18 +39,26 @@ export const router = createBrowserRouter([
       { path: '/contact', element: <Contact /> },
     ],
   },
-  { path: '/admin', element: <Navigate to="/admin/dashboard" replace /> },
   { path: '/admin/login', element: <AdminLogin /> },
+  { path: '/admin/dashboard', element: <Navigate to="/admin" replace /> },
   {
-    element: <AdminLayout />,
+    path: '/admin',
+    element: (
+      <RequireAuth>
+        <AdminLayout />
+      </RequireAuth>
+    ),
     children: [
-      { path: '/admin/dashboard', element: <AdminComingSoon /> },
-      { path: '/admin/sermons', element: <AdminComingSoon /> },
-      { path: '/admin/events', element: <AdminComingSoon /> },
-      { path: '/admin/gallery', element: <AdminComingSoon /> },
-      { path: '/admin/ministries', element: <AdminComingSoon /> },
-      { path: '/admin/announcements', element: <AdminComingSoon /> },
-      { path: '/admin/settings', element: <AdminComingSoon /> },
+      { index: true, element: <AdminDashboard /> },
+      { path: 'messages', element: <AdminMessages /> },
+      { path: 'sermons', element: <AdminSermons /> },
+      { path: 'events', element: <AdminEvents /> },
+      { path: 'gallery', element: <AdminGallery /> },
+      { path: 'ministries', element: <AdminMinistries /> },
+      { path: 'service-sessions', element: <AdminServiceSessions /> },
+      { path: 'announcements', element: <AdminAnnouncements /> },
+      { path: 'team', element: <AdminTeam /> },
+      { path: 'settings', element: <AdminSettings /> },
     ],
   },
   { path: '*', element: <NotFound /> },

@@ -35,8 +35,11 @@ export interface ChurchEvent {
   description: string
   date: string
   endDate?: string
-  time?: string
+  startTime?: string
+  endTime?: string
+  category?: string
   location?: string
+  rsvpUrl?: string
   image?: string
 }
 
@@ -86,6 +89,26 @@ export interface LeadershipMember {
   role: string
   bio?: string
   image?: string
+  socialLinks?: {
+    facebook?: string
+    instagram?: string
+    twitter?: string
+    website?: string
+  }
+  displayOrder: number
+}
+
+export interface ServiceSession {
+  id: string
+  name: string
+  slug: string
+  dayOfWeek: string
+  startTime: string
+  endTime?: string
+  platform: 'in-person' | 'online' | 'hybrid'
+  locationName?: string
+  meetingUrl?: string
+  description?: string
   displayOrder: number
 }
 
@@ -98,6 +121,7 @@ export interface SiteSettings {
   phone?: string
   address?: string
   serviceTimes: ServiceTime[]
+  footerNote?: string
   socials?: {
     facebook?: string
     instagram?: string

@@ -5,6 +5,7 @@ import { AsyncList } from '@/components/shared/AsyncList'
 import { PageHero } from '@/components/shared/PageHero'
 import { Reveal } from '@/components/shared/Reveal'
 import { StateMessage } from '@/components/shared/StateMessage'
+import { EventDetails } from '@/components/shared/EventDetails'
 import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { getEvents } from '@/lib/api/resources'
@@ -67,6 +68,7 @@ export function Events() {
                             <p className="mt-1 text-sm text-text-muted">{event.location}</p>
                           )}
                           <p className="mt-3 text-sm text-text-muted">{event.description}</p>
+                          <EventDetails event={event} />
                         </Card>
                       </Reveal>
                     ))}
@@ -92,6 +94,7 @@ export function Events() {
                           </p>
                           <h3 className="mt-2 text-lg font-semibold text-text">{event.title}</h3>
                           <p className="mt-3 text-sm text-text-muted">{event.description}</p>
+                          <EventDetails event={event} />
                         </Card>
                       </Reveal>
                     ))}

@@ -5,6 +5,9 @@ node_modules/
 dist/
 build/
 
+# Uploaded media (runtime data, never committed)
+backend/uploads/
+
 # Environment variables (never commit real secrets)
 .env
 .env.local

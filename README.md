@@ -22,6 +22,23 @@ docs/       Architecture, design system, backend/dashboard plans, migration note
 - [`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md) / [`docs/DASHBOARD_PLAN.md`](docs/DASHBOARD_PLAN.md) — backend architecture and the planned admin dashboard (Milestone 4).
 - [`docs/MIGRATION_NOTES.md`](docs/MIGRATION_NOTES.md) — exactly what moved, what didn't, and what's still pending confirmation from church leadership.
 
+## Running the backend and the admin dashboard
+
+```bash
+cd backend
+npm install
+cp .env.example .env   # then fill in MONGODB_URI, JWT_SECRET, FRONTEND_URL
+npm run dev            # API on http://localhost:5000/api
+```
+
+Create the admin account once (values come from your shell, never from a file):
+
+```bash
+ADMIN_EMAIL=you@example.org ADMIN_NAME="Your Name" ADMIN_PASSWORD="at least 12 characters" npm run create-admin
+```
+
+Then open http://localhost:5173/admin/login. See [`docs/API.md`](docs/API.md) for the endpoints and [`docs/DATABASE.md`](docs/DATABASE.md) for setup, including Atlas, which is not yet verified.
+
 ## Running the frontend
 
 ```bash

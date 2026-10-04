@@ -18,3 +18,20 @@ export function applyJsonTransform(schema: Schema) {
     },
   })
 }
+
+/**
+ * JSON view for admin responses: same shape as the public view, but keeps
+ * `isPublished` so the dashboard can show draft/published state. Only ever
+ * returned from authenticated routes.
+ */
+export function adminJson(doc: { toJSON: (options?: object) => unknown }) {
+  return doc.toJSON({
+    virtuals: true,
+    transform: (_doc: unknown, ret: Record<string, unknown>) => {
+      ret.id = ret._id
+      delete ret._id
+      delete ret.__v
+      return ret
+    },
+  })
+}

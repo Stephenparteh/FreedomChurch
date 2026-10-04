@@ -6,6 +6,8 @@ import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { getGallery } from '@/lib/api/resources'
 
+import { resolveMediaUrl } from '@/lib/media'
+
 export function Gallery() {
   usePageMeta('Gallery', 'Photos from services and events at NFPC.')
   const state = useApi(() => getGallery({ limit: 100 }), [])
@@ -31,14 +33,14 @@ export function Gallery() {
               {photos.map((photo) => (
                 <Reveal key={photo.id}>
                   <a
-                    href={photo.imageUrl}
+                    href={resolveMediaUrl(photo.imageUrl)}
                     target="_blank"
                     rel="noreferrer"
                     className="group block overflow-hidden rounded-lg"
                   >
                     <div className="aspect-[4/3] overflow-hidden">
                       <img
-                        src={photo.imageUrl}
+                        src={resolveMediaUrl(photo.imageUrl)}
                         alt={photo.altText}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"

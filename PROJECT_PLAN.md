@@ -32,7 +32,15 @@ National Freedom Pentecostal Church's website is being rebuilt from a static, be
 
 Implement the Express + TypeScript + Mongoose API against MongoDB Atlas, following [`docs/BACKEND_PLAN.md`](docs/BACKEND_PLAN.md): all content models (Sermon, Event, Ministry, Announcement, GalleryItem, LeadershipMember, ContactSubmission, SiteSetting), public read endpoints, and the contact form actually submitting somewhere real. Wire the Milestone 2 frontend pages to fetch from this API instead of static data.
 
-## Milestone 4 — Church administration dashboard
+## Milestone 4 — Church administration dashboard (complete pending review)
+
+- Bearer-token admin authentication with bcrypt password hashing, server-side logout, and login rate limiting. The admin account is created from the command line.
+- Protected `/api/admin` endpoints for sermons, events, gallery, ministries, service sessions, announcements, team, contact messages, site settings, and image uploads. Unauthenticated requests are rejected at the API layer.
+- Image uploads validated by type, size, and file contents, and stored under server-chosen names.
+- Admin dashboard at `/admin/*` with login, a protected layout, and every CMS section. Changes appear on the public site.
+- Service and Bible study sessions are data, not code: each session is its own record.
+- Verified in automated tests (backend) and in a real browser (desktop and mobile). See [`docs/DASHBOARD_PLAN.md`](docs/DASHBOARD_PLAN.md).
+- Not verified: Atlas production connection, persistent upload storage on the hosting platform. Both are Milestone 5 items.
 
 Implement real authentication/authorization and the full admin UI described in [`docs/DASHBOARD_PLAN.md`](docs/DASHBOARD_PLAN.md) behind the `/admin/*` route shells already in place: CRUD for every content type, publish/unpublish workflows, site settings management, contact-submission inbox.
 

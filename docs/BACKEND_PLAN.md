@@ -1,6 +1,6 @@
 # Backend Plan
 
-This document describes the backend architecture. Milestone 3 implements the public read API and contact endpoint; endpoints are documented in [API.md](API.md) and models in [DATABASE.md](DATABASE.md). Authentication, admin write endpoints, and the dashboard remain Milestone 4.
+This document describes the backend architecture. Milestone 3 implements the public read API and contact endpoint; endpoints are documented in [API.md](API.md) and models in [DATABASE.md](DATABASE.md). Milestone 4 adds authenticated admin write endpoints and a single-admin session model; see the authentication section below and [API.md](API.md).
 
 ## Structure
 
@@ -30,7 +30,7 @@ Node.js + Express + TypeScript + Mongoose. Express over a heavier framework (Nes
 ## Authentication & authorization strategy
 
 - Single role for Milestone 3/4: `AdminUser`. No public user accounts are planned (the site has no member-facing login) — only church staff authenticate, to manage content.
-- Session approach: HTTP-only, signed cookie holding a JWT (or an opaque session id backed by a `sessions` collection — final choice made in Milestone 4 alongside the actual login UI). HTTP-only avoids exposing the token to client-side JS (XSS mitigation).
+- **Implemented (Milestone 4):** a bearer token (HS256 JWT, 8-hour lifetime) sent in the `Authorization` header and held in `sessionStorage`. This was chosen over an HTTP-only cookie because the frontend and API are on different origins in production, and cross-origin cookies need extra configuration. The trade-off is that a script running on the admin page could read the token, so the admin app avoids third-party scripts. Logout bumps the account's `tokenVersion`, so tokens are invalidated on the server, not only forgotten by the browser.
 - Passwords hashed with `bcrypt` (or `argon2`) — never stored or logged in plaintext.
 - `AUTH_SECRET` env var signs tokens; generated once, rotated only with a deliberate re-auth plan (not done casually, since it invalidates all sessions).
 - Authorization is currently a single tier (any authenticated admin can manage any content). Per-resource roles (e.g. an editor who can't touch Settings) are **not** planned for Milestone 3/4 — flagged here as a possible Milestone 5+ enhancement only if the church actually needs multiple staff accounts with different permissions.

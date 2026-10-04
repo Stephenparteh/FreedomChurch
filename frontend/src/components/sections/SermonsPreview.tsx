@@ -6,6 +6,8 @@ import { Reveal } from '@/components/shared/Reveal'
 import { useApi } from '@/hooks/useApi'
 import { getSermons } from '@/lib/api/resources'
 
+import { resolveMediaUrl } from '@/lib/media'
+
 export function SermonsPreview() {
   const state = useApi(() => getSermons({ limit: 3 }), [])
 
@@ -37,7 +39,11 @@ export function SermonsPreview() {
             {sermons.map((sermon, index) => (
               <Reveal key={sermon.id} delay={index * 100}>
                 <Card interactive className="flex h-full flex-col">
-                  <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
+                  {resolveMediaUrl(sermon.thumbnail) ? (
+                        <img src={resolveMediaUrl(sermon.thumbnail)} alt="" className="aspect-video w-full rounded-md object-cover" />
+                      ) : (
+                        <div className="aspect-video rounded-md bg-surface-muted" aria-hidden />
+                      )}
                   {sermon.category && (
                     <span className="mt-4 w-fit rounded-full bg-primary-50 px-2.5 py-1 text-xs font-medium text-primary-700">
                       {sermon.category}

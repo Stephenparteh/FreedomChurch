@@ -17,6 +17,8 @@ const faithPillars = [
   { title: 'Community', body: 'Placeholder — confirm real doctrinal statement with church leadership.' },
 ]
 
+import { resolveMediaUrl } from '@/lib/media'
+
 export function About() {
   usePageMeta('About', 'Learn about the mission, history, and leadership of NFPC.')
   const { motto } = useSiteSettings()
@@ -74,13 +76,27 @@ export function About() {
               {members.map((member, index) => (
                 <Reveal key={member.id} delay={index * 100}>
                   <Card className="h-full text-center">
-                    <div
-                      className="mx-auto h-24 w-24 rounded-full bg-surface-muted bg-cover bg-center"
-                      style={member.image ? { backgroundImage: `url(${member.image})` } : undefined}
-                      aria-hidden
-                    />
+                    {resolveMediaUrl(member.image) ? (
+                      <img src={resolveMediaUrl(member.image)} alt="" className="mx-auto h-24 w-24 rounded-full object-cover" />
+                    ) : (
+                      <div className="mx-auto h-24 w-24 rounded-full bg-surface-muted" aria-hidden />
+                    )}
                     <p className="mt-4 font-medium text-text">{member.name}</p>
                     <p className="text-sm text-text-muted">{member.role}</p>
+                    {member.bio && <p className="mt-3 text-sm text-text-muted">{member.bio}</p>}
+                    {member.socialLinks && Object.values(member.socialLinks).some(Boolean) && (
+                      <ul className="mt-3 flex flex-wrap justify-center gap-3 text-sm">
+                        {Object.entries(member.socialLinks)
+                          .filter(([, url]) => Boolean(url))
+                          .map(([name, url]) => (
+                            <li key={name}>
+                              <a href={url} target="_blank" rel="noreferrer" className="text-primary-600 underline">
+                                {name === 'twitter' ? 'X' : name.charAt(0).toUpperCase() + name.slice(1)}
+                              </a>
+                            </li>
+                          ))}
+                      </ul>
+                    )}
                   </Card>
                 </Reveal>
               ))}

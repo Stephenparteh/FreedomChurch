@@ -9,11 +9,12 @@ const announcementSchema = new Schema(
     image: { type: String, trim: true },
     publishedAt: { type: Date, required: true, default: Date.now },
     isPublished: { type: Boolean, default: false, index: true },
+    isArchived: { type: Boolean, default: false, index: true },
   },
   { timestamps: true },
 )
 
-announcementSchema.index({ isPublished: 1, publishedAt: -1 })
+announcementSchema.index({ isPublished: 1, isArchived: 1, publishedAt: -1 })
 
 applyJsonTransform(announcementSchema)
 

@@ -7,6 +7,8 @@ import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { getMinistries } from '@/lib/api/resources'
 
+import { resolveMediaUrl } from '@/lib/media'
+
 export function Ministries() {
   usePageMeta('Ministries', 'Explore the ministries you can join or support at NFPC.')
   const state = useApi(() => getMinistries(), [])
@@ -42,7 +44,7 @@ export function Ministries() {
                       <div className="flex aspect-[4/3] items-center justify-center rounded-xl bg-primary-50">
                         {ministry.image ? (
                           <img
-                            src={ministry.image}
+                            src={resolveMediaUrl(ministry.image)}
                             alt=""
                             className="h-full w-full rounded-xl object-cover"
                           />

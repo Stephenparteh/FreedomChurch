@@ -81,7 +81,7 @@ async function seed() {
       speaker: 'Development Test Data',
       description: 'Development-only sample record for exercising the API locally. Not real content.',
       date: new Date(),
-      category: 'Faith',
+      category: 'Faith Series',
       isPublished: true,
     },
     { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true },

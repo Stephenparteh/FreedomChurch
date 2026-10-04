@@ -1,3 +1,5 @@
+import bcrypt from 'bcryptjs'
+import type { Express } from 'express'
 import mongoose from 'mongoose'
 import { connectDb, disconnectDb } from '../src/config/db.js'
 
@@ -13,4 +15,23 @@ export async function teardownTestDb() {
 export async function clearTestDb() {
   const { collections } = mongoose.connection
   await Promise.all(Object.values(collections).map((c) => c.deleteMany({})))
+}
+
+export const TEST_ADMIN = { email: 'admin@example.test', name: 'Test Admin', password: 'correct-horse-battery' }
+
+/**
+ * Provisions the test admin (idempotent) and mints a session token directly.
+ * Fixtures don't go through HTTP login: the login endpoint is rate limited on
+ * purpose, and its own behavior is covered by auth.test.ts.
+ */
+export async function loginAsTestAdmin(_app: Express): Promise<string> {
+  const { AdminUserModel } = await import('../src/models/AdminUser.js')
+  const { signAdminToken } = await import('../src/utils/auth.js')
+  const passwordHash = await bcrypt.hash(TEST_ADMIN.password, 4)
+  const user = await AdminUserModel.findOneAndUpdate(
+    { email: TEST_ADMIN.email },
+    { $set: { name: TEST_ADMIN.name, passwordHash } },
+    { upsert: true, returnDocument: 'after', setDefaultsOnInsert: true },
+  )
+  return signAdminToken(user!.id as string, user!.tokenVersion)
 }

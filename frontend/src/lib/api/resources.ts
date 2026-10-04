@@ -8,6 +8,7 @@ import type {
   Ministry,
   ServiceUnit,
   Sermon,
+  ServiceSession,
   SiteSettings,
 } from '@/types/content'
 
@@ -67,3 +68,5 @@ export const submitContact = (payload: ContactPayload) =>
     method: 'POST',
     body: JSON.stringify(payload),
   })
+
+export const getServiceSessions = () => apiFetch<ServiceSession[]>('/service-sessions')

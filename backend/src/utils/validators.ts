@@ -7,3 +7,8 @@ export const contactSubmissionSchema = z.object({
   subject: z.string().trim().max(200).optional(),
   message: z.string().trim().min(10, 'Message must be at least 10 characters.').max(5000),
 })
+
+export const loginSchema = z.object({
+  email: z.string().trim().toLowerCase().email('Enter a valid email address.').max(200),
+  password: z.string().min(1, 'Password is required.').max(200),
+})

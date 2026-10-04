@@ -1,3 +1,4 @@
+import { AnnouncementsPreview } from '@/components/sections/AnnouncementsPreview'
 import { AboutPreview } from '@/components/sections/AboutPreview'
 import { CTASection } from '@/components/sections/CTASection'
 import { EventsPreview } from '@/components/sections/EventsPreview'
@@ -20,6 +21,7 @@ export function Home() {
       <ServiceInfo />
       <AboutPreview />
       <MinistriesPreview />
+      <AnnouncementsPreview />
       <SermonsPreview />
       <EventsPreview />
       <GalleryPreview />

@@ -8,7 +8,7 @@ import { sendSuccess } from '../utils/respond.js'
 
 export async function listAnnouncements(req: Request, res: Response) {
   const { page, limit } = parsePagination(req.query as Record<string, unknown>)
-  const { items, total } = await listPublished(AnnouncementModel, {}, {
+  const { items, total } = await listPublished(AnnouncementModel, { isArchived: { $ne: true } }, {
     page,
     limit,
     sort: { publishedAt: -1 },
