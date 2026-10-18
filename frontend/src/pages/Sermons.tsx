@@ -29,7 +29,7 @@ export function Sermons() {
 
   return (
     <>
-      <PageHero eyebrow="Sermon library" title="Sermons" description="Listen to recent teaching, and return to the messages that speak to you." />
+      <PageHero title="Sermons" description="Listen to recent teaching, and return to the messages that speak to you." />
 
       <section className="py-14 sm:py-20">
         <Container>
