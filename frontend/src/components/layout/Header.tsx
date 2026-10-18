@@ -1,142 +1,305 @@
-import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import nfpcLogo from '@/assets/brand/nfpc-logo.png'
-import { Button } from '@/components/ui/Button'
-import { Container } from '@/components/ui/Container'
-import { primaryNav, siteConfig } from '@/data/site'
-import { useScrolled } from '@/hooks/useScrolled'
-import { cn } from '@/lib/cn'
+import { useEffect, useRef, useState, type FocusEvent } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import nfpcCrest from "@/assets/brand/nfpc-crest-transparent.png";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { primaryNav, siteConfig } from "@/data/site";
+import { useApi } from "@/hooks/useApi";
+import { getBranches } from "@/lib/api/resources";
+import { cn } from "@/lib/cn";
 
+/**
+ * A solid white bar on every page. The active page is marked by a red underline
+ * beneath its label, not by a background shape. Below the xl breakpoint, the
+ * links move into a full-width sheet with large touch targets.
+ *
+ * Give remains part of the primary navigation, while Contact is the primary
+ * action on the far right. "Branches" is inserted after Ministries as a real
+ * link to /branches at all times; its dropdown arrow and panel only appear
+ * once at least one branch is published, so the item is never a dead end.
+ */
 export function Header() {
-  const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
-  const isHome = pathname === '/'
-  const scrolled = useScrolled(40)
-  const solid = !isHome || scrolled || open
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+  const branchesState = useApi(() => getBranches(), []);
+  const branches = branchesState.status === "success" ? branchesState.data : [];
 
   // Close the mobile panel on route change, without an effect (React's
   // documented pattern for resetting state in response to a prop change).
-  const [lastPathname, setLastPathname] = useState(pathname)
+  const [lastPathname, setLastPathname] = useState(pathname);
+
   if (pathname !== lastPathname) {
-    setLastPathname(pathname)
-    setOpen(false)
+    setLastPathname(pathname);
+    setOpen(false);
   }
 
   useEffect(() => {
-    if (!open) return
+    if (!open) return;
+
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setOpen(false)
+      if (e.key === "Escape") setOpen(false);
     }
-    window.addEventListener('keydown', onKey)
-    document.body.style.overflow = 'hidden'
+
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+
     return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [open])
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  // Keep Give in the main navigation, but move Contact to the primary action.
+  const desktopNav = primaryNav.filter((link) => link.to !== "/contact");
 
   return (
-    <>
-      {open && (
-        <div
-          aria-hidden
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-        />
-      )}
-      <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-300',
-        solid
-          ? 'border-b border-border bg-surface/95 backdrop-blur'
-          : 'border-b border-transparent bg-transparent',
-      )}
-    >
-      <Container className="flex h-16 items-center justify-between lg:h-20">
-        <NavLink to="/" className="flex items-center gap-2.5">
-          <img src={nfpcLogo} alt="" className="h-9 w-9 lg:h-11 lg:w-11" />
-          <span
-            className={cn(
-              'font-display text-lg font-semibold tracking-tight transition-colors',
-              solid ? 'text-text' : 'text-white',
-            )}
-          >
-            {siteConfig.shortName}
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-border bg-white">
+      <Container className="flex h-16 items-center justify-between lg:h-24">
+        <NavLink
+          to="/"
+          className="flex items-center gap-3.5"
+          aria-label={`${siteConfig.name}, home`}
+        >
+          <img
+            src={nfpcCrest}
+            alt=""
+            className="h-12 w-12 object-contain lg:h-16 lg:w-16"
+          />
+
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-xl font-semibold tracking-tight text-text lg:text-2xl">
+              {siteConfig.shortName}
+            </span>
+
+            <span className="mt-1.5 hidden text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-text-muted sm:block">
+              National Freedom Pentecostal
+            </span>
           </span>
         </NavLink>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
-          {primaryNav.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              className={({ isActive }) =>
-                cn(
-                  'text-sm font-medium transition-colors',
-                  solid ? 'text-text-muted hover:text-primary-600' : 'text-white/85 hover:text-white',
-                  isActive && (solid ? 'text-primary-600' : 'text-white'),
-                )
-              }
-            >
-              {link.label}
-            </NavLink>
+        {/* Desktop navigation */}
+        <nav className="hidden items-center gap-8 xl:flex" aria-label="Primary">
+          {desktopNav.map((link) => (
+            <div key={link.to} className="contents">
+              <NavLink
+                to={link.to}
+                end={link.to === "/"}
+                className={({ isActive }) =>
+                  cn(
+                    "relative py-2 text-sm font-medium text-text-muted transition-colors hover:text-text",
+                    isActive &&
+                      "text-text after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-accent-500 after:content-['']",
+                  )
+                }
+              >
+                {link.label}
+              </NavLink>
+              {link.to === "/ministries" && <BranchesMenu branches={branches} />}
+            </div>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Button to="/give" variant="primary">
-            Give
+        {/* Primary action */}
+        <div className="hidden xl:block">
+          <Button to="/contact" variant="primary" className="min-h-11 px-6">
+            Contact
           </Button>
         </div>
 
+        {/* Mobile menu button */}
         <button
           type="button"
-          className={cn(
-            'inline-flex h-10 w-10 items-center justify-center rounded-md lg:hidden',
-            solid ? 'text-text' : 'text-white',
-          )}
-          aria-label={open ? 'Close menu' : 'Open menu'}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-text hover:bg-surface-muted xl:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((prev) => !prev)}
         >
-          <span aria-hidden className="text-2xl leading-none">
-            {open ? '✕' : '☰'}
+          <span aria-hidden className="relative block h-4 w-5">
+            <span
+              className={cn(
+                "absolute left-0 h-0.5 w-5 bg-current transition-transform duration-300",
+                open ? "top-1.5 rotate-45" : "top-0",
+              )}
+            />
+
+            <span
+              className={cn(
+                "absolute left-0 top-1.5 h-0.5 w-5 bg-current transition-opacity duration-300",
+                open ? "opacity-0" : "opacity-100",
+              )}
+            />
+
+            <span
+              className={cn(
+                "absolute left-0 h-0.5 w-5 bg-current transition-transform duration-300",
+                open ? "top-1.5 -rotate-45" : "top-3",
+              )}
+            />
           </span>
         </button>
       </Container>
 
+      {/* Mobile navigation */}
       <nav
         id="mobile-nav"
         aria-label="Primary"
         className={cn(
-          'overflow-hidden border-t border-border bg-surface transition-[max-height] duration-300 ease-out lg:hidden',
-          open ? 'max-h-[28rem]' : 'max-h-0 border-t-0',
+          "overflow-hidden border-t border-border bg-white transition-[max-height,opacity] duration-300 ease-out xl:hidden",
+          open
+            ? "max-h-[80vh] overflow-y-auto opacity-100"
+            : "pointer-events-none max-h-0 opacity-0",
         )}
       >
         <Container className="flex flex-col gap-1 py-4">
-          {primaryNav.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              className={({ isActive }) =>
-                cn(
-                  'rounded-md px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-surface-muted',
-                  isActive && 'bg-primary-50 text-primary-600',
-                )
-              }
-            >
-              {link.label}
-            </NavLink>
+          {desktopNav.map((link) => (
+            <div key={link.to}>
+              <NavLink
+                to={link.to}
+                end={link.to === "/"}
+                className={({ isActive }) =>
+                  cn(
+                    "flex min-h-12 items-center border-l-2 border-transparent pl-3 font-display text-xl text-text-muted hover:text-text",
+                    isActive && "border-accent-500 text-text",
+                  )
+                }
+              >
+                {link.label}
+              </NavLink>
+              {link.to === "/ministries" && (
+                <div className="ml-3 border-l-2 border-transparent pl-3">
+                  <NavLink
+                    to="/branches"
+                    end
+                    className={({ isActive }) =>
+                      cn(
+                        "flex min-h-12 items-center font-display text-xl text-text-muted hover:text-text",
+                        isActive && "text-text",
+                      )
+                    }
+                  >
+                    Branches
+                  </NavLink>
+                  {branches.length > 0 && (
+                    <ul className="mb-1 ml-3 border-l-2 border-border pl-3">
+                      {branches.map((branch) => (
+                        <li key={branch.id}>
+                          <NavLink
+                            to={`/branches/${branch.slug}`}
+                            className={({ isActive }) =>
+                              cn(
+                                "flex min-h-10 items-center text-base text-text-muted hover:text-text",
+                                isActive && "text-text",
+                              )
+                            }
+                          >
+                            {branch.name}
+                          </NavLink>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+            </div>
           ))}
-          <Button to="/give" variant="primary" className="mt-2 justify-center">
-            Give
+
+          <Button to="/contact" variant="primary" className="mt-4 w-full">
+            Contact
           </Button>
         </Container>
       </nav>
-      </header>
-    </>
-  )
+    </header>
+  );
+}
+
+/**
+ * Desktop "Branches" item: the label is always a real link to /branches, so
+ * it's never a dead end even with nothing published yet. The dropdown arrow
+ * and panel only render once there's at least one branch to show in it, and
+ * open on hover, on click/tap, and on keyboard focus; they close on Escape,
+ * on losing focus entirely, or when the pointer and focus have both left.
+ * Each branch in the panel links to its own page.
+ */
+function BranchesMenu({ branches }: { branches: { id: string; name: string; slug: string }[] }) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasBranches = branches.length > 0;
+
+  function handleBlur(e: FocusEvent<HTMLDivElement>) {
+    if (!containerRef.current?.contains(e.relatedTarget as Node | null)) setOpen(false);
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative flex items-center"
+      onMouseEnter={() => hasBranches && setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onBlur={handleBlur}
+    >
+      <NavLink
+        to="/branches"
+        end
+        className={({ isActive }) =>
+          cn(
+            "relative py-2 text-sm font-medium text-text-muted transition-colors hover:text-text",
+            isActive &&
+              "text-text after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-accent-500 after:content-['']",
+          )
+        }
+      >
+        Branches
+      </NavLink>
+
+      {hasBranches && (
+        <button
+          type="button"
+          aria-label="Show branches"
+          aria-haspopup="true"
+          aria-expanded={open}
+          className="flex items-center py-2 pl-1.5 text-text-muted transition-colors hover:text-text"
+          onClick={() => setOpen((v) => !v)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setOpen(false);
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              setOpen(true);
+            }
+          }}
+        >
+          <svg aria-hidden viewBox="0 0 12 8" className={cn("h-2 w-2.5 transition-transform", open && "rotate-180")}>
+            <path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      )}
+
+      {hasBranches && (
+        <div
+          className={cn(
+            "absolute left-0 top-full z-10 w-56 pt-3 transition-[opacity,transform] duration-150",
+            open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-1 opacity-0",
+          )}
+        >
+          <ul className="overflow-hidden rounded-md border border-border bg-white py-2 shadow-elevated">
+            {branches.map((branch) => (
+              <li key={branch.id}>
+                <NavLink
+                  to={`/branches/${branch.slug}`}
+                  className={({ isActive }) =>
+                    cn(
+                      "block px-4 py-2.5 text-sm font-medium text-text-muted hover:bg-surface-muted hover:text-text",
+                      isActive && "text-primary-700",
+                    )
+                  }
+                >
+                  {branch.name}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
 }

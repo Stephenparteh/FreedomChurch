@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+  <rect width="1600" height="1200" fill="#e9edf4"/>
+  <rect x="40" y="40" width="1520" height="1120" fill="none" stroke="#9fb3cf" stroke-width="4" stroke-dasharray="16 12"/>
+  <text x="800" y="560" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#1f4f8a">SAMPLE PLACEHOLDER</text>
+  <text x="800" y="650" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" fill="#5a6474">Replace with NFPC photography</text>
+  <text x="800" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" fill="#5a6474">Not a photograph of the church</text>
+</svg>

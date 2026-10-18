@@ -4,6 +4,8 @@ import { RequireAuth } from '@/components/admin/RequireAuth'
 import { AdminLayout } from '@/components/layout/AdminLayout'
 import { SiteLayout } from '@/components/layout/SiteLayout'
 import { About } from '@/pages/About'
+import { BranchPage } from '@/pages/Branch'
+import { Branches } from '@/pages/Branches'
 import { Contact } from '@/pages/Contact'
 import { Events } from '@/pages/Events'
 import { Gallery } from '@/pages/Gallery'
@@ -20,6 +22,8 @@ export const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/about', element: <About /> },
       { path: '/ministries', element: <Ministries /> },
+      { path: '/branches', element: <Branches /> },
+      { path: '/branches/:slug', element: <BranchPage /> },
       { path: '/sermons', element: <Sermons /> },
       { path: '/events', element: <Events /> },
       { path: '/gallery', element: <Gallery /> },
@@ -46,6 +50,7 @@ export const router = createBrowserRouter([
       { path: 'service-sessions', element: <AdminPage page="service-sessions" /> },
       { path: 'announcements', element: <AdminPage page="announcements" /> },
       { path: 'team', element: <AdminPage page="team" /> },
+      { path: 'branches', element: <AdminPage page="branches" /> },
       { path: 'settings', element: <AdminPage page="settings" /> },
     ],
   },

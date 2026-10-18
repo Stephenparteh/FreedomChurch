@@ -1,6 +1,7 @@
 import { apiFetch } from './client'
 import type {
   Announcement,
+  Branch,
   ChurchEvent,
   ContactPayload,
   GalleryItem,
@@ -41,6 +42,10 @@ export const getAnnouncement = (slug: string) => apiFetch<Announcement>(`/announ
 export const getMinistries = () => apiFetch<Ministry[]>('/ministries')
 
 export const getMinistry = (slug: string) => apiFetch<Ministry>(`/ministries/${slug}`)
+
+export const getBranches = () => apiFetch<Branch[]>('/branches')
+
+export const getBranch = (slug: string) => apiFetch<Branch>(`/branches/${slug}`)
 
 export const getServiceUnits = (params: { ministry?: string } = {}) =>
   apiFetch<ServiceUnit[]>(`/service-units${toQuery(params)}`)

@@ -14,6 +14,7 @@ const pages = {
   'service-sessions': lazy(() => import('@/pages/admin/CmsPages').then((m) => ({ default: m.AdminServiceSessions }))),
   announcements: lazy(() => import('@/pages/admin/CmsPages').then((m) => ({ default: m.AdminAnnouncements }))),
   team: lazy(() => import('@/pages/admin/CmsPages').then((m) => ({ default: m.AdminTeam }))),
+  branches: lazy(() => import('@/pages/admin/CmsPages').then((m) => ({ default: m.AdminBranches }))),
 }
 
 export type AdminPageName = keyof typeof pages

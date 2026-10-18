@@ -2,18 +2,23 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { cn } from '@/lib/cn'
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'link'
+type Variant = 'primary' | 'secondary' | 'ghost' | 'link' | 'light' | 'danger' | 'accent'
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-primary-600 text-white hover:bg-primary-700 focus-visible:outline-primary-600 shadow-soft',
-  secondary: 'bg-white text-primary-700 border border-border-strong hover:bg-primary-50',
-  ghost: 'bg-transparent text-text hover:bg-surface-muted',
-  link: 'bg-transparent text-primary-600 hover:text-primary-700 underline-offset-4 hover:underline px-0 py-0',
+    'bg-primary-600 text-white shadow-soft hover:bg-primary-700 active:bg-primary-800 focus-visible:outline-primary-600',
+  accent: 'bg-accent-500 text-white shadow-soft hover:bg-accent-600 active:bg-accent-700 focus-visible:outline-accent-500',
+  danger: 'bg-error text-white shadow-soft hover:bg-error/90 focus-visible:outline-error',
+  secondary:
+    'border border-border-strong bg-surface text-primary-700 hover:border-primary-300 hover:bg-primary-50 focus-visible:outline-primary-600',
+  ghost: 'bg-transparent text-text hover:bg-surface-muted focus-visible:outline-primary-600',
+  link: 'bg-transparent p-0 text-primary-600 hover:text-primary-800 focus-visible:outline-primary-600',
+  light:
+    'bg-white text-primary-800 shadow-soft hover:bg-primary-50 focus-visible:outline-white',
 }
 
 const baseClasses =
-  'inline-flex items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none'
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold tracking-wide transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50'
 
 interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: Variant

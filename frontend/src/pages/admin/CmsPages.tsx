@@ -1,6 +1,7 @@
 import { CrudPage } from '@/components/admin/CrudPage'
 import {
   announcementsConfig,
+  branchesConfig,
   eventsConfig,
   galleryConfig,
   ministriesConfig,
@@ -35,4 +36,8 @@ export function AdminAnnouncements() {
 
 export function AdminTeam() {
   return <CrudPage config={teamConfig} />
+}
+
+export function AdminBranches() {
+  return <CrudPage config={branchesConfig} />
 }

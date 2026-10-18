@@ -51,15 +51,18 @@ export const eventsConfig: ResourceConfig = {
   description: 'Events appear on the website once published. Use a date and times that are confirmed with the church.',
   publishable: true,
   label: (r) => str(r.title),
-  detail: (r) =>
-    [shortDate(r.date), r.startTime ? `${str(r.startTime)}${r.endTime ? `–${str(r.endTime)}` : ''}` : '', str(r.location)]
+  detail: (r) => {
+    const dateText = r.endDate && shortDate(r.endDate) !== shortDate(r.date) ? `${shortDate(r.date)}–${shortDate(r.endDate)}` : shortDate(r.date)
+    return [dateText, r.startTime ? `${str(r.startTime)}${r.endTime ? `–${str(r.endTime)}` : ''}` : '', str(r.location)]
       .filter(Boolean)
-      .join(' · '),
-  blank: { title: '', slug: '', date: today(), startTime: '', endTime: '', category: '', location: '', rsvpUrl: '', description: '', image: '', isPublished: false },
+      .join(' · ')
+  },
+  blank: { title: '', slug: '', date: today(), endDate: '', startTime: '', endTime: '', category: '', location: '', rsvpUrl: '', description: '', image: '', isPublished: false },
   fields: [
     { name: 'title', label: 'Title', kind: 'text', required: true, maxLength: 200 },
     { name: 'slug', label: 'Web address (slug)', kind: 'slug', help: 'Leave blank to create one from the title.' },
-    { name: 'date', label: 'Date', kind: 'date', required: true },
+    { name: 'date', label: 'Start date', kind: 'date', required: true },
+    { name: 'endDate', label: 'End date', kind: 'date-optional', help: 'Only for multi-day events (a revival, crusade, or conference). Leave blank for a one-day event.' },
     { name: 'startTime', label: 'Starts', kind: 'time' },
     { name: 'endTime', label: 'Ends', kind: 'time' },
     { name: 'category', label: 'Category', kind: 'select', options: EVENT_CATEGORIES },
@@ -106,8 +109,8 @@ export const ministriesConfig: ResourceConfig = {
     { name: 'shortDescription', label: 'Short description', kind: 'text', required: true, maxLength: 300 },
     { name: 'description', label: 'Full description', kind: 'textarea', required: true, maxLength: 5000 },
     { name: 'image', label: 'Image', kind: 'image' },
-    { name: 'meetingInfo', label: 'When it meets', kind: 'text', maxLength: 300 },
-    { name: 'contactInfo', label: 'Who to contact', kind: 'text', maxLength: 300 },
+    { name: 'meetingInfo', label: 'When it meets', kind: 'text', maxLength: 300, help: 'The ministry’s regular meeting schedule, e.g. "Saturdays, 4:00 PM" or "First Sunday of the month."' },
+    { name: 'contactInfo', label: 'Who to contact', kind: 'text', maxLength: 300, help: 'The person or way to reach them for this ministry, e.g. a name, phone number, or email.' },
     { name: 'displayOrder', label: 'Display order', kind: 'number', help: 'Lower numbers appear first.' },
     { name: 'isPublished', label: 'Published (visible on the website)', kind: 'checkbox' },
   ],
@@ -199,6 +202,31 @@ export const teamConfig: ResourceConfig = {
     { name: 'twitter', label: 'X (Twitter) link', kind: 'url' },
     { name: 'website', label: 'Website', kind: 'url' },
     { name: 'displayOrder', label: 'Display order', kind: 'number', help: 'Lower numbers appear first.' },
+    { name: 'isPublished', label: 'Published (visible on the website)', kind: 'checkbox' },
+  ],
+}
+
+export const branchesConfig: ResourceConfig = {
+  segment: 'branches',
+  title: 'Branches',
+  noun: 'branch',
+  description: 'Each published branch gets its own page, linked from the Branches menu. Only add branches the church has confirmed.',
+  publishable: true,
+  label: (r) => str(r.name),
+  detail: (r) => str(r.address),
+  blank: { name: '', slug: '', description: '', address: '', phone: '', email: '', history: '', serviceTimes: '', leadershipInfo: '', image: '', displayOrder: '0', isPublished: false },
+  fields: [
+    { name: 'name', label: 'Branch name', kind: 'text', required: true, maxLength: 150 },
+    { name: 'slug', label: 'Web address (slug)', kind: 'slug', help: 'Leave blank to create one from the name.' },
+    { name: 'description', label: 'Description', kind: 'textarea', required: true, maxLength: 5000, help: 'Shown on the branch’s own page.' },
+    { name: 'address', label: 'Address', kind: 'text', maxLength: 300 },
+    { name: 'phone', label: 'Phone', kind: 'text', maxLength: 60 },
+    { name: 'email', label: 'Email', kind: 'email' },
+    { name: 'history', label: 'How this branch started (optional)', kind: 'textarea', maxLength: 3000, help: 'Only if confirmed — leave blank otherwise.' },
+    { name: 'serviceTimes', label: 'Service times (optional)', kind: 'textarea', maxLength: 1000, help: 'Free text, e.g. "Sundays, 9:00 AM".' },
+    { name: 'leadershipInfo', label: 'Leadership (optional)', kind: 'text', maxLength: 500, help: 'Who leads this branch, if confirmed.' },
+    { name: 'image', label: 'Image', kind: 'image' },
+    { name: 'displayOrder', label: 'Display order', kind: 'number', help: 'Lower numbers appear first in the Branches menu.' },
     { name: 'isPublished', label: 'Published (visible on the website)', kind: 'checkbox' },
   ],
 }

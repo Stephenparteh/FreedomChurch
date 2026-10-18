@@ -1,43 +1,18 @@
-import { Card } from '@/components/ui/Card'
-import { Section } from '@/components/ui/Section'
 import { PageHero } from '@/components/shared/PageHero'
-import { StateMessage } from '@/components/shared/StateMessage'
+import { GivingRequestCTA } from '@/components/sections/give/GivingRequestCTA'
+import { GivingRequestForm } from '@/components/sections/give/GivingRequestForm'
+import { WaysToGive } from '@/components/sections/give/WaysToGive'
 import { usePageMeta } from '@/hooks/usePageMeta'
-import { useSiteSettings } from '@/hooks/useSiteSettings'
 
 export function Give() {
   usePageMeta('Give', 'Support the mission of NFPC.')
-  const { email, address } = useSiteSettings()
 
   return (
     <>
-      <PageHero
-        eyebrow="Support our mission"
-        title="Give"
-        description="Your generosity helps sustain our ministries and outreach."
-      />
-
-      <Section>
-        <div className="mx-auto max-w-xl">
-          <StateMessage
-            title="Online giving coming soon"
-            description="In the meantime, you can give in person or by contacting the church. See below."
-          />
-          <Card className="mt-8">
-            <h2 className="text-lg font-semibold text-text">Other ways to give</h2>
-            <dl className="mt-4 space-y-3 text-sm text-text-muted">
-              <div>
-                <dt className="font-medium text-text">In person</dt>
-                <dd>During any service at {address}</dd>
-              </div>
-              <div>
-                <dt className="font-medium text-text">Contact</dt>
-                <dd>{email}</dd>
-              </div>
-            </dl>
-          </Card>
-        </div>
-      </Section>
+      <PageHero title="Give" description="Your generosity helps sustain the work of NFPC and its ministry to the community." />
+      <WaysToGive />
+      <GivingRequestCTA />
+      <GivingRequestForm />
     </>
   )
 }

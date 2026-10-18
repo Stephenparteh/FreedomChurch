@@ -9,6 +9,8 @@ export type FieldKind =
   | 'email'
   | 'number'
   | 'date'
+  /** Same as 'date', but blanking it sends a clearing signal on update (for optional dates like Event.endDate). */
+  | 'date-optional'
   | 'datetime'
   | 'time'
   | 'select'
@@ -58,6 +60,7 @@ export function valuesFromRecord(record: Record<string, unknown> | null, fields:
         values[f.name] = raw === undefined || raw === null ? '0' : String(raw)
         break
       case 'date':
+      case 'date-optional':
         values[f.name] = toDateInput(raw)
         break
       case 'datetime':
@@ -97,6 +100,12 @@ export function payloadFromValues(
       case 'date': {
         const text = String(raw ?? '')
         if (text) payload[f.name] = new Date(`${text}T00:00:00`).toISOString()
+        break
+      }
+      case 'date-optional': {
+        const text = String(raw ?? '')
+        if (text) payload[f.name] = new Date(`${text}T00:00:00`).toISOString()
+        else if (mode === 'update') payload[f.name] = ''
         break
       }
       case 'datetime': {

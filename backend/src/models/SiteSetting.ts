@@ -10,6 +10,18 @@ const serviceTimeSchema = new Schema(
   { _id: false },
 )
 
+// Free-form on purpose: each giving method (Orange Money, Bank Transfer, ...) needs
+// different details, and NFPC hasn't confirmed a fixed set of sub-fields for any of
+// them. The church writes exactly what a giver needs to see for that method, and
+// nothing is shown publicly until an admin enters it here — no fabricated numbers.
+const givingMethodSchema = new Schema(
+  {
+    title: { type: String, required: true, trim: true, maxlength: 120 },
+    instructions: { type: String, trim: true, maxlength: 1000 },
+  },
+  { _id: false },
+)
+
 const siteSettingSchema = new Schema(
   {
     // Singleton: this field is always "default" so findOneAndUpdate({key:'default'}, ..., {upsert:true})
@@ -29,6 +41,7 @@ const siteSettingSchema = new Schema(
     },
     logoUrl: { type: String, trim: true },
     footerNote: { type: String, trim: true, maxlength: 500 },
+    givingMethods: { type: [givingMethodSchema], default: [] },
   },
   { timestamps: true },
 )

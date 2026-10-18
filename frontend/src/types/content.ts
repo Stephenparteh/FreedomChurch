@@ -64,6 +64,21 @@ export interface Ministry {
   displayOrder: number
 }
 
+export interface Branch {
+  id: string
+  name: string
+  slug: string
+  description: string
+  address?: string
+  phone?: string
+  email?: string
+  history?: string
+  serviceTimes?: string
+  leadershipInfo?: string
+  image?: string
+  displayOrder: number
+}
+
 export interface ServiceUnit {
   id: string
   name: string
@@ -128,6 +143,12 @@ export interface SiteSettings {
     twitter?: string
   }
   logoUrl?: string
+  givingMethods?: GivingMethod[]
+}
+
+export interface GivingMethod {
+  title: string
+  instructions?: string
 }
 
 export interface ContactPayload {

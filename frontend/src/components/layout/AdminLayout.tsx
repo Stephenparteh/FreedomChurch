@@ -1,22 +1,41 @@
 import { useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import nfpcCrest from '@/assets/brand/nfpc-crest-transparent.png'
 import { useAuth } from '@/lib/auth/context'
 import { cn } from '@/lib/cn'
 
-const adminNav = [
-  { label: 'Dashboard', to: '/admin', end: true },
-  { label: 'Messages', to: '/admin/messages' },
-  { label: 'Sermons', to: '/admin/sermons' },
-  { label: 'Events', to: '/admin/events' },
-  { label: 'Gallery', to: '/admin/gallery' },
-  { label: 'Ministries', to: '/admin/ministries' },
-  { label: 'Service sessions', to: '/admin/service-sessions' },
-  { label: 'Announcements', to: '/admin/announcements' },
-  { label: 'Team', to: '/admin/team' },
-  { label: 'Settings', to: '/admin/settings' },
+interface NavItem {
+  label: string
+  to: string
+  end?: boolean
+}
+
+interface NavGroup {
+  heading: string | null
+  items: NavItem[]
+}
+
+/** Grouped by how the church uses the CMS: publish content, read messages, change settings. */
+const adminNav: NavGroup[] = [
+  { heading: null, items: [{ label: 'Overview', to: '/admin', end: true }] },
+  {
+    heading: 'Content',
+    items: [
+      { label: 'Sermons', to: '/admin/sermons' },
+      { label: 'Events', to: '/admin/events' },
+      { label: 'Announcements', to: '/admin/announcements' },
+      { label: 'Ministries', to: '/admin/ministries' },
+      { label: 'Gallery', to: '/admin/gallery' },
+      { label: 'Leadership', to: '/admin/team' },
+      { label: 'Branches', to: '/admin/branches' },
+      { label: 'Service sessions', to: '/admin/service-sessions' },
+    ],
+  },
+  { heading: 'Communication', items: [{ label: 'Messages', to: '/admin/messages' }] },
+  { heading: 'Settings', items: [{ label: 'Site settings', to: '/admin/settings' }] },
 ]
 
-/** Admin shell: sidebar on large screens, a collapsible menu on small ones. */
+/** Admin shell: a fixed sidebar on large screens and a top bar with a full-height sheet on small ones. */
 export function AdminLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -28,69 +47,95 @@ export function AdminLayout() {
   }
 
   const nav = (
-    <nav aria-label="Admin" className="space-y-1">
-      {adminNav.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          end={item.end}
-          onClick={() => setMenuOpen(false)}
-          className={({ isActive }) =>
-            cn(
-              'block rounded-md px-3 py-2 text-sm font-medium text-text-muted hover:bg-surface-muted',
-              isActive && 'bg-primary-50 text-primary-700',
-            )
-          }
-        >
-          {item.label}
-        </NavLink>
+    <nav aria-label="Admin" className="space-y-7">
+      {adminNav.map((group) => (
+        <div key={group.heading ?? 'root'}>
+          {group.heading && <p className="eyebrow mb-2 px-3 text-[0.65rem] text-text-muted">{group.heading}</p>}
+          <ul className="space-y-0.5">
+            {group.items.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    cn(
+                      'relative flex min-h-10 items-center rounded-md px-3 text-sm font-medium text-text-muted transition-colors hover:bg-surface-muted hover:text-text',
+                      isActive &&
+                        "bg-primary-50 text-primary-800 before:absolute before:inset-y-2 before:-left-px before:w-0.5 before:rounded-full before:bg-gold-500 before:content-['']",
+                    )
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
     </nav>
   )
 
   return (
     <div className="min-h-screen bg-surface-muted lg:flex">
-      <header className="flex items-center justify-between border-b border-border bg-surface px-4 py-3 lg:hidden">
-        <p className="font-display text-lg font-semibold text-text">NFPC Admin</p>
+      <header className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-surface px-4 py-3 lg:hidden">
+        <div className="flex items-center gap-3">
+          <img src={nfpcCrest} alt="" className="h-9 w-9 object-contain" />
+          <p className="font-display text-lg font-semibold leading-none text-text">NFPC Admin</p>
+        </div>
         <button
           type="button"
-          className="rounded-md border border-border-strong px-3 py-1.5 text-sm font-medium"
+          className="inline-flex min-h-11 items-center rounded-md border border-border-strong px-4 text-sm font-semibold text-text hover:bg-surface-muted"
           aria-expanded={menuOpen}
           aria-controls="admin-mobile-nav"
           onClick={() => setMenuOpen((v) => !v)}
         >
-          {menuOpen ? 'Close menu' : 'Menu'}
+          {menuOpen ? 'Close' : 'Menu'}
         </button>
       </header>
 
       {menuOpen && (
-        <div id="admin-mobile-nav" className="border-b border-border bg-surface p-4 lg:hidden">
+        <div
+          id="admin-mobile-nav"
+          className="fixed inset-x-0 bottom-0 top-[57px] z-30 flex flex-col overflow-y-auto bg-surface px-4 py-6 lg:hidden"
+        >
           {nav}
-          <LogoutButton onLogout={handleLogout} email={user?.email} />
+          <AccountBlock email={user?.email} onLogout={handleLogout} />
         </div>
       )}
 
-      <aside className="hidden w-64 shrink-0 flex-col border-r border-border bg-surface p-6 lg:flex">
-        <p className="font-display text-lg font-semibold text-text">NFPC Admin</p>
-        <div className="mt-8 flex-1">{nav}</div>
-        <LogoutButton onLogout={handleLogout} email={user?.email} />
+      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col overflow-y-auto border-r border-border bg-surface px-5 py-8 lg:flex">
+        <div className="flex items-center gap-3 px-3">
+          <img src={nfpcCrest} alt="" className="h-11 w-11 object-contain" />
+          <div>
+            <p className="font-display text-xl font-semibold leading-none text-text">NFPC</p>
+            <p className="mt-1 text-xs text-text-muted">Content management</p>
+          </div>
+        </div>
+        <div className="mt-10 flex-1">{nav}</div>
+        <AccountBlock email={user?.email} onLogout={handleLogout} />
       </aside>
 
-      <main className="min-w-0 flex-1 p-4 sm:p-6 lg:p-10">
+      <main className="min-w-0 flex-1 px-4 py-8 sm:px-8 lg:px-12 lg:py-12">
         <Outlet />
       </main>
     </div>
   )
 }
 
-function LogoutButton({ onLogout, email }: { onLogout: () => void; email?: string }) {
+function AccountBlock({ email, onLogout }: { email?: string; onLogout: () => void }) {
   return (
-    <div className="mt-6 border-t border-border pt-4">
-      {email && <p className="mb-2 truncate text-xs text-text-muted">Signed in as {email}</p>}
+    <div className="mt-8 border-t border-border pt-5">
+      {email && (
+        <div className="mb-3 px-3">
+          <p className="text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-text-muted">Signed in</p>
+          <p className="mt-1 truncate text-sm text-text">{email}</p>
+        </div>
+      )}
       <button
         type="button"
         onClick={onLogout}
-        className="w-full rounded-md border border-border-strong px-3 py-2 text-sm font-medium text-text hover:bg-surface-muted"
+        className="inline-flex min-h-10 w-full items-center justify-center rounded-md border border-border-strong px-3 text-sm font-semibold text-text hover:border-primary-300 hover:bg-surface-muted"
       >
         Sign out
       </button>

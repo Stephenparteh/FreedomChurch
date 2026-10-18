@@ -13,7 +13,11 @@
     "lint": "oxlint src tests",
     "test": "vitest run",
     "seed": "tsx src/scripts/seed.ts",
-    "create-admin": "tsx src/scripts/create-admin.ts"
+    "seed-demo": "tsx src/scripts/seed-demo.ts",
+    "seed-demo:remove": "tsx src/scripts/seed-demo.ts --remove",
+    "create-admin": "tsx src/scripts/create-admin.ts",
+    "seed-nfpc": "tsx src/scripts/seed-nfpc.ts",
+    "seed-nfpc:remove": "tsx src/scripts/seed-nfpc.ts --remove"
   },
   "keywords": [],
   "author": "",

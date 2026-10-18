@@ -1,4 +1,6 @@
+import { ApiError } from '../utils/ApiError.js'
 import { AnnouncementModel } from '../models/Announcement.js'
+import { BranchModel } from '../models/Branch.js'
 import { EventModel } from '../models/Event.js'
 import { GalleryItemModel } from '../models/GalleryItem.js'
 import { LeadershipMemberModel } from '../models/LeadershipMember.js'
@@ -7,6 +9,7 @@ import { SermonModel } from '../models/Sermon.js'
 import { ServiceSessionModel } from '../models/ServiceSession.js'
 import {
   announcementInput,
+  branchInput,
   eventInput,
   galleryInput,
   leadershipInput,
@@ -33,6 +36,13 @@ export const resourceSpecs = {
     sort: { date: -1 },
     slugFrom: 'title',
     mediaFields: ['image'],
+    validate: (data) => {
+      const date = data.date instanceof Date ? data.date : undefined
+      const endDate = data.endDate instanceof Date ? data.endDate : undefined
+      if (date && endDate && endDate < date) {
+        throw ApiError.badRequest('End date cannot be before the start date.', 'VALIDATION_ERROR')
+      }
+    },
     notFoundMessage: 'Event not found.',
   },
   gallery: {
@@ -76,5 +86,14 @@ export const resourceSpecs = {
     sort: { displayOrder: 1, name: 1 },
     mediaFields: ['image'],
     notFoundMessage: 'Team member not found.',
+  },
+  branches: {
+    model: BranchModel,
+    create: branchInput,
+    defaults: { isPublished: false, displayOrder: 0 },
+    sort: { displayOrder: 1, name: 1 },
+    slugFrom: 'name',
+    mediaFields: ['image'],
+    notFoundMessage: 'Branch not found.',
   },
 } satisfies Record<string, ResourceSpec>

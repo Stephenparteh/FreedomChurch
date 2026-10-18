@@ -19,6 +19,13 @@ export interface ResourceSpec {
   mediaFields?: string[]
   /** Generates the slug from the title when the admin leaves it blank. */
   slugFrom?: 'title' | 'name'
+  /**
+   * Extra cross-field validation that zod's per-field schema can't express (e.g. "end
+   * date can't be before start date"). Receives the EFFECTIVE values — on update, the
+   * existing document merged with the partial input, so a rule still sees both sides
+   * even when only one of the two fields was sent. Throw an ApiError to reject.
+   */
+  validate?: (data: Record<string, unknown>) => void
   notFoundMessage: string
 }
 
@@ -77,6 +84,7 @@ export function createAdminResource(spec: ResourceSpec): Router {
   router.post('/', async (req: Request, res: Response) => {
     const data = spec.create.parse(req.body) as Record<string, unknown>
     for (const key of Object.keys(data)) if (data[key] === '' || data[key] === null) delete data[key]
+    spec.validate?.(data)
     if (!data.slug && spec.slugFrom) {
       const generated = slugify(String(data[spec.slugFrom] ?? ''))
       if (!generated) throw ApiError.badRequest('Could not create a URL slug from that title.', 'VALIDATION_ERROR')
@@ -88,8 +96,12 @@ export function createAdminResource(spec: ResourceSpec): Router {
 
   router.patch('/:id', async (req: Request, res: Response) => {
     const parsed = updateSchema.parse(req.body) as Record<string, unknown>
-    const { $set, $unset } = toUpdateOperators(parsed)
     const before = await spec.model.findById(idParam(req)).lean()
+    if (spec.validate && before) {
+      const defined = Object.fromEntries(Object.entries(parsed).filter(([, v]) => v !== undefined))
+      spec.validate({ ...(before as Record<string, unknown>), ...defined })
+    }
+    const { $set, $unset } = toUpdateOperators(parsed)
     const doc = await spec.model.findByIdAndUpdate(
       idParam(req),
       { $set, $unset },

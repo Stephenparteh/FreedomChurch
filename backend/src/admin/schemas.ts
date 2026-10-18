@@ -59,6 +59,10 @@ export const eventInput = z.object({
   slug: slugField,
   description: required(5000, 'Description'),
   date: z.coerce.date(),
+  // Optional and clearable (same '' pattern as optionalUrl/optionalEnum below): unset
+  // or equal to `date` means a one-day event. When present, the generic resource
+  // validate() hook (see admin/resources.ts) rejects endDate < date.
+  endDate: z.union([z.literal(''), z.coerce.date()]).optional(),
   startTime: optionalTime,
   endTime: optionalTime,
   category: optionalEnum(EVENT_CATEGORIES),
@@ -131,6 +135,21 @@ export const leadershipInput = z.object({
   isPublished: bool,
 })
 
+export const branchInput = z.object({
+  name: required(150, 'Name'),
+  slug: slugField,
+  description: required(5000, 'Description'),
+  address: text(300),
+  phone: text(60),
+  email: z.union([z.literal(''), z.email({ error: 'Enter a valid email address.' })]).optional(),
+  history: text(3000),
+  serviceTimes: text(1000),
+  leadershipInfo: text(500),
+  image: media,
+  displayOrder: order,
+  isPublished: bool,
+})
+
 export const messageStatusInput = z.object({
   status: z.enum(['new', 'read', 'archived']),
 })
@@ -145,5 +164,16 @@ export const settingsInput = z.object({
   footerNote: text(500),
   socials: z
     .object({ facebook: optionalUrl, instagram: optionalUrl, twitter: optionalUrl })
+    .optional(),
+  // The whole list is replaced on each save (see settings.routes.ts) — simplest way to
+  // let the admin add, edit, reorder, and remove methods from one array.
+  givingMethods: z
+    .array(
+      z.object({
+        title: required(120, 'Title'),
+        instructions: text(1000),
+      }),
+    )
+    .max(10, 'Up to 10 giving methods.')
     .optional(),
 })
