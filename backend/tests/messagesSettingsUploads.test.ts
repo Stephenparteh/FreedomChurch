@@ -102,6 +102,22 @@ describe('Site settings protection and public reflection', () => {
     })
   })
 
+  it('keeps description and aboutDescription independent', async () => {
+    await request(app)
+      .patch('/api/admin/settings')
+      .set(auth())
+      .send({ description: 'Hero text.', aboutDescription: 'About section text.' })
+
+    const pub = await request(app).get('/api/site-settings')
+    expect(pub.body.data.description).toBe('Hero text.')
+    expect(pub.body.data.aboutDescription).toBe('About section text.')
+
+    await request(app).patch('/api/admin/settings').set(auth()).send({ aboutDescription: 'Updated About text.' })
+    const after = await request(app).get('/api/site-settings')
+    expect(after.body.data.description).toBe('Hero text.')
+    expect(after.body.data.aboutDescription).toBe('Updated About text.')
+  })
+
   it('keeps unverified values unset rather than inventing them', async () => {
     const pub = await request(app).get('/api/site-settings')
     expect(pub.body.data.churchName).toBe('National Freedom Pentecostal Church')

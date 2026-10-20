@@ -158,6 +158,7 @@ export const settingsInput = z.object({
   churchName: required(200, 'Church name').optional(),
   motto: text(200),
   description: text(1000),
+  aboutDescription: text(1000),
   email: z.union([z.literal(''), z.email({ error: 'Enter a valid email address.' })]).optional(),
   phone: text(60),
   address: text(300),

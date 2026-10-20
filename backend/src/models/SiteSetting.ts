@@ -30,6 +30,9 @@ const siteSettingSchema = new Schema(
     churchName: { type: String, required: true, trim: true, maxlength: 200 },
     motto: { type: String, trim: true, maxlength: 200 },
     description: { type: String, trim: true, maxlength: 1000 },
+    // Separate from `description` (used by the homepage hero): the homepage's brief
+    // About section has its own independent copy, editable on its own in the dashboard.
+    aboutDescription: { type: String, trim: true, maxlength: 1000 },
     email: { type: String, trim: true, maxlength: 200 },
     phone: { type: String, trim: true, maxlength: 60 },
     address: { type: String, trim: true, maxlength: 300 },
