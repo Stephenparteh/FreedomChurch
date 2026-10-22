@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 
 const servicePhoto = "/photos/congregation-service.webp";
 
@@ -22,7 +23,7 @@ export function AboutStory() {
 
         {/* Story */}
         <div className="mx-auto mt-14 max-w-6xl sm:mt-16 lg:mt-12">
-          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <Reveal className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             {/* Image */}
             <div className="overflow-hidden rounded-md bg-primary-900">
               <div className="aspect-[5/3]">
@@ -41,26 +42,26 @@ export function AboutStory() {
                 Faith, people &amp; purpose
               </p>
 
+              {/*
+                Founding date and location are directly from the church constitution
+                supplied to the project. Nothing else about the church's history is
+                confirmed yet (how it grew, who led it, early milestones), so this
+                stays a single factual sentence rather than an invented narrative —
+                see the content audit report for what's still needed here.
+              */}
               <div className="mt-5 space-y-5 text-base leading-relaxed text-text-muted sm:text-lg">
                 <p>
-                  National Freedom Pentecostal Church exists to create a place
-                  where people can encounter God, grow in faith, and walk
-                  together in community.
-                </p>
-
-                <p>
-                  What began with a commitment to faith and fellowship has
-                  continued to grow through generations of worshippers,
-                  families, leaders, and volunteers.
-                </p>
-
-                <p>
-                  Today, NFPC remains focused on creating a welcoming church
-                  community where people can discover purpose and grow together.
+                  National Freedom Pentecostal Church (NFPC) Inc. was founded on
+                  January 2, 2005, at Dougan Yard, Police Academy, Paynesville,
+                  Liberia. Rooted in faith and a commitment to the Gospel of
+                  Jesus Christ, NFPC exists to share the message of salvation,
+                  encourage prayer, and teach the Word of God. Guided by its
+                  motto, “You Must Be Freed,” the church is committed to
+                  proclaiming the freedom found in Jesus Christ.
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </Container>
     </section>

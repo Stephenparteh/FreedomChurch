@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/shared/Reveal";
 
 export function GivingRequestCTA() {
   const handleStartGiving = () => {
@@ -12,7 +13,7 @@ export function GivingRequestCTA() {
   return (
     <section className="bg-primary-900 py-20 text-white sm:py-24 lg:py-16">
       <Container>
-        <div className="grid items-end gap-10 lg:grid-cols-12 lg:gap-20">
+        <Reveal className="grid items-end gap-10 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-8">
       
             <h2 className="mt-6 max-w-3xl font-display text-5xl font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
@@ -38,7 +39,7 @@ export function GivingRequestCTA() {
               </span> */}
             </Button>
           </div>
-        </div>
+        </Reveal>
 
         {/* <div className="mt-14 h-px w-full bg-white/10 sm:mt-16" /> */}
 

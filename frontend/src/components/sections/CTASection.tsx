@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 
 /**
  * Closing CTA:
@@ -12,13 +13,13 @@ export function CTASection() {
   return (
     <section className="bg-primary-900 text-white">
       <Container className="py-24 sm:py-32 lg:py-36">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
+        <Reveal className="grid gap-12 lg:grid-cols-12 lg:items-end">
           {/* Statement */}
           <div className="lg:col-span-8">
-            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent-500">
+            {/* <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent-500">
               <span aria-hidden="true" className="h-px w-8 bg-accent-500" />
               Your next step
-            </p>
+            </p> */}
 
             <h2 className="mt-6 max-w-4xl font-display text-5xl font-semibold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-8xl">
               Come as you are.
@@ -44,7 +45,7 @@ export function CTASection() {
               See upcoming events
             </Button>
           </div>
-        </div>
+        </Reveal>
 
         {/* Closing accent */}
         {/* <div

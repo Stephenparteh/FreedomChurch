@@ -2,7 +2,6 @@ import { CTASection } from "@/components/sections/CTASection";
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutStory } from "@/components/sections/about/AboutStory";
 import { Leadership } from "@/components/sections/about/Leadership";
-import { MeetThePastor } from "@/components/sections/about/MeetThePastor";
 import { MissionVision } from "@/components/sections/about/MissionVision";
 import { MoreAboutChurch } from "@/components/sections/about/MoreAboutChurch";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -26,7 +25,6 @@ export function About() {
       <AboutStory />
       <MoreAboutChurch />
       <MissionVision />
-      <MeetThePastor />
       <Leadership />
       <CTASection />
     </>

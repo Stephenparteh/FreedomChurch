@@ -1,54 +1,51 @@
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 
-type Purpose = "mission" | "vision";
+type Purpose = "motto" | "mandate";
 
 const content = {
-  mission: {
-    label: "Mission",
-    title:
-      "To help people encounter God, grow in faith, and live with purpose.",
+  motto: {
+    label: "Our Motto",
+    title: "You Must Be Freed.",
+    reference: "John 8:32, 36",
     description:
-      "Everything NFPC does is shaped by this: creating space for people to meet God, be formed in faith, and carry that faith into everyday life.",
+      "Our motto points to the freedom found in Jesus Christ and the truth of His Word.",
   },
-  vision: {
-    label: "Vision",
-    title:
-      "To be a growing church community where faith, service, and transformation shape everyday life.",
+  mandate: {
+    label: "Our Mandate",
+    title: "Proclaim the Gospel. Teach salvation. Pray for freedom.",
+    reference: "Matthew 28:18–20",
     description:
-      "We look forward to a church that keeps growing in depth and in reach, marked by people who serve one another and their city well.",
+      "Rooted in the Great Commission, our mandate is to preach the Gospel, teach the message of salvation, and pray for those seeking freedom from spiritual bondage.",
   },
 };
 
 export function MissionVision() {
-  const [active, setActive] = useState<Purpose>("mission");
+  const [active, setActive] = useState<Purpose>("motto");
 
-  const currentIndex = active === "mission" ? 0 : 1;
+  const currentIndex = active === "motto" ? 0 : 1;
+  const current = content[active];
 
   return (
-    <section className="overflow-hidden bg-primary-900 py-24 text-white sm:py-32 lg:py-12">
+    <section className="overflow-hidden bg-primary-900 py-20 text-white sm:py-24 lg:py-20">
       <Container>
-        <div className="mx-auto max-w-6xl">
-          {/* Heading */}
-          <div className="text-center">
-            <h2 className="mt-6 font-display text-5xl font-semibold leading-[0.98] tracking-tight text-white sm:text-6xl lg:text-7xl">
-              Why we exist.
-            </h2>
-          </div>
-
-          {/* Journey navigation */}
-          <div className="mx-auto mt-14 max-w-5xl sm:mt-16 lg:mt-10">
+        <Reveal className="mx-auto max-w-6xl">
+          {/* Section heading */}
+        
+          {/* Motto and mandate navigation */}
+          <div className="mx-auto mt-12 max-w-5xl sm:mt-16">
             <div className="relative">
-              {/* Track */}
+              {/* Navigation track */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-white/20"
+                className="absolute left-0 right-0 top-[calc(100%-8px)] h-px bg-white/20"
               />
 
               {/* Active progress */}
               <div
                 aria-hidden="true"
-                className="absolute left-0 top-1/2 h-0.5 -translate-y-1/2 bg-accent-500 transition-all duration-500"
+                className="absolute left-0 top-[calc(100%-8px)] h-0.5 bg-accent-500 transition-all duration-500"
                 style={{
                   width: currentIndex === 0 ? "0%" : "100%",
                 }}
@@ -57,24 +54,24 @@ export function MissionVision() {
               <div className="relative grid grid-cols-2">
                 <button
                   type="button"
-                  onClick={() => setActive("mission")}
-                  className="group flex flex-col items-start"
-                  aria-pressed={active === "mission"}
+                  onClick={() => setActive("motto")}
+                  className="group flex min-h-16 flex-col items-start gap-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  aria-pressed={active === "motto"}
                 >
                   <span
-                    className={`font-display text-xl font-semibold uppercase tracking-[0.08em] transition-colors duration-300 sm:text-2xl ${
-                      active === "mission"
+                    className={`font-display text-lg font-semibold uppercase tracking-[0.06em] transition-colors duration-300 sm:text-2xl ${
+                      active === "motto"
                         ? "text-white"
-                        : "text-white/35 group-hover:text-white/70"
+                        : "text-white/45 group-hover:text-white/80"
                     }`}
                   >
-                    Mission
+                    Our Motto
                   </span>
 
                   <span
                     aria-hidden="true"
-                    className={`mt-4 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
-                      active === "mission"
+                    className={`h-4 w-4 rounded-full border-2 transition-all duration-300 ${
+                      active === "motto"
                         ? "border-accent-500 bg-accent-500 ring-4 ring-accent-500/20"
                         : "border-white/40 bg-primary-900"
                     }`}
@@ -83,24 +80,24 @@ export function MissionVision() {
 
                 <button
                   type="button"
-                  onClick={() => setActive("vision")}
-                  className="group flex flex-col items-end"
-                  aria-pressed={active === "vision"}
+                  onClick={() => setActive("mandate")}
+                  className="group flex min-h-16 flex-col items-end gap-4 text-right focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                  aria-pressed={active === "mandate"}
                 >
                   <span
-                    className={`font-display text-xl font-semibold uppercase tracking-[0.08em] transition-colors duration-300 sm:text-2xl ${
-                      active === "vision"
+                    className={`font-display text-lg font-semibold uppercase tracking-[0.06em] transition-colors duration-300 sm:text-2xl ${
+                      active === "mandate"
                         ? "text-white"
-                        : "text-white/35 group-hover:text-white/70"
+                        : "text-white/45 group-hover:text-white/80"
                     }`}
                   >
-                    Vision
+                    Our Mandate
                   </span>
 
                   <span
                     aria-hidden="true"
-                    className={`mt-4 h-4 w-4 rounded-full border-2 transition-all duration-300 ${
-                      active === "vision"
+                    className={`h-4 w-4 rounded-full border-2 transition-all duration-300 ${
+                      active === "mandate"
                         ? "border-accent-500 bg-accent-500 ring-4 ring-accent-500/20"
                         : "border-white/40 bg-primary-900"
                     }`}
@@ -109,53 +106,40 @@ export function MissionVision() {
               </div>
             </div>
 
-            {/* Sliding content */}
-            <div className="mt-12 overflow-hidden sm:mt-10">
-              <div
-                className="flex w-[200%] transition-transform duration-500 ease-out"
-                style={{
-                  transform: `translateX(-${currentIndex * 50}%)`,
-                }}
-              >
-                {/* Mission panel */}
-                <div className="w-1/2 px-2 sm:px-8">
-                  <div className="mx-auto max-w-4xl text-center">
-                    <h3 className="mt-6 font-display text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl">
-                      {content.mission.title}
-                    </h3>
-                  </div>
-                </div>
+            {/* Active content */}
+            <div className="mt-12 text-center sm:mt-16" aria-live="polite">
+             
 
-                {/* Vision panel */}
-                <div className="w-1/2 px-2 sm:px-8">
-                  <div className="mx-auto max-w-4xl text-center">
-                   
-                    <h3 className="mt-6 font-display text-3xl font-semibold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl">
-                      {content.vision.title}
-                    </h3>
+              <h3 className="mx-auto mt-5 max-w-4xl font-display text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl lg:text-6xl">
+                {current.title}
+              </h3>
 
-                  </div>
-                </div>
-              </div>
+              {/* <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8">
+                {current.description}
+              </p> */}
+
+              <p className="mt-6 text-sm font-medium tracking-wide text-white/60">
+                {current.reference}
+              </p>
             </div>
 
-            {/* Small journey indicator */}
-            <div className="mt-10 flex justify-center gap-3">
+            {/* Active indicator */}
+            <div className="mt-10 flex justify-center gap-3" aria-hidden="true">
               <span
                 className={`h-1.5 rounded-full transition-all duration-500 ${
-                  active === "mission"
+                  active === "motto" ? "w-10 bg-accent-500" : "w-2 bg-white/25"
+                }`}
+              />
+              <span
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  active === "mandate"
                     ? "w-10 bg-accent-500"
                     : "w-2 bg-white/25"
                 }`}
               />
-              <span
-                className={`h-1.5 rounded-full transition-all duration-500 ${
-                  active === "vision" ? "w-10 bg-accent-500" : "w-2 bg-white/25"
-                }`}
-              />
             </div>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

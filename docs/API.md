@@ -126,7 +126,7 @@ Media fields accept an http(s) URL, a path returned by the upload endpoint (`/up
 | GET | `/api/admin/settings` | the singleton |
 | PATCH | `/api/admin/settings` | partial update. Empty strings clear a value. `churchName` cannot be cleared. `email` must be a valid address. `socials` takes `facebook`, `instagram`, `twitter` URLs |
 
-Settings covers church name, motto, description, email, phone, address, footer note, and social links. Service times are managed as service sessions, not in settings.
+Settings covers church name, motto, description, aboutDescription, email, phone, address, footer note, and social links. `description` feeds the homepage hero; `aboutDescription` is the independent copy for the homepage's brief About section. Service times are managed as service sessions, not in settings.
 
 ## Health
 

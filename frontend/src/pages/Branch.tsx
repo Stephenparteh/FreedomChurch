@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { PageHero } from '@/components/shared/PageHero'
+import { Reveal } from '@/components/shared/Reveal'
 import { StateMessage } from '@/components/shared/StateMessage'
 import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
@@ -60,7 +61,7 @@ export function BranchPage() {
         </Container>
 
         <Container className="mt-8 grid gap-14 lg:grid-cols-12">
-          <div className={image ? 'lg:col-span-7' : 'lg:col-span-12'}>
+          <Reveal className={image ? 'lg:col-span-7' : 'lg:col-span-12'}>
             <p className="whitespace-pre-line text-lg leading-relaxed text-text-muted">{branch.description}</p>
 
             {branch.history && (
@@ -76,34 +77,36 @@ export function BranchPage() {
                 <p className="mt-3 whitespace-pre-line text-base leading-relaxed text-text-muted">{branch.serviceTimes}</p>
               </div>
             )}
-          </div>
+          </Reveal>
 
           {image && (
-            <div className="lg:col-span-5">
+            <Reveal className="lg:col-span-5" delay={100}>
               <div className="aspect-[4/3] overflow-hidden rounded-md bg-primary-50">
                 <img src={image} alt={branch.name} className="h-full w-full object-cover" loading="lazy" />
               </div>
-            </div>
+            </Reveal>
           )}
         </Container>
 
         {contactDetails.length > 0 && (
           <Container className="mt-14">
-            <h2 className="eyebrow">Contact this branch</h2>
-            <dl className="mt-3 max-w-lg divide-y divide-border border-y border-border">
-              {branch.address && <DetailRow label="Address" value={branch.address} />}
-              {branch.phone && <DetailRow label="Phone" value={branch.phone} />}
-              {branch.email && (
-                <DetailRow
-                  label="Email"
-                  value={
-                    <a className="text-primary-700 underline underline-offset-4" href={`mailto:${branch.email}`}>
-                      {branch.email}
-                    </a>
-                  }
-                />
-              )}
-            </dl>
+            <Reveal>
+              <h2 className="eyebrow">Contact this branch</h2>
+              <dl className="mt-3 max-w-lg divide-y divide-border border-y border-border">
+                {branch.address && <DetailRow label="Address" value={branch.address} />}
+                {branch.phone && <DetailRow label="Phone" value={branch.phone} />}
+                {branch.email && (
+                  <DetailRow
+                    label="Email"
+                    value={
+                      <a className="text-primary-700 underline underline-offset-4" href={`mailto:${branch.email}`}>
+                        {branch.email}
+                      </a>
+                    }
+                  />
+                )}
+              </dl>
+            </Reveal>
           </Container>
         )}
       </section>

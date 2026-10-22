@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 import { StateMessage } from "@/components/shared/StateMessage";
 import { useApi } from "@/hooks/useApi";
 import { getGallery } from "@/lib/api/resources";
@@ -98,20 +99,19 @@ export function GalleryList() {
          */}
         {filteredMedia.length > 0 && (
           <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
-            {filteredMedia.map((media) => (
-              <article
-                key={media.id}
-                className="group mb-4 break-inside-avoid overflow-hidden rounded-md bg-primary-50"
-              >
-                <div className="relative overflow-hidden">
-                  <img
-                    src={resolveMediaUrl(media.imageUrl)}
-                    alt={media.altText}
-                    className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-                    loading="lazy"
-                  />
-                </div>
-              </article>
+            {filteredMedia.map((media, index) => (
+              <Reveal key={media.id} className="mb-4 break-inside-avoid" delay={(index % 6) * 60}>
+                <article className="group overflow-hidden rounded-md bg-primary-50">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={resolveMediaUrl(media.imageUrl)}
+                      alt={media.altText}
+                      className="block h-auto w-full transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         )}

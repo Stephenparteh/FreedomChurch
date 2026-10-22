@@ -17,6 +17,10 @@ export function useSiteSettings() {
     churchName: visibleText(settings?.churchName) || 'National Freedom Pentecostal Church',
     motto: visibleText(settings?.motto),
     description: visibleText(settings?.description),
+    // Independent from `description` (the hero's text). Falls back to `description`
+    // only so the homepage About section doesn't go blank for records saved before
+    // this field existed — once the church sets it directly, that value wins.
+    aboutDescription: visibleText(settings?.aboutDescription) || visibleText(settings?.description),
     email: visibleText(settings?.email),
     phone: visibleText(settings?.phone),
     address: visibleText(settings?.address),

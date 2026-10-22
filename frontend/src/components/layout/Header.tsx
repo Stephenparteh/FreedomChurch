@@ -14,12 +14,15 @@ import { cn } from "@/lib/cn";
  * links move into a full-width sheet with large touch targets.
  *
  * Give remains part of the primary navigation, while Contact is the primary
- * action on the far right. "Branches" is inserted after Ministries as a real
- * link to /branches at all times; its dropdown arrow and panel only appear
- * once at least one branch is published, so the item is never a dead end.
+ * action on the far right. "Branches" is inserted after Ministries; its label
+ * never navigates on its own — visitors reach a branch only by picking one
+ * from its dropdown (desktop, opens on hover or via the arrow) or submenu
+ * (mobile, taps to expand/collapse), both of which only appear once at least
+ * one branch is published.
  */
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [mobileBranchesOpen, setMobileBranchesOpen] = useState(false);
   const { pathname } = useLocation();
   const branchesState = useApi(() => getBranches(), []);
   const branches = branchesState.status === "success" ? branchesState.data : [];
@@ -32,6 +35,11 @@ export function Header() {
     setLastPathname(pathname);
     setOpen(false);
   }
+
+  // The branches submenu only makes sense while the mobile panel is open.
+  useEffect(() => {
+    if (!open) setMobileBranchesOpen(false);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -94,7 +102,9 @@ export function Header() {
               >
                 {link.label}
               </NavLink>
-              {link.to === "/ministries" && <BranchesMenu branches={branches} />}
+              {link.to === "/ministries" && (
+                <BranchesMenu branches={branches} isActive={pathname === "/branches"} />
+              )}
             </div>
           ))}
         </nav>
@@ -168,20 +178,30 @@ export function Header() {
               </NavLink>
               {link.to === "/ministries" && (
                 <div className="ml-3 border-l-2 border-transparent pl-3">
-                  <NavLink
-                    to="/branches"
-                    end
-                    className={({ isActive }) =>
-                      cn(
-                        "flex min-h-12 items-center font-display text-xl text-text-muted hover:text-text",
-                        isActive && "text-text",
-                      )
-                    }
-                  >
-                    Branches
-                  </NavLink>
-                  {branches.length > 0 && (
-                    <ul className="mb-1 ml-3 border-l-2 border-border pl-3">
+                  {branches.length > 0 ? (
+                    <button
+                      type="button"
+                      onClick={() => setMobileBranchesOpen((v) => !v)}
+                      aria-expanded={mobileBranchesOpen}
+                      aria-controls="mobile-branches-submenu"
+                      className="flex min-h-12 w-full items-center justify-between font-display text-xl text-text-muted hover:text-text"
+                    >
+                      Branches
+                      <svg
+                        aria-hidden
+                        viewBox="0 0 12 8"
+                        className={cn("h-2.5 w-3 shrink-0 transition-transform", mobileBranchesOpen && "rotate-180")}
+                      >
+                        <path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </button>
+                  ) : (
+                    <span className="flex min-h-12 items-center font-display text-xl text-text-muted">
+                      Branches
+                    </span>
+                  )}
+                  {branches.length > 0 && mobileBranchesOpen && (
+                    <ul id="mobile-branches-submenu" className="mb-1 ml-3 border-l-2 border-border pl-3">
                       {branches.map((branch) => (
                         <li key={branch.id}>
                           <NavLink
@@ -214,14 +234,16 @@ export function Header() {
 }
 
 /**
- * Desktop "Branches" item: the label is always a real link to /branches, so
- * it's never a dead end even with nothing published yet. The dropdown arrow
- * and panel only render once there's at least one branch to show in it, and
- * open on hover, on click/tap, and on keyboard focus; they close on Escape,
- * on losing focus entirely, or when the pointer and focus have both left.
- * Each branch in the panel links to its own page.
+ * Desktop "Branches" item: the label itself never navigates (there is no
+ * single page it should take visitors to) — it only opens the dropdown on
+ * hover, or via the arrow button on click/keyboard focus. Visitors reach a
+ * branch only by clicking that branch's own item in the panel. The arrow
+ * and panel only render once there's at least one branch to show; with none
+ * published, the label is inert and clicking it does nothing. They close on
+ * Escape, on losing focus entirely, or when the pointer and focus have both
+ * left.
  */
-function BranchesMenu({ branches }: { branches: { id: string; name: string; slug: string }[] }) {
+function BranchesMenu({ branches, isActive }: { branches: { id: string; name: string; slug: string }[]; isActive: boolean }) {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const hasBranches = branches.length > 0;
@@ -238,19 +260,15 @@ function BranchesMenu({ branches }: { branches: { id: string; name: string; slug
       onMouseLeave={() => setOpen(false)}
       onBlur={handleBlur}
     >
-      <NavLink
-        to="/branches"
-        end
-        className={({ isActive }) =>
-          cn(
-            "relative py-2 text-sm font-medium text-text-muted transition-colors hover:text-text",
-            isActive &&
-              "text-text after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-accent-500 after:content-['']",
-          )
-        }
+      <span
+        className={cn(
+          "relative py-2 text-sm font-medium text-text-muted transition-colors",
+          isActive &&
+            "text-text after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:bg-accent-500 after:content-['']",
+        )}
       >
         Branches
-      </NavLink>
+      </span>
 
       {hasBranches && (
         <button

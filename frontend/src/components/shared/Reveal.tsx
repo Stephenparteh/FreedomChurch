@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ElementType } from 'react'
 import { cn } from '@/lib/cn'
 
 interface RevealProps {
@@ -6,6 +6,10 @@ interface RevealProps {
   className?: string
   /** ms, for staggering a group of reveals */
   delay?: number
+  /** Tag to render (default 'div'). Use e.g. 'ul'/'li' to keep valid HTML nesting when wrapping list items. */
+  as?: ElementType
+  /** Any other DOM attributes (aria-*, id, role, ...) are passed through to the rendered tag. */
+  [key: string]: unknown
 }
 
 /**
@@ -13,8 +17,8 @@ interface RevealProps {
  * visible throughout) for prefers-reduced-motion users — the animation
  * classes only apply under the `motion-safe:` variant.
  */
-export function Reveal({ children, className, delay = 0 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null)
+export function Reveal({ children, className, delay = 0, as: Tag = 'div', ...rest }: RevealProps) {
+  const ref = useRef<HTMLElement>(null)
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -34,7 +38,8 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
   }, [])
 
   return (
-    <div
+    <Tag
+      {...rest}
       ref={ref}
       style={{ transitionDelay: visible ? `${delay}ms` : '0ms' }}
       className={cn(
@@ -46,6 +51,6 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
       )}
     >
       {children}
-    </div>
+    </Tag>
   )
 }

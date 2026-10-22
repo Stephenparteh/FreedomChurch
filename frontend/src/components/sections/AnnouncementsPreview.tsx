@@ -1,4 +1,5 @@
 import { Container } from '@/components/ui/Container'
+import { Reveal } from '@/components/shared/Reveal'
 import { useApi } from '@/hooks/useApi'
 import { getAnnouncements } from '@/lib/api/resources'
 import { formatLongDate } from '@/lib/format'
@@ -15,7 +16,7 @@ export function AnnouncementsPreview() {
           <h2 className="font-display text-3xl font-semibold text-primary-900 sm:text-4xl">Announcements</h2>
           <p className="hidden text-sm font-semibold uppercase tracking-[0.18em] text-text-muted sm:block">What&rsquo;s new</p>
         </div>
-        <ul className="divide-y divide-border-strong">
+        <Reveal as="ul" className="divide-y divide-border-strong">
           {state.data.map((item) => (
             <li key={item.id} className="grid gap-3 py-7 md:grid-cols-12 md:gap-8">
               <p className="text-xs font-semibold uppercase tracking-[0.15em] text-accent-500 md:col-span-2 md:pt-1.5">
@@ -27,7 +28,7 @@ export function AnnouncementsPreview() {
               </div>
             </li>
           ))}
-        </ul>
+        </Reveal>
       </Container>
     </section>
   )

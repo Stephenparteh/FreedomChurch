@@ -10,7 +10,13 @@ import { ApiClientError } from '@/lib/api/client'
 const FIELDS: { name: string; label: string; type?: 'textarea' | 'email' | 'url'; required?: boolean; help?: string }[] = [
   { name: 'churchName', label: 'Church name', required: true },
   { name: 'motto', label: 'Motto' },
-  { name: 'description', label: 'Short description', type: 'textarea' },
+  { name: 'description', label: 'Short description', type: 'textarea', help: 'Shown in the homepage hero section.' },
+  {
+    name: 'aboutDescription',
+    label: 'About section description',
+    type: 'textarea',
+    help: 'Shown in the brief About section on the homepage. Independent from the Short description above.',
+  },
   { name: 'email', label: 'Email', type: 'email' },
   { name: 'phone', label: 'Phone' },
   { name: 'address', label: 'Address' },

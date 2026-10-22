@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 import { StateMessage } from "@/components/shared/StateMessage";
 import { ApiClientError } from "@/lib/api/client";
 import { submitContact } from "@/lib/api/resources";
@@ -100,7 +101,7 @@ export function GivingRequestForm() {
         ) : (
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-20">
             {/* Intro */}
-            <div className="lg:col-span-5">
+            <Reveal className="lg:col-span-5">
               <div className="lg:sticky lg:top-32">
                 <h2 className="mt-6 max-w-md font-display text-5xl font-semibold leading-[0.98] tracking-tight text-primary-900 sm:text-6xl lg:text-7xl">
                   Let&apos;s take the next step.
@@ -117,10 +118,10 @@ export function GivingRequestForm() {
                   other sensitive payment information.
                 </p>
               </div>
-            </div>
+            </Reveal>
 
             {/* Form */}
-            <div className="lg:col-span-7">
+            <Reveal className="lg:col-span-7" delay={100}>
               <form onSubmit={handleSubmit} noValidate>
                 {state === "error" && (
                   <p role="alert" className="mb-8 border-l-2 border-error pl-4 text-sm leading-relaxed text-error">
@@ -331,7 +332,7 @@ export function GivingRequestForm() {
                   </p>
                 </div>
               </form>
-            </div>
+            </Reveal>
           </div>
         )}
       </Container>

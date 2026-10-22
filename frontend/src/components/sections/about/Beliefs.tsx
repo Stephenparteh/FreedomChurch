@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Container } from '@/components/ui/Container'
+import { Reveal } from '@/components/shared/Reveal'
 
 type Belief = {
   title: string
@@ -7,25 +8,48 @@ type Belief = {
   image: string
 }
 
-const SAMPLE_BELIEFS: Belief[] = [
+/**
+ * Directly from the church constitution supplied to the project (not sample copy,
+ * not invented): the Holy Scriptures, the Trinity, the person and work of Jesus
+ * Christ, salvation by grace through faith, divine healing through prayer, and the
+ * priesthood of believers. Wording here is a plain restatement of what the
+ * constitution lists, not theological elaboration beyond it. The constitution
+ * excerpt is known to be incomplete, so this list isn't necessarily exhaustive —
+ * see the content audit report.
+ *
+ * NOTE: this component is not currently rendered on the About page (not imported
+ * in pages/About.tsx). Re-enabling it is a page-composition decision left to the
+ * project owner, not made here.
+ */
+const CORE_BELIEFS: Belief[] = [
   {
-    title: 'Faith',
-    body: 'A life centered on trust in God and His Word.',
+    title: 'The Holy Bible',
+    body: 'We believe the Holy Bible is divinely inspired.',
     image: '/photos/congregation-worship.webp',
   },
   {
-    title: 'Worship',
-    body: 'A community committed to honoring God together.',
+    title: 'The Trinity',
+    body: 'We believe in one God, eternally existing as Father, Son, and Holy Spirit.',
     image: '/photos/congregation-service.webp',
   },
   {
-    title: 'Community',
-    body: 'A church where people grow through fellowship and service.',
+    title: 'Jesus Christ',
+    body: 'We believe in the deity of Jesus Christ, His virgin birth, His sinless life, and His atoning death.',
     image: '/photos/congregation-worship.webp',
   },
   {
-    title: 'Purpose',
-    body: 'A life that reflects faith through action.',
+    title: 'Salvation by Grace',
+    body: 'We believe salvation is received by grace through faith.',
+    image: '/photos/congregation-service.webp',
+  },
+  {
+    title: 'Divine Healing',
+    body: 'We believe in divine healing through prayer.',
+    image: '/photos/congregation-worship.webp',
+  },
+  {
+    title: 'The Priesthood of Believers',
+    body: 'We believe in the priesthood of all believers.',
     image: '/photos/congregation-service.webp',
   },
 ]
@@ -34,13 +58,13 @@ const SAMPLE_BELIEFS: Belief[] = [
 export function Beliefs() {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  const activeBelief = SAMPLE_BELIEFS[activeIndex]
+  const activeBelief = CORE_BELIEFS[activeIndex]
 
   return (
     <section className="bg-surface py-24 sm:py-32 lg:py-36">
       <Container>
         {/* Heading */}
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
           <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent-500">
             <span
               aria-hidden="true"
@@ -52,12 +76,12 @@ export function Beliefs() {
           <h2 className="mt-6 font-display text-5xl font-semibold leading-[0.98] tracking-tight text-primary-900 sm:text-6xl lg:text-7xl">
             What guides us.
           </h2>
-        </div>
+        </Reveal>
 
         {/* Belief navigation */}
         <div className="mt-14 border-y border-border sm:mt-16 lg:mt-20">
           <div className="grid grid-cols-2 sm:grid-cols-4">
-            {SAMPLE_BELIEFS.map((belief, index) => {
+            {CORE_BELIEFS.map((belief, index) => {
               const isActive = index === activeIndex
 
               return (
@@ -67,7 +91,7 @@ export function Beliefs() {
                   onClick={() => setActiveIndex(index)}
                   aria-pressed={isActive}
                   className={`relative border-b border-border px-4 py-6 text-left transition-colors duration-300 sm:border-b-0 sm:px-5 lg:px-6 ${
-                    index < SAMPLE_BELIEFS.length - 1
+                    index < CORE_BELIEFS.length - 1
                       ? 'sm:border-r'
                       : ''
                   } ${
@@ -105,7 +129,7 @@ export function Beliefs() {
         </div>
 
         {/* Active belief */}
-        <div className="mt-12 grid items-center gap-10 sm:mt-16 lg:grid-cols-12 lg:gap-16 lg:mt-20">
+        <Reveal className="mt-12 grid items-center gap-10 sm:mt-16 lg:grid-cols-12 lg:gap-16 lg:mt-20">
           {/* Image */}
           <div className="overflow-hidden rounded-md bg-primary-900 lg:col-span-7">
             <div className="aspect-[16/9]">
@@ -136,7 +160,7 @@ export function Beliefs() {
               {activeBelief.body}
             </p>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   )

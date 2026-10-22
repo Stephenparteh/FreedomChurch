@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 import {
   formatSessionTime,
   PLATFORM_LABEL,
@@ -27,12 +28,12 @@ export function ServiceInfo() {
       className="bg-primary-900 py-20 text-white sm:py-24 lg:py-28"
     >
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-20">
+        <Reveal className="grid gap-14 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-20">
           {/* Intro */}
           <div className="max-w-lg">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
+            {/* <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent-500">
               Plan your visit
-            </p>
+            </p> */}
 
             <h2
               id="service-info-heading"
@@ -46,7 +47,7 @@ export function ServiceInfo() {
               for worship, fellowship, and the Word of God.
             </p>
 
-            {address && (
+            {/* {address && (
               <div className="mt-10 border-white/15 pt-7">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent-500">
                   Find us
@@ -65,7 +66,7 @@ export function ServiceInfo() {
                   Get directions
                 </a>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Services */}
@@ -100,7 +101,7 @@ export function ServiceInfo() {
               ))}
             </div>
           )}
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

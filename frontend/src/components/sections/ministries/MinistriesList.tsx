@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 import { useApi } from "@/hooks/useApi";
 import { getMinistries } from "@/lib/api/resources";
 import { visibleText } from "@/lib/format";
@@ -40,7 +41,8 @@ export function MinistriesList() {
             const imageFirst = index % 2 === 1;
 
             return (
-              <article key={ministry.id} className="group">
+              <Reveal key={ministry.id} delay={Math.min(index, 4) * 80}>
+              <article className="group">
                 <div
                   className={`grid items-center gap-10 lg:grid-cols-2 lg:gap-20 ${
                     imageFirst
@@ -121,6 +123,7 @@ export function MinistriesList() {
                   </div>
                 </div>
               </article>
+              </Reveal>
             );
           })}
         </div>

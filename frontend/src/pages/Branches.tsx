@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { AsyncList } from '@/components/shared/AsyncList'
 import { PageHero } from '@/components/shared/PageHero'
+import { Reveal } from '@/components/shared/Reveal'
 import { useApi } from '@/hooks/useApi'
 import { usePageMeta } from '@/hooks/usePageMeta'
 import { getBranches } from '@/lib/api/resources'
@@ -28,10 +29,10 @@ export function Branches() {
           >
             {(branches) => (
               <ul className="divide-y divide-border border-y border-border">
-                {branches.map((branch) => {
+                {branches.map((branch, index) => {
                   const image = resolveMediaUrl(branch.image)
                   return (
-                    <li key={branch.id}>
+                    <Reveal key={branch.id} as="li" delay={Math.min(index, 4) * 80}>
                       <Link
                         to={`/branches/${branch.slug}`}
                         className="group flex items-center gap-6 py-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-500"
@@ -53,7 +54,7 @@ export function Branches() {
                           &rarr;
                         </span>
                       </Link>
-                    </li>
+                    </Reveal>
                   )
                 })}
               </ul>

@@ -1,4 +1,5 @@
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/shared/Reveal";
 import { useApi } from "@/hooks/useApi";
 import { getLeadership } from "@/lib/api/resources";
 import { resolveMediaUrl } from "@/lib/media";
@@ -23,19 +24,21 @@ export function Leadership() {
     <section className="bg-surface py-24 sm:py-32 lg:py-16">
       <Container>
         {/* Heading */}
-        <div className="max-w-3xl">
+        <Reveal className="max-w-3xl">
 
           <h2 className="mt-5 font-display text-5xl font-semibold leading-[0.98] tracking-tight text-primary-900 sm:text-6xl lg:text-7xl">
             People serving the church.
           </h2>
 
-        </div>
+        </Reveal>
 
         {/* Leadership */}
         <div className="mt-16 sm:mt-10">
           <div className="grid gap-x-8 gap-y-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-20">
-            {state.data.map((leader) => (
-              <LeaderItem key={leader.id} leader={leader} />
+            {state.data.map((leader, index) => (
+              <Reveal key={leader.id} delay={index * 80}>
+                <LeaderItem leader={leader} />
+              </Reveal>
             ))}
           </div>
         </div>

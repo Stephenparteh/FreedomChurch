@@ -132,6 +132,7 @@ export interface SiteSettings {
   churchName: string
   motto?: string
   description?: string
+  aboutDescription?: string
   email?: string
   phone?: string
   address?: string
